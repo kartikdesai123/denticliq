@@ -33,7 +33,8 @@ class ShopCollection extends ResourceCollection
                     'top_3_products' => $this->top_3_products ? new ProductCollection($data->top_3_products) : [],
                     'reviews_count' => $data->reviews_count,
                     'products_count' => $data->products_count,
-                    'since' => $data->created_at->format('d M, Y')
+                    'since' => $data->created_at->format('d M, Y'),
+                    'address' => $data->address
                 ];
             })
         ];

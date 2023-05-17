@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Currency;
 use App\Models\Order;
+use App\Models\Shop;
 use App\Models\Language;
 use PDF;
 
@@ -55,8 +56,10 @@ class InvoiceController extends Controller
         }
 
         $order = Order::findOrFail($id);
+        $shop = Shop::where('id',$order->shop_id)->get();
         return PDF::loadView('backend.invoices.invoice', [
             'order' => $order,
+            'shop' => $shop,
             'font_family' => $font_family,
             'direction' => $direction,
             'default_text_align' => $default_text_align,
@@ -161,8 +164,9 @@ class InvoiceController extends Controller
         }
 
         $order = Order::find($id);
+        $shop = Shop::where('id',$order->shop_id)->get();
         if ($order != null) {
-            return view('backend.invoices.invoice_print', compact('order', 'font_family', 'direction', 'default_text_align', 'reverse_text_align'));
+            return view('backend.invoices.invoice_print', compact('order','shop','font_family', 'direction', 'default_text_align', 'reverse_text_align'));
         }
     }
 }

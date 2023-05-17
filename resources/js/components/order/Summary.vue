@@ -67,7 +67,7 @@
             </v-col>
         </v-row>
         <v-sheet class="" color="white" elevation="0" v-for="(order, i) in orderDetails.orders" :key="i">
-            <order-package :order-details="order" />
+            <order-package :order-details="order" :shipping-address="orderDetails.shipping_address"/>
         </v-sheet>
     </div>
 </template>

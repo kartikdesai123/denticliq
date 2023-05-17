@@ -20,6 +20,7 @@ class OrderResource extends JsonResource
             'shop' => [
                 'name' => $this->shop->name ?? translate('Shop not found'),
                 'slug' => $this->shop->slug ?? '',
+                'address' => $this->shop->address,
             ],
             'payment_type' => $this->payment_type,
             'manual_payment' => $this->manual_payment,
@@ -34,10 +35,10 @@ class OrderResource extends JsonResource
             'tax' => (double) $this->calculateTotalTax($this->orderDetails),
             'products' => new OrderProductCollection($this->orderDetails),
             'created_at' => strtotime($this->created_at),
-            'has_refund_request' => $this->refundRequests->count() > 0 ? true : false, 
-            'courier_name' => $this->courier_name, 
-            'tracking_number' => $this->tracking_number, 
-            'tracking_url' => $this->tracking_url, 
+            'has_refund_request' => $this->refundRequests->count() > 0 ? true : false,
+            'courier_name' => $this->courier_name,
+            'tracking_number' => $this->tracking_number,
+            'tracking_url' => $this->tracking_url,
         ];
     }
 
