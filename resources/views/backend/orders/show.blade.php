@@ -67,9 +67,9 @@
                                                     </a>
                                                 </td>
                                             </tr>
-                                        @endif 
+                                        @endif
                                     @endif
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -200,10 +200,22 @@
                                             {{ format_price($order->orderDetails->sum('total') - $totalTax) }}
                                         </td>
                                     </tr>
+                                    @if($shop[0]->address != $shipping_address->state)
                                     <tr>
-                                        <td><strong class="">{{ translate('Tax') }} :</strong></td>
+                                        <td><strong class="">{{ translate('IGST') }} :</strong></td>
                                         <td>{{ format_price($totalTax) }}</td>
                                     </tr>
+                                    @endif
+                                    @if($shop[0]->address == $shipping_address->state)
+                                    <tr>
+                                        <td><strong class="">{{ translate('SGST') }} :</strong></td>
+                                        <td>{{ format_price($totalTax / 2) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong class="">{{ translate('CGST') }} :</strong></td>
+                                        <td>{{ format_price($totalTax / 2) }}</td>
+                                    </tr>
+                                    @endif
                                     <tr>
                                         <td><strong class=""> {{ translate('Shipping') }} :</strong></td>
                                         <td>{{ format_price($order->shipping_cost) }}</td>
@@ -248,7 +260,7 @@
                                 $last_refund_date = $orderDetail->created_at->addDays($refund_request_time_period);
                                 $today_date = Carbon\Carbon::now();
                                 $refund_request_order_status = get_setting('refund_request_order_status') != null ? json_decode(get_setting('refund_request_order_status')) : [];
-                                
+
                             @endphp
                             @if ($order->payment_status == 'paid' && in_array($order->delivery_status, $refund_request_order_status) && $refund_request == null && $today_date <= $last_refund_date)
                                 <a href="{{ route('admin.refund_request.create', $order->id) }}"

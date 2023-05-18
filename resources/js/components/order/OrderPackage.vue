@@ -4,7 +4,7 @@
             <router-link :to="{ name: 'ShopDetails', params: {slug: order.shop.slug}}" class="text-reset fs-16 fw-700 lh-1">{{ order.shop.name }}</router-link>
             <span class="text-end">
                 <div class="fs-12 red--text c-pointer" v-if="order.delivery_status == 'order_placed' && order.payment_status == 'unpaid' " @click="cancelOrder(order)">{{ $t('cancel_order') }}</div>
-                <div class="fs-12 red--text c-pointer" 
+                <div class="fs-12 red--text c-pointer"
                     v-if="is_addon_activated('refund')
                             && (!order.has_refund_request)
                                 && order.payment_status == 'paid'
@@ -14,11 +14,11 @@
                 </div>
             </span>
         </div>
-        
+
         <div class="grey lighten-4 border border-gray-200 pa-4 rounded d-flex justify-space-between align-center" v-else>
             <span class="fs-16 fw-700 lh-1">{{ $t('order_details') }}</span>
             <div class="fs-12 red--text c-pointer" v-if="order.delivery_status == 'order_placed' && order.payment_status == 'unpaid' " @click="cancelOrder(order)">{{ $t('cancel_order') }}</div>
-            <div class="fs-12 red--text c-pointer" 
+            <div class="fs-12 red--text c-pointer"
                 v-if="is_addon_activated('refund')
                         && (!order.has_refund_request)
                             && order.payment_status == 'paid'
@@ -96,9 +96,17 @@
                         <v-list-item-content>{{ $t('sub_total') }} :</v-list-item-content>
                         <v-list-item-content class="align-end col-4 justify-end">{{ format_price(order.subtotal) }}</v-list-item-content>
                     </v-list-item>
-                    <v-list-item class="fw-700">
-                        <v-list-item-content>{{ $t('tax') }} :</v-list-item-content>
+                    <v-list-item class="fw-700" v-if="order.shop.address != shipping.state">
+                        <v-list-item-content>{{ $t('IGST') }} :</v-list-item-content>
                         <v-list-item-content class="align-end col-4 justify-end">{{ format_price(order.tax) }}</v-list-item-content>
+                    </v-list-item>
+                    <v-list-item class="fw-700" v-if="order.shop.address == shipping.state">
+                        <v-list-item-content>{{ $t('SGST') }} :</v-list-item-content>
+                        <v-list-item-content class="align-end col-4 justify-end">{{ format_price(order.tax / 2) }}</v-list-item-content>
+                    </v-list-item>
+                    <v-list-item class="fw-700" v-if="order.shop.address == shipping.state">
+                        <v-list-item-content>{{ $t('CGST') }} :</v-list-item-content>
+                        <v-list-item-content class="align-end col-4 justify-end">{{ format_price(order.tax / 2) }}</v-list-item-content>
                     </v-list-item>
                     <v-list-item class="fw-700">
                         <v-list-item-content>{{ $t('shipping_charge') }} :</v-list-item-content>
@@ -130,7 +138,8 @@ import { mapGetters } from "vuex";
 export default {
     components: { ReviewDialog, Steps, ConfirmDialog },
     props: {
-        orderDetails: { type: Object, default: () => {} }
+        orderDetails: { type: Object, default: () => {} },
+        shippingAddress: { type: Object, default: () => {} },
     },
     data: () => ({
         cod_sticker: Vue.helpers.asset("/assets/img/cod_sticker.svg"),
@@ -141,6 +150,12 @@ export default {
         order:{
             get(){
                 return this.orderDetails
+            },
+            set(newVal){}
+        },
+        shipping:{
+            get(){
+                return this.shippingAddress
             },
             set(newVal){}
         },

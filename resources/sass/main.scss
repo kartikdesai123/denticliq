@@ -2506,6 +2506,16 @@ hr,
 }
 
 // vueify css override
+
+/*Abhishek Change*/
+@media (min-width: 1264px) {
+    .container {
+        max-width: 1500px;
+    }
+}
+/*Abhishek Change*/
+
+
 @media (min-width: 1904px) {
     .container {
         max-width: 1324px;
@@ -3078,8 +3088,8 @@ label {
     .product-reviews .v-input__append-inner {
         display: none;
     }
- 
-   
+
+
 }
 
 // steps
@@ -3252,7 +3262,7 @@ label {
     top: 0;
     left: 0;
     padding: 2px 9px;
-    font-size: 11px; 
+    font-size: 11px;
 }
 .max-w-80px{
     max-width: 80px;

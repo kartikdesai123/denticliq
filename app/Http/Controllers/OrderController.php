@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CommissionHistory;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Shop;
 use App\Models\OrderUpdate;
 use App\Models\User;
 use App\Models\Wallet;
@@ -52,7 +53,8 @@ class OrderController extends Controller
     public function show($id)
     {
         $order = Order::with(['orderDetails.product','orderDetails.variation.combinations'])->findOrFail($id);
-        return view('backend.orders.show', compact('order'));
+        $shop = Shop::where('id',$order->shop_id)->get();
+        return view('backend.orders.show', compact('order','shop'));
     }
 
     /**
@@ -80,7 +82,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        
+
     }
 
     /**
@@ -133,7 +135,7 @@ class OrderController extends Controller
                 }
                 $refundRequest->delete();
             }
-            
+
             $order_count = Order::where('combined_order_id',$order->combined_order_id)->count();
             if($order_count == 1){
                 $order->combined_order->delete();
@@ -149,7 +151,7 @@ class OrderController extends Controller
 
     public function update_delivery_status(Request $request)
     {
-        $order = Order::findOrFail($request->order_id); 
+        $order = Order::findOrFail($request->order_id);
         OrderUpdate::create([
             'order_id' => $order->id,
             'user_id' => auth()->user()->id,
@@ -163,7 +165,7 @@ class OrderController extends Controller
                         $category->sales_amount -= $orderDetail->total;
                         $category->save();
                     }
-        
+
                     $brand = $orderDetail->product->brand;
                     if($brand){
                         $brand->sales_amount -= $orderDetail->total;
@@ -171,7 +173,7 @@ class OrderController extends Controller
                     }
                 }
                 catch(\Exception $e){
-                    
+
                 }
             }
             if($order->payment_status == 'paid'){
@@ -193,14 +195,14 @@ class OrderController extends Controller
                     if ($order->payment_type == 'cash_on_delivery') {
                         // For Cash on Delivery admin commmision was deducted from the seller old balance. That's why the deducted commission amount have to add again.
                         $shop->current_balance += $order->admin_commission;
-        
+
                         $commission = new CommissionHistory();
                         $commission->order_id = $order->id;
                         $commission->shop_id = $shop->id;
                         $commission->seller_earning = $order->admin_commission;
                         $commission->details = format_price($order->admin_commission).' is Added for Cash On Delivery Order Cancellation.';
                         $commission->save();
-                    } 
+                    }
                     else{
                         $shop->current_balance -= $order->seller_earning;
                     }
@@ -208,7 +210,7 @@ class OrderController extends Controller
                 }
 
             }
-                
+
         }
         $order->delivery_status = $request->status;
         $order->save();
@@ -225,13 +227,13 @@ class OrderController extends Controller
         if($order->payment_status == 'unpaid'){
             $order->payment_status = $request->status;
             $order->save();
-    
+
             OrderUpdate::create([
                 'order_id' => $order->id,
                 'user_id' => auth()->user()->id,
                 'note' => 'Payment status updated to '.$request->status.'.',
             ]);
-    
+
             if($request->status == 'paid'){
                 calculate_seller_commision($order);
                 $order->commission_calculated = 1;
@@ -247,7 +249,7 @@ class OrderController extends Controller
     }
 
     public function add_tracking_information(Request $request){
-        
+
         $order = Order::findOrFail($request->order_id);
 
         if($order->courier_name){

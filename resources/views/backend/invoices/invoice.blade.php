@@ -279,12 +279,29 @@
                             <td class="bold" style="border-bottom:1px dotted #B8B8B8">
                                 {{ format_price($order->orderDetails->sum('total') - $totalTax) }}</td>
                         </tr>
+                        @if($shop[0]->address != $shipping_address->state)
                         <tr class="">
                             <td class="text-left" style="border-bottom:1px dotted #B8B8B8">
-                                {{ translate('Total Tax') }}</td>
+                                {{ translate('IGST') }}</td>
                             <td class="bold" style="border-bottom:1px dotted #B8B8B8">
                                 {{ format_price($totalTax) }}</td>
                         </tr>
+                        @endif
+
+                        @if($shop[0]->address == $shipping_address->state)
+                        <tr>
+                        <td class="text-left" style="border-bottom:1px dotted #B8B8B8">
+                                {{ translate('SGST') }}</td>
+                                <td class="bold" style="border-bottom:1px dotted #B8B8B8">
+                                {{ format_price($totalTax / 2) }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left" style="border-bottom:1px dotted #B8B8B8">{{ translate('CGST') }}</td>
+                            <td class="bold" style="border-bottom:1px dotted #B8B8B8">
+                                {{ format_price($totalTax / 2) }}</td>
+                        </tr>
+                        @endif
+
                         <tr>
                             <td class="text-left" style="border-bottom:1px dotted #B8B8B8">
                                 {{ translate('Shipping Cost') }}</td>

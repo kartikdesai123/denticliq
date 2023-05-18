@@ -35,6 +35,7 @@ class OrderController extends Controller
 
     public function show($order_code)
     {
+
         $order = CombinedOrder::where('code',$order_code)->with(['user','orders.orderDetails.variation.product','orders.orderDetails.variation.combinations','orders.shop'])->first();
         if($order){
             if(auth('api')->user()->id == $order->user_id){
@@ -87,7 +88,7 @@ class OrderController extends Controller
         }else{
             $direction = 'ltr';
             $default_text_align = 'left';
-            $reverse_text_align = 'right';            
+            $reverse_text_align = 'right';
         }
 
 
@@ -154,7 +155,7 @@ class OrderController extends Controller
                         $category->sales_amount -= $orderDetail->total;
                         $category->save();
                     }
-        
+
                     $brand = $orderDetail->product->brand;
                     if($brand){
                         $brand->sales_amount -= $orderDetail->total;
@@ -162,7 +163,7 @@ class OrderController extends Controller
                     }
                 }
                 catch(\Exception $e){
-                    
+
                 }
             }
 
@@ -191,13 +192,13 @@ class OrderController extends Controller
                 'success' => false,
                 'message' => translate('Your cart is empty. Please select a product.')
             ]);
-        
+
         if(!$request->shipping_address_id)
             return response()->json([
                 'success' => false,
                 'message' => translate('Please select a shipping address.')
             ]);
-            
+
         if(!$request->billing_address_id)
             return response()->json([
                 'success' => false,
@@ -278,7 +279,7 @@ class OrderController extends Controller
         foreach ($shops_cart_items as $shop_id => $shop_cart_item_ids) {
 
             $shop_cart_items = $cartItems->whereIn('id', $shop_cart_item_ids);
-            
+
             $shop_subTotal = 0;
             $shop_tax = 0;
             $shop_coupon_discount = 0;
@@ -300,7 +301,7 @@ class OrderController extends Controller
                 $coupon = $coupons->firstWhere('shop_id', $shop_id);
                 if($coupon){
                     $shop_coupon_discount = (new CouponController)->calculate_discount($coupon, $shop_total, $shop_cart_items);
-                    
+
                     $shop_total -= $shop_coupon_discount;
 
                     $coupon_usage = new CouponUsage();
@@ -328,12 +329,12 @@ class OrderController extends Controller
 
             $package_number++;
             $grand_total += $shop_total;
-    
+
 
             foreach ($shop_cart_items as $cartItem) {
                 $itemPriceWithoutTax = variation_discounted_price($cartItem->variation->product,$cartItem->variation,false);
                 $itemTax = product_variation_tax($cartItem->variation->product,$cartItem->variation);
-    
+
                 $orderDetail = OrderDetail::create([
                     'order_id' => $order->id,
                     'product_id' => $cartItem->product_id,
@@ -343,16 +344,16 @@ class OrderController extends Controller
                     'total' => ($itemPriceWithoutTax+$itemTax)*$cartItem->quantity,
                     'quantity' => $cartItem->quantity,
                 ]);
-    
+
                 $cartItem->product->update([
                     'num_of_sale' => DB::raw('num_of_sale + ' . $cartItem->quantity)
                 ]);
-    
+
                 foreach($orderDetail->product->categories as $category){
                     $category->sales_amount += $orderDetail->total;
                     $category->save();
                 }
-    
+
                 $brand = $orderDetail->product->brand;
                 if($brand){
                     $brand->sales_amount += $orderDetail->total;
@@ -382,10 +383,12 @@ class OrderController extends Controller
                 'user_id' => auth('api')->user()->id,
                 'note' => 'Order has been placed.',
             ]);
-            
+
         }
         $combined_order->grand_total = $grand_total;
         $combined_order->save();
+        $shop = Shop::where('id',$shop_id)->get();
+        $combined_order->shop = $shop;
         //Invioce mail send to the customer and seller
         try {
             Notification::send($user, new OrderPlacedNotification($combined_order));
@@ -394,16 +397,16 @@ class OrderController extends Controller
             }
         } catch (\Exception $e) {
         }
-        // 
+        //
 
         // add club points
         if (get_setting('club_point') == 1) {
             (new ClubPointController)->processClubPoints($combined_order, $club_points);
         }
-        
+
         // clear user's cart
         Cart::destroy($request->cart_item_ids);
-        
+
         if($request->payment_type == 'wallet'){
             $user->balance -= $combined_order->grand_total;
             $user->save();
@@ -427,21 +430,21 @@ class OrderController extends Controller
                 $splittedPaymentMethod = explode('-', $request->payment_type);
                 $offlinePaymentId = array_pop($splittedPaymentMethod);
                 $manualPaymentMethod = ManualPaymentMethod::find((int) $offlinePaymentId);
-                
+
                 $manual_payment_data = new ManualPaymentMethod;
                 $manual_payment_data->transactionId = $request->transactionId;
                 $manual_payment_data->payment_method = $manualPaymentMethod->heading;
-                
 
-                // store receipt here 
+
+                // store receipt here
                 if ($request->hasFile('receipt')) {
                     $manual_payment_data->reciept = $request->receipt->store(
                         'uploads/offline_payments'
-                    ); 
+                    );
                 }else{
                     $manual_payment_data->reciept = null;
-                } 
-                
+                }
+
                 $order->manual_payment = 1;
                 $order->manual_payment_data = json_encode($manual_payment_data);
                 $order->save();
@@ -451,7 +454,7 @@ class OrderController extends Controller
         }else{
             $go_to_payment = true;
         }
-        
+
         return response()->json([
             'success' => true,
             'go_to_payment' => $go_to_payment,
@@ -468,10 +471,10 @@ class OrderController extends Controller
 
             // commission calculation
             calculate_seller_commision($order);
-            
+
             $order->payment_status = 'paid';
             $order->payment_type = $payment_method;
-            $order->payment_details = $payment_info; 
+            $order->payment_details = $payment_info;
             $order->save();
         }
     }

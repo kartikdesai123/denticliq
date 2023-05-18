@@ -117,9 +117,18 @@
                                             {{ this.selectedDeliveryOption === 'standard' ? format_price(standardDeliveryCost*getCartShops.length) : format_price(expressDeliveryCost*getCartShops.length) }}
                                         </v-col>
                                     </v-row>
-                                    <v-row class="mt-0">
-                                        <v-col cols="8" class="fw-500 opacity-80">{{ $t('tax') }}</v-col>
+
+                                    <v-row class="mt-0" v-if="selectedShippingAddress != getCartShops[0].address">
+                                        <v-col cols="8" class="fw-500 opacity-80">{{ $t('IGST') }}</v-col>
                                         <v-col cols="4" class="fw-700">{{  format_price(getCartTax, false) }}</v-col>
+                                    </v-row>
+                                    <v-row class="mt-0" v-if="selectedShippingAddress == getCartShops[0].address">
+                                        <v-col cols="8" class="fw-500 opacity-80">{{ $t('SGST') }}</v-col>
+                                        <v-col cols="4" class="fw-700">{{  format_price(getCartTax / 2, false) }}</v-col>
+                                    </v-row>
+                                    <v-row class="mt-0" v-if="selectedShippingAddress == getCartShops[0].address">
+                                        <v-col cols="8" class="fw-500 opacity-80">{{ $t('CGST') }}</v-col>
+                                        <v-col cols="4" class="fw-700">{{  format_price(getCartTax / 2, false) }}</v-col>
                                     </v-row>
                                     <v-divider class="mt-3 mb-2"></v-divider>
 
@@ -335,8 +344,9 @@ export default {
             selectedShippingAddressId: null,
             selectedBillingAddressId: null,
             selectedPaymentMethod: null,
-            // selectedDeliveryOption: '',
-            selectedDeliveryOption: 'standard',
+            selectedDeliveryOption: '',
+            selectedShippingAddress:'',
+            // selectedDeliveryOption: 'standard',
             standardDeliveryCost: 0,
             expressDeliveryCost: 0,
             addDialogShow: false,
@@ -547,6 +557,7 @@ export default {
         await this.fetchAddresses();
         this.selectedShippingAddressId = this.getDefaultShippingAddress.id
         this.selectedBillingAddressId = this.getDefaultBillingAddress.id
+        this.selectedShippingAddress = this.getDefaultShippingAddress.state
         this.getShippingCost(this.selectedShippingAddressId);
 
         let dateArray = [];
@@ -556,7 +567,6 @@ export default {
         this.dateLoop = dateArray;
     },
     mounted(){
-        alert('fff');
         if(this.$route.query.cart_payment && this.$route.query.order_code){
 
             if(this.$route.query.cart_payment == 'success'){
