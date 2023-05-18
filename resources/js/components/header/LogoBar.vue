@@ -190,19 +190,12 @@
                 </v-btn>
                 <v-spacer class="d-none d-md-block" />
                 <div class="d-none d-md-block">
-                    <div class="d-flex align-center" v-if="!isAuthenticated">
-                        <i class="las la-user fs-30 lh-1 me-3 opacity-70"></i>
-                        <router-link
-                            :to="{ name: 'Login' }"
-                            class="text-reset opacity-80 fw-500"
-                            >{{ $t("login") }}</router-link
-                        >
-                        <span class="mx-3 opacity-60">{{ $t("or") }}</span>
-                        <router-link
-                            :to="{ name: 'Registration' }"
-                            class="text-reset opacity-80 fw-500"
-                            >{{ $t("registration") }}</router-link
-                        >
+                    <div class="header_icons" v-if="!isAuthenticated">
+                    <ul class="list-unstyled">
+                        <li><a href="/user/wishlist"> <i class="las la-heart lh-1"></i> Wishlist</a></li>
+                        <li><a href="/compared-list"> <i class="las la-shopping-bag lh-1"></i> Cart</a></li>
+                        <li><a href="/user/login"> <i class="las la-user lh-1"></i> Login</a></li>
+                    </ul>
                     </div>
                     <div class="d-flex align-center" v-else>
                         <i class="las la-user fs-30 lh-1 me-3 opacity-70"></i>

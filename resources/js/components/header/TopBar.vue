@@ -27,8 +27,10 @@
         </div>
         <v-container class="fs-13 py-0 px-0 px-md-3">
             <v-row align="center" class="my-0 d-none d-md-flex">
-                <v-col cols="6" class="py-2">
+                <v-col cols="3" class="py-2">
                     <div class="d-flex align-center">
+                        <a :href="'tel:' + $optional('data.helpline')" class="text-reset opacity-60"> <i class="la la-phone" /><span> {{ $t("help_line") }} </span> <span> {{ $optional("data.helpline") }} </span> </a>
+                        <v-divider vertical class="mx-4" />
                         <!-- language switcher -->
                         <v-menu
                             v-if="data.show_language_switcher == 'on' && allLanguages.length > 1"
@@ -121,40 +123,19 @@
                                 class="mx-4"
                                 v-if="data.mobile_app_links && (data.mobile_app_links.show_play_store == 'on' || data.mobile_app_links.show_app_store == 'on')"
                             />
-                            <router-link :to="{ name: 'ShopRegistration' }" class="text-reset opacity-60">
-                                {{ $t("be_a_seller") }}
-                            </router-link>
                         </template>
                     </div>
                 </v-col>
-                <v-col cols="6" class="py-2">
+                <v-col cols="9" class="py-2">
                     <div class="d-flex align-center justify-end">
-                        <router-link :to="{ name: 'TrackOrder' }" class="text-reset opacity-60">track Order - new hhhhhhh</router-link> 
-                        <v-divider vertical class="mx-4" />
-                        <a :href="'tel:' + $optional('data.helpline')" class="text-reset opacity-60"> <i class="la la-phone" /><span> {{ $t("help_line") }} </span> <span> {{ $optional("data.helpline") }} </span> </a>
-                        <v-divider vertical class="mx-4" />
+                       
                         <!-- <router-link
                             :to="{ name: 'Home' }"
                             class="text-reset opacity-60 me-3"
                         >
                             <span class="">Compare (0)</span>
                         </router-link> -->
-                        <router-link
-                            :to="{ name: 'ComparedList' }"
-                            class="text-reset opacity-60 me-3"
-                        v-if="generalSettings.product_comparison==1">
-                            <span class="">{{ $t("compare") }} ({{ getTotalComparedList }})</span>
-                        </router-link>
-                        <router-link
-                            :to="{ name: 'Wishlist' }"
-                            class="text-reset opacity-60"
-                        >
-                            <span class=""
-                            >{{ $t("wishlist") }} ({{
-                                getTotalWishlisted
-                            }})</span
-                            >
-                        </router-link>
+                       
                     </div>
                 </v-col>
             </v-row>
