@@ -24,7 +24,7 @@
                     <th>{{translate('Name')}}</th>
                     <th>{{translate('Cities')}}</th>
                     <th>{{translate('Standard Delivery Cost')}}</th>
-                    <th>{{translate('Express Delivery Cost')}}</th>
+                    <th>{{translate('COD Delivery Cost')}}</th>
                     <th data-breakpoints="md" class="text-right">{{translate('Options')}}</th>
                 </tr>
             </thead>

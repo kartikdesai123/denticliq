@@ -53,7 +53,8 @@
 
                     <v-list-item>
                         <v-list-item-content class="fw-700">{{ $t('delivery_type') }} :</v-list-item-content>
-                        <v-list-item-content class="align-end text-capitalize">{{ orderDetails.orders[0].delivery_type.replaceAll('_',' ') }}</v-list-item-content>
+                        <v-list-item-content class="align-end text-capitalize">Standar</v-list-item-content>
+                        <!-- <v-list-item-content class="align-end text-capitalize">{{ orderDetails.orders[0].delivery_type.replaceAll('_',' ') }}</v-list-item-content> -->
                     </v-list-item>
                     <v-list-item>
                         <v-list-item-content class="fw-700 align-self-baseline">{{ $t('billing_address') }} :</v-list-item-content>

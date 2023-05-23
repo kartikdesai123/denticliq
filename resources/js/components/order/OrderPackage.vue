@@ -90,6 +90,7 @@
                     <img :src="cod_sticker">
                 </div>
             </v-col>
+
             <v-col xl="5" md="6" cols="12" order="1" order-md="2">
                 <v-list dense>
                     <v-list-item class="fw-700">
@@ -109,7 +110,7 @@
                         <v-list-item-content class="align-end col-4 justify-end">{{ format_price(order.tax / 2) }}</v-list-item-content>
                     </v-list-item>
                     <v-list-item class="fw-700">
-                        <v-list-item-content>{{ $t('shipping_charge') }} :</v-list-item-content>
+                        <v-list-item-content>{{ (order.delivery_type != 'express') ? $t('shipping_charge') : 'Shipping Charge COD' }} :</v-list-item-content>
                         <v-list-item-content class="align-end col-4 justify-end">{{ format_price(order.shipping_cost) }}</v-list-item-content>
                     </v-list-item>
                     <v-list-item class="fw-700">

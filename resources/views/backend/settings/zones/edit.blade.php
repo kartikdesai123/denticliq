@@ -40,7 +40,7 @@
 
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label">
-                            {{ translate('Express Delivery Cost') }}
+                            {{ translate('COD Delivery Cost') }}
                         </label>
                         <div class="col-md-9">
                             <input type="number" step="0.01" name="express_delivery_cost" class="form-control" id="express_delivery_cost" value="{{ $zone->express_delivery_cost }}" placeholder="{{ translate('Express Delivery Cost') }}" required>

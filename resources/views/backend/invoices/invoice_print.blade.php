@@ -128,8 +128,10 @@
                                     <tr>
                                         <td>
                                             <span class=" ">{{ translate('Delivery type') }}:</span>
+                                            <!-- <span class="bold"
+                                                style="text-transform: capitalize">{{ translate($order->delivery_type) }}</span> -->
                                             <span class="bold"
-                                                style="text-transform: capitalize">{{ translate($order->delivery_type) }}</span>
+                                                style="text-transform: capitalize">{{ translate('Standar') }}</span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -299,7 +301,7 @@
                         @endif
                         <tr>
                             <td class="text-left" style="border-bottom:1px dotted #B8B8B8">
-                                {{ translate('Shipping Cost') }}</td>
+                                {{ ($order->delivery_type != 'express') ? translate('Shipping Cost') : 'Shipping Cost COD'  }}</td>
                             <td class="bold" style="border-bottom:1px dotted #B8B8B8">
                                 {{ format_price($order->shipping_cost) }}</td>
                         </tr>

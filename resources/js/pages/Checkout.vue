@@ -28,71 +28,8 @@
                             <span>{{ $t("add_new_address") }}</span>
                         </v-btn>
                     </div>
-                    <h3 class="opacity-80 mb-3 fs-20">{{ $t("billing_address") }}</h3>
-                    <div class="mb-4">
-                        <div class="position-relative mb-3" v-for="(address) in getAddresses" :key="address.id">
-                            <label class="aiz-megabox d-block">
-                                <input type="radio" name="checkout_billing" v-model="selectedBillingAddressId" :value="address.id" :checked="address.default_billing">
-                                <span class="d-flex pa-3 aiz-megabox-elem fs-13 fw-600">
-                                    <span class="aiz-rounded-check flex-shrink-0 mt-1"></span>
-                                    <span class="flex-grow-1 ps-3 opacity-80 lh-1-5">
-                                        <span class="d-block">{{ address.address }}, {{ address.postal_code }}</span>
-                                        <span class="d-block">{{ address.city }}, {{ address.state }}, {{ address.country }}</span>
-                                        <span>{{ address.phone }}</span>
-                                    </span>
-                                </span>
-                            </label>
-                            <v-btn class="absolute-right-center me-3" color="primary" elevation="0" small  @click="editAddress(address)">
-                                {{ $t("change") }}
-                            </v-btn>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="opacity-80 mb-3 fs-20">{{ $t("delivery_option") }}</h3>
-                        <v-row v-if="selectedDeliveryOption !== ''">
-                            <v-col cols="12" sm="6">
-                               <div class="position-relative mb-3">
-                                    <label class="aiz-megabox d-block">
-                                        <input type="radio" name="delivery_option" v-model="selectedDeliveryOption" value="standard">
-                                        <span class="d-flex pa-3 aiz-megabox-elem fs-13 ">
-                                            <span class="aiz-rounded-check flex-shrink-0 mt-1"></span>
-                                            <span class="flex-grow-1 ps-3 lh-1-5">
-                                                <span class="d-block fw-600">{{ $t("standard_delivery") }}</span>
-                                                <span class="d-block">
-                                                    {{ $t("delivery_cost") }}:
-                                                    <span class="fw-600">{{ format_price(standardDeliveryCost) }}</span>
-                                                    <span v-if="is_addon_activated('multi_vendor')">/{{ $t('shop') }}</span>
-                                                </span>
-                                                <span class="d-block">{{ $t("delivery_timing") }}: <span class="fw-600">{{ getStandardTime }} {{ $t("days") }}</span></span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </v-col>
-                            <v-col cols="12" sm="6">
-                               <div class="position-relative mb-3">
-                                    <label class="aiz-megabox d-block">
-                                        <input type="radio" name="delivery_option" v-model="selectedDeliveryOption" value="express">
-                                        <span class="d-flex pa-3 aiz-megabox-elem fs-13">
-                                            <span class="aiz-rounded-check flex-shrink-0 mt-1"></span>
-                                            <span class="flex-grow-1 ps-3 lh-1-5">
-                                                <span class="d-block fw-600">{{ $t("express_delivery") }}</span>
-                                                <span class="d-block">
-                                                    {{ $t("delivery_cost") }}:
-                                                    <span class="fw-600">{{ format_price(expressDeliveryCost) }}</span>
-                                                    <span v-if="is_addon_activated('multi_vendor')">/{{ $t('shop') }}</span>
-                                                </span>
-                                                <span class="d-block">{{ $t("delivery_timing") }}: <span class="fw-600">{{ getExpressTime }} {{ $t("days") }}</span></span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </v-col>
-                        </v-row>
-                        <div class="border red white--text rounded pa-4" v-else>
-                            {{ $t("sorry_delivery_is_not_available_in_this_shipping_address") }}
-                        </div>
-                    </div>
+
+
                 </div>
                 <div class="mb-4">
                     <h3 class="opacity-80 mb-3 fs-20">{{ $t("order_summary") }}</h3>
@@ -112,7 +49,7 @@
                                         <v-col cols="4" class="fw-700">{{ format_price(getCartPrice - getCartTax, false) }}</v-col>
                                     </v-row>
                                     <v-row class="mt-0">
-                                        <v-col cols="8" class="fw-500 opacity-80">{{ $t('shipping_charge') }}</v-col>
+                                        <v-col cols="8" class="fw-500 opacity-80">{{ this.selectedDeliveryOption === 'standard' ? $t('shipping_charge') : 'Shipping Charge COD' }}</v-col>
                                         <v-col cols="4" class="fw-700">
                                             {{ this.selectedDeliveryOption === 'standard' ? format_price(standardDeliveryCost*getCartShops.length) : format_price(expressDeliveryCost*getCartShops.length) }}
                                         </v-col>
@@ -429,7 +366,11 @@ export default {
             this.rechargeDialogShow = false;
         },
         paymentSelected(event, paymentMethod){
-            this.selectedPaymentMethod = paymentMethod
+            this.selectedPaymentMethod = paymentMethod;
+            this.getShippingCost(this.selectedShippingAddressId);
+            if(this.selectedPaymentMethod.code == "cash_on_delivery"){
+                this.selectedDeliveryOption = 'express'
+            }
         },
         walletSelected(){
             if(this.currentUser.balance >= this.totalPrice){
@@ -448,6 +389,12 @@ export default {
             this.selectedDeliveryOption = res.data.success ? 'standard' : ''
             this.standardDeliveryCost = parseFloat(res.data.standard_delivery_cost)
             this.expressDeliveryCost = parseFloat(res.data.express_delivery_cost)
+            if(this.selectedPaymentMethod != null){
+                if(this.selectedPaymentMethod.code == 'cash_on_delivery'){
+                    this.selectedDeliveryOption = 'express'
+                }
+            }
+
         },
         async proceedCheckout(){
 
@@ -556,7 +503,8 @@ export default {
     async created() {
         await this.fetchAddresses();
         this.selectedShippingAddressId = this.getDefaultShippingAddress.id
-        this.selectedBillingAddressId = this.getDefaultBillingAddress.id
+        // this.selectedBillingAddressId = this.getDefaultBillingAddress.id
+        this.selectedBillingAddressId = this.getDefaultShippingAddress.id
         this.selectedShippingAddress = this.getDefaultShippingAddress.state
         this.getShippingCost(this.selectedShippingAddressId);
 

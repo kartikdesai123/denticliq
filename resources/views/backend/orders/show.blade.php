@@ -34,8 +34,11 @@
                                     </tr>
                                     <tr>
                                         <td class="">{{ translate('Delivery type') }}:</td>
-                                        <td class="text-right fw-700">
+                                        <!-- <td class="text-right fw-700">
                                             {{ ucfirst(str_replace('_', ' ', $order->delivery_type)) }}
+                                        </td> -->
+                                        <td class="text-right fw-700">
+                                            Standar
                                         </td>
                                     </tr>
                                     <tr>
@@ -217,7 +220,7 @@
                                     </tr>
                                     @endif
                                     <tr>
-                                        <td><strong class=""> {{ translate('Shipping') }} :</strong></td>
+                                        <td><strong class=""> {{ ($order->delivery_type != 'express') ? translate('Shipping') : 'Shipping COD'}} :</strong></td>
                                         <td>{{ format_price($order->shipping_cost) }}</td>
                                     </tr>
                                     <tr>
