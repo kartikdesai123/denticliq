@@ -24,27 +24,23 @@
                         class="w-100px px-3 mt-2"
                     ></v-skeleton-loader>
                 </template>
-              
+
                 <template v-else>
                     <v-list class="d-flex py-0">
                          <!-- <a href="/all-categories" class="text-reset fs-13 fw-700 opacity-80">All</a>-->
                         <div tabindex="-1" role="listitem" class="submenuitems flex-grow-0 flex-fill v-list-item theme--light">
                             <div class="v-list-item__title">
-                                <a href="/all-categories" class="text-reset fs-13 fw-700 opacity-80">All Categories</a>
+                                <router-link :to="{ name: 'AllCategories'}" class="text-reset fs-13 fw-700 opacity-80">All Categories</router-link>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                  
-                                    <li><a href="#">Submenu Name 1</a></li>
-                                    <li><a href="#">Submenu Name 1</a></li>
-                                    <li><a href="#">Submenu Name 1</a></li>
-                                    <li class="subsubmenuitems">
-                                        <a  href="#">New Arrival</a>
-                                        <ul class="dropdown-submenu" aria-labelledby="dropdownMenu1">
-                                            <li><a href="#">Action</a></li>
-                                            <li><a href="#">Action 2</a></li>
-                                            <li><a href="#">Action 3</a></li>
-                                        </ul>
+                                <li :class="{'subsubmenuitems': category.children.data.length > 0}" v-for="(category, index) in categories" :key="index">
+                                    <router-link :to="{ name: 'Category', params: {categorySlug: category.slug}}">{{ category.name }}</router-link>
+                                    <ul v-if="category.children.data && category.children.data.length > 0"  aria-labelledby="dropdownMenu1" class="dropdown-submenu">
+                                    <li v-for="(subcategory, subIndex) in category.children.data" :key="subIndex">
+                                        <!-- <a :href="`category/${subcategory.slug}`">{{ subcategory.name }}</a> -->
+                                        <router-link :to="{ name: 'Category', params: {categorySlug: subcategory.slug}}">{{ subcategory.name }}</router-link>
                                     </li>
-                                   
+                                    </ul>
+                                </li>
                                 </ul>
                             </div>
                         </div>
@@ -81,5 +77,22 @@ export default {
             default: {},
         },
     },
+    data: () => ({
+        loading: true,
+        categories: [{},{},{},{}]
+    }),
+    mounted() {
+        this.allCategory();
+    },
+    methods:{
+        async allCategory() {
+        const res = await this.call_api("get", "all-categories");
+        if (res.data.success) {
+            this.categories = res.data.data
+            this.loading = false
+        }
+    }
+    },
 };
 </script>
+
