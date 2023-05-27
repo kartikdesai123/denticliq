@@ -2,7 +2,7 @@
     <div class="mb-5">
         <v-container class="py-0 pe-0 pe-md-3 ps-3">
             <div class="d-flex justify-space-between align-center mb-4 pe-3 pe-md-0">
-                <h2 class="">{{ $t('popular_categories') }}</h2>
+                <h2 class="main_heading">{{ $t('Trending Category') }}</h2>
                 <router-link :to="{ name: 'AllCategories' }" class="py-2 primary--text lh-1 d-inline-block">
                     {{ $t('view_all') }}
                     <i class="las la-angle-right"></i>
@@ -17,10 +17,10 @@
             </div>
             <div v-else>
                 <swiper :options="carouselOption" class="">
-                    <swiper-slide v-for="(category, i) in categories" :key="i" class="">
-                        <router-link class="rounded pa-2 pa-md-4 border text-center d-block text-reset" :to="{ name: 'Category', params: {categorySlug: category.slug}}">
-                            <img :src="category.banner" :alt="category.name" @error="imageFallback($event)" class="img-fluid">
-                            <div class="fs-13 opacity-80 text-truncate d-none d-md-block mt-3">{{ category.name }}</div>
+                    <swiper-slide v-for="(category, i) in categories" :key="i" class="popularcat">
+                        <router-link class="" :to="{ name: 'Category', params: {categorySlug: category.slug}}">
+                            <img :src="category.banner" :alt="category.name" @error="imageFallback($event)" class="img-fluid ">
+                            <h3>{{ category.name }}</h3>
                         </router-link>
                     </swiper-slide>
                 </swiper>
@@ -78,12 +78,7 @@ export default {
 }
 </script>
 <style scoped>
-    h2{
-        font-size: 16px;
-    }
-    @media (min-width: 960px) {
-        h2{
-            font-size: 24px;
-        }
-    }
+   
+
+
 </style>

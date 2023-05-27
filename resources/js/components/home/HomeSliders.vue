@@ -1,63 +1,23 @@
 <template>
     <div class="mb-5">
-        <v-container class="pt-md-6 pb-0 px-0 px-md-3">
             <v-row class="gutters-7 md-gutters-10 lh-0" v-if="loading">
-                <v-col cols="12" lg="6" class="">
+                <v-col cols="12" lg="12" md="12" class="">
                     <v-skeleton-loader
                         type="image"
                         height="310"
                         class="loader"
-                    ></v-skeleton-loader>
-                </v-col>
-                <v-col cols="6" lg="3" class="">
-                    <v-skeleton-loader
-                        type="image"
-                        height="310"
-                        class="loader"
-                    ></v-skeleton-loader>
-                </v-col>
-                <v-col cols="6" lg="3" class="">
-                    <v-skeleton-loader
-                        type="image"
-                        height="145"
-                        class="right-first loader-half"
-                    ></v-skeleton-loader>
-                    <v-skeleton-loader
-                        type="image"
-                        height="145"
-                        class="loader-half"
                     ></v-skeleton-loader>
                 </v-col>
             </v-row>
-            <v-row class="gutters-7 md-gutters-10 lh-0" v-else>
-                <v-col cols="12" lg="6" class="">
+            <v-row class="mainslider" v-else>
+                <v-col cols="12" lg="12" class="">
                     <swiper :options="carouselOption" class="">
                         <swiper-slide v-for="(slider, i) in sliders.one" :key="i" class="">
                             <banner :loading="false" :banner="slider"/>
                         </swiper-slide>
                     </swiper>
                 </v-col>
-                <v-col cols="6" lg="3" class="">
-                    <swiper :options="carouselOption" class="">
-                        <swiper-slide v-for="(slider, i) in sliders.two" :key="i" class="">
-                            <banner :loading="false" :banner="slider"/>
-                        </swiper-slide>
-                    </swiper>
-                </v-col>
-                <v-col cols="6" lg="3" class="d-flex justify-space-between flex-column">
-                    <swiper :options="carouselOption" class="right-first w-100">
-                        <swiper-slide v-for="(slider, i) in sliders.three" :key="i" class="">
-                            <banner :loading="false" :banner="slider"/>
-                        </swiper-slide>
-                    </swiper>
-                    <swiper :options="carouselOption" class="w-100">
-                        <swiper-slide v-for="(slider, i) in sliders.four" :key="i" class="">
-                            <banner :loading="false" :banner="slider"/>
-                        </swiper-slide>
-                    </swiper>
-                </v-col>
             </v-row>
-        </v-container>
     </div>
 </template>
 
@@ -66,6 +26,7 @@ export default {
     data: () => ({
         loading: true,
         sliders: null,
+        pagination: '.swiper-pagination',
         carouselOption: {
             slidesPerView: 1,
             spaceBetween: 0,
@@ -120,6 +81,10 @@ export default {
         padding-right: 7px;
         padding-left: 0;
     }
+    .swiper-wrapper img{
+width:200px;
+}
+
     @media (min-width: 600px) {
         
     }

@@ -3,13 +3,9 @@
         <div v-if="isLoading">
             <v-skeleton-loader type="image" :height="boxStyle == 'two' ? '70' : boxStyle == 'three' ? '150' : boxStyle == 'four' ? '130' : '310'"/>
         </div>
-        <div :class="['overflow-hidden', {'rounded border':!noBorder}]" v-else>
+        <div :class="['overflow-hidden','productbox']" v-else>
             <v-row align="center" no-gutters :class="[{'flex-nowrap': boxStyle != 'one'}]">
-                <v-col :cols="boxStyle == 'one' ? '12' : 'auto'" class="flex-shrink-0">
-                    <div class="position-relative">
-                        <div v-if="discount > 0 && boxStyle != 'two'" class="discount-badge">
-                            {{ $t('off') }} {{ discount }}%
-                        </div>
+                    <div class="position-relative ">
                         <router-link
                             :to="{ name: 'ProductDetails', params: {slug: productDetails.slug}}"
                             class="text-reset d-block lh-0 text-center"
@@ -18,29 +14,31 @@
                                 :src="productDetails.thumbnail_image"
                                 :alt="productDetails.name"
                                 @error="imageFallback($event)"
-                                :class="['img-fit', boxStyle == 'two' ? 'size-70px' : boxStyle == 'three' ? 'size-150px' : boxStyle == 'four' ? 'size-130px' : 'h-180px' ]"
+                                :class="[]"
                             >
                         </router-link>
                     </div>
-                </v-col>
+             
                 <v-col :cols="boxStyle == 'one' ? '12' : null" class="minw-0 flex-shrink-0">
                     <div :class="['px-3 d-flex flex-column', boxStyle == 'two' ? 'py-1' : 'py-2']">
-                        <div :class="[ boxStyle == 'two' ? 'order-2 fs-14 lh-1' : 'fs-16 mb-2']">
-                            <template v-if="productDetails.base_price > productDetails.base_discounted_price">
-                                <del class="opacity-40">{{ format_price(productDetails.base_price) }}</del>
-                                <span class="fw-700">{{ format_price(productDetails.base_discounted_price) }}</span>
-                            </template>
-                            <template v-else>
-                                <span class="fw-700">{{ format_price(productDetails.base_discounted_price) }}</span>
-                            </template>
-                        </div>
-                        <h5 :class="['opacity-60 fw-400 mb-2 lh-1-6', boxStyle == 'two' ? 'text-truncate fs-12' : 'fs-13 text-truncate-2 h-40px' ]">
+                       
+                        <h5 :class="[boxStyle == 'two' ? 'text-truncate fs-12' : '' ]">
                             <router-link
                                 :to="{ name: 'ProductDetails', params: {slug: productDetails.slug}}"
                                 class="text-reset"
                             >{{ productDetails.name }}</router-link>
                         </h5>
-                         <div v-if="generalSettings.club_point == 1 && boxStyle != 'two' &&  boxStyle != 'four'" :class="[ boxStyle == 'two' || boxStyle == 'four' ? 'd-flex flex-row align-center max-w-80px club-badge rounded-sm mb-2' : 'd-flex flex-row align-center max-w-80px club-badge rounded-sm' ]">
+                        <div :class="[ boxStyle == 'two' ? 'order-2 fs-14 lh-1' : 'productprice']">
+                            <template v-if="productDetails.base_price > productDetails.base_discounted_price">
+                                <del class="opacity-40">{{ format_price(productDetails.base_price) }}</del>
+                                <span class="fw-700">{{ format_price(productDetails.base_discounted_price) }}</span>
+                                <span v-if="discount > 0 && boxStyle != 'two'" class="discount-badge-new">{{ $t('off') }} {{ discount }}%</span>
+                            </template>
+                            <template v-else>
+                                <span class="fw-700">{{ format_price(productDetails.base_discounted_price) }}</span>
+                            </template>
+                        </div>
+                         <div v-if="generalSettings.club_point == 1 && boxStyle != 'two' &&  boxStyle != 'four'" :class="[ boxStyle == 'two' || boxStyle == 'four' ? 'd-flex flex-row align-center max-w-80px club-badge-design' : 'd-flex flex-row align-center max-w-80px club-badge-design' ]">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="11.001" viewBox="0 0 18 12.001">
                                 <g id="Group_23890" data-name="Group 23890" transform="translate(-631 -822)">
                                     <path id="Subtraction_84" data-name="Subtraction 84" d="M7583,12a5.989,5.989,0,0,1-1.8-.274,7.1,7.1,0,0,0,0-11.45A5.927,5.927,0,0,1,7583,0a6,6,0,1,1,0,12Zm-1.885-.3A3.016,3.016,0,1,0,7580,11.2a6.1,6.1,0,0,0,1.113.5Z" transform="translate(-6940 822)" fill="#fff"/>
@@ -56,29 +54,16 @@
                         <div class="d-flex align-center" v-if="boxStyle != 'two'">
                             <div :class="[ boxStyle == 'three' || boxStyle == 'four' ? 'me-3' : 'flex-grow-1 me-1' ]">
                                 <template v-if="productDetails.stock">
-                                    <button class="text-reset py-1 lh-1 align-center d-flex" @click="showAddToCartDialog({status:true,slug:productDetails.slug})">
+                                    <button class="buynowbtn-theme" @click="showAddToCartDialog({status:true,slug:productDetails.slug})">
                                         <i class="la la-shopping-cart fs-20 ts-05 me-1"></i>
-                                        <span class="fw-700 fs-13">{{ $t('buy_now') }}</span>
+                                        <span>{{ $t('buy_now') }}</span>
                                     </button>
-                                    <!-- <span v-else-if="!productDetails.is_variant && isThisInCart(productDetails.variations[0].id)" class="d-flex align-center">
-                                        <button class="btn-xxs size-20px d-inline-flex align-center justify-center" @click="updateCart('minus',findCartItemByVariationId(productDetails.variations[0].id).cart_id)" type="button">
-                                            <i class="las la-minus fs-16 ts-05"></i>
-                                        </button>
-                                        <span class="mx-4">{{ findCartItemByVariationId(productDetails.variations[0].id).qty }}</span>
-                                        <button class="btn-xxs size-20px d-inline-flex align-center justify-center" @click="updateCart('plus',findCartItemByVariationId(productDetails.variations[0].id).cart_id)" type="button">
-                                            <i class="las la-plus fs-16 ts-05"></i>
-                                        </button>
-                                    </span>
-                                    <button class="py-1 lh-1 align-center d-flex" v-else @click="addCart" type="button">
-                                        <i class="la la-shopping-cart fs-20 ts-05 me-1"></i>
-                                        <span class="fw-700 fs-13">Add to Cart</span>
-                                    </button> -->
                                 </template>
                                 <template v-else>
                                     <span class="fw-700 fs-13 opacity-60">{{ $t('out_of_stock') }}</span>
                                 </template>
                             </div>
-                            <div>
+                            <div class='wighlist-icon'>
                                 <template v-if="isThisWishlisted(productDetails.id)">                        
                                     <button class="primary--text pa-1 lh-1" @click="removeFromWishlist(productDetails.id)" type="button"><i class="la la-heart ts-02 fs-18"></i></button>
                                 </template>
@@ -86,25 +71,7 @@
                                     <button class="primary--text pa-1 lh-1" @click="addNewWishlist(productDetails.id)" type="button"><i class="la la-heart-o ts-02 fs-18"></i></button>
                                 </template>
                             </div>
-                            <div v-if="generalSettings.product_comparison==1">
-                                <template v-if="isThisComparedListed(productDetails.id)">
-                                     <v-tooltip top>
-                                        <template v-slot:activator="{ on, attrs }">
-                                            <button v-bind="attrs" v-on="on" class="primary--text pa-1 lh-1" @click="RemoveComparedListProduct(productDetails.id)" type="button"><i class="la la-remove ts-02 fs-18"></i></button>
-                                        </template>
-                                        <span>Remove from compare list</span>
-                                        </v-tooltip>                                   
-                                </template>
-                                <template v-else>
-                                    <v-tooltip top>
-                                        <template v-slot:activator="{ on, attrs }">
-                                             <button v-bind="attrs" v-on="on" class="primary--text pa-1 lh-1" @click="addNewComparedList(productDetails.id)" type="button"><i class="las la-sync ts-02 fs-18"></i></button>
-                                        </template>
-                                        <span>Add to compare list</span>
-                                    </v-tooltip>                                           
-                                   
-                                </template>
-                            </div>
+
                         </div>
                     </div>
                 </v-col>
@@ -173,3 +140,70 @@ export default {
     }
 }
 </script>
+
+<style>
+.discount-badge-new{
+    border: 1px solid #9d3b3b;
+    font-weight: 400;
+    font-size: 11px!important;
+    padding: 0px 9px;
+    color: #e82424!important;
+    margin-left: 10px;
+    letter-spacing: 0.03em;
+    display: inline-block;
+}
+.club-badge-design{
+    position: absolute;
+    top: 5px;
+}
+.buynowbtn-theme{
+    background: #3e3d3d00;
+    border: 1.5px solid #252424c7;
+    color: black;
+    border-radius: 3px;
+    padding: 5px 22px;
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    margin: 10px auto 10px;
+    font-weight: 400;
+    font-size: 13px;
+}
+.product-box-one{
+    border: 1px solid #8080802e;
+    border-radius: 5px;
+}
+    .productbox{
+        border: 1px solid #80808008;
+    border-radius: 5px;
+    min-height: 420px;
+    background: white;
+}
+.productbox img{
+    width: 100%;
+    height: 276px;
+    border-radius: 5px;
+    -o-object-fit: contain;
+    object-fit: contain;
+}
+.productbox .productprice del{
+    color: red;
+    opacity: 0.7!important;
+}
+.productbox .productprice span{
+    color: green;
+    font-size: 15px;
+}
+.productbox h5 a{
+    text-transform: capitalize;
+    font-size: 16px;
+    font-weight: 400!important;
+    letter-spacing: inherit;
+} 
+.wighlist-icon{
+    position: absolute;
+    top: 5px;
+    right: 7px;
+}
+
+</style>

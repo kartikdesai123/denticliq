@@ -1,7 +1,7 @@
 <template>
     <div class="mb-5">
         <v-container class="py-0">
-            <h2 class="mb-4">{{ title }}</h2>
+            <h2 class="main_heading">{{ title }}</h2>
             <div v-if="loading">
                 <swiper ref="c1" class="" :options="carouselOption">
                     <swiper-slide v-for="i in 8" :key="i" class="">

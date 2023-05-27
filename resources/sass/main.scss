@@ -3319,3 +3319,130 @@ label {
   font-weight: 600;
   margin-right: 0;
 }
+/*your custom css goes here*/
+.topbar {
+    background-color: #36b8bb!important;
+    text-align: center;
+}
+.v-application p {
+    margin-bottom: 0;
+    color: white;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+}
+.v-application .py-2 {
+    padding-top: 4px!important;
+    padding-bottom: 4px!important;
+}
+.logobar {
+    border-bottom: 1px solid #80808026;
+    padding: 4px 20px;
+    min-height: auto!important;
+}
+.v-input input {
+    max-height: 42px;
+    border: 1px solid #80808059;
+    padding: 7px 9px;
+    font-size: 14px;
+    border-radius: 3px;
+}
+.search-box button{
+    background: none!important;
+    position: absolute;
+    right: 18px;
+    padding: 0!important;
+    height: 32px !important;
+    min-width: 32px!important;
+}
+.search-box button:hover {
+    background: none!important;
+}
+.v-application a {
+    text-transform: uppercase;
+    font-weight: 400!important;
+    letter-spacing: 0.04em;
+}
+.theme--light.v-list, .menumain  {
+    background: #f8f8f8;
+}
+.v-application .submenuitems {
+
+}
+.submenuitems .dropdown-menu{
+    display:none;
+}
+.submenuitems:hover .dropdown-menu{
+    display: block;
+    position: absolute;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: white;
+    border: 1px solid rgba(128, 128, 128, 0.2509803922);
+    width: 230px;
+    top: 30px;
+    border-top: 2px solid #36b8bb;
+    z-index: 2;
+}
+.submenuitems .dropdown-menu li{
+    border-bottom: 1px solid #8080804a;
+}
+.submenuitems .dropdown-menu li a{
+    color: rgba(0, 0, 0, 0.5803921569);
+    font-size: 14px;
+    text-transform: capitalize;
+    display: block;
+    padding: 8px 12px;
+}
+.subsubmenuitems .dropdown-submenu{
+    display:none;
+}
+.subsubmenuitems:hover .dropdown-submenu{
+    display: block;
+    position: absolute;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: white;
+    border: 1px solid rgba(128, 128, 128, 0.2509803922);
+    width: 230px;
+    top: 32px;
+    border-top: 2px solid #36b8bb;
+    right: -230px;
+}
+
+.mainslider img{
+    width: 100%!important;
+    height: 425px;
+    object-fit: cover;
+}
+.swiper-image {
+    height: 100%;
+    display: flex;  
+    justify-content: center;
+    align-items: center;
+  }
+ .main_heading{
+    font-size: 20px;
+    font-weight: 600;
+ }
+ .popularcat{
+    text-align: center;
+}
+.popularcat img{
+width: 200px!important;
+height: 200px;
+-o-object-fit: cover;
+object-fit: cover;
+border-radius: 10px;
+}
+.popularcat h3{
+color: black;
+font-size: 17px;
+font-weight: 500;
+letter-spacing: inherit;
+text-transform: capitalize;
+line-height: normal;
+}
+
+

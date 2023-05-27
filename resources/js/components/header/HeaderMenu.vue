@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="menumain">
         <v-container class="py-0">
-            <div class="d-flex align-center justify-center py-2">
+            <div class="d-flex align-center justify-center">
                 <template v-if="loading">
                     <v-skeleton-loader
                         type="text"
@@ -24,68 +24,30 @@
                         class="w-100px px-3 mt-2"
                     ></v-skeleton-loader>
                 </template>
+              
                 <template v-else>
                     <v-list class="d-flex py-0">
-                        <!-- <v-list-item class="flex-grow-0 flex-fill">
-                            <v-list-item-title>
-                                <router-link
-                                    :to="{ name: 'Home' }"
-                                    class="text-reset fs-13 fw-700 opacity-80"
-                                >
-                                    {{ $t("home") }}
-                                </router-link>
-                            </v-list-item-title>
-                        </v-list-item>
-                        <v-list-item class="flex-grow-0 flex-fill">
-                            <v-list-item-title>
-                                <router-link
-                                    :to="{ name: 'AllCategories' }"
-                                    class="text-reset fs-13 fw-700 opacity-80"
-                                >
-                                    {{ $t("all_categories") }}
-                                </router-link>
-                            </v-list-item-title>
-                        </v-list-item>
-                        <v-list-item class="flex-grow-0 flex-fill">
-                            <v-list-item-title>
-                                <router-link
-                                    :to="{ name: 'AllBrands' }"
-                                    class="text-reset fs-13 fw-700 opacity-80"
-                                >
-                                    {{ $t("all_brands") }}
-                                </router-link>
-                            </v-list-item-title>
-                        </v-list-item>
-                        <v-list-item v-if="is_addon_activated('multi_vendor')" class="flex-grow-0 flex-fill">
-                            <v-list-item-title>
-                                <router-link
-                                    :to="{ name: 'AllShops' }"
-                                    class="text-reset fs-13 fw-700 opacity-80"
-                                >
-                                    {{ $t("all_shops") }}
-                                </router-link>
-                            </v-list-item-title>
-                        </v-list-item>
-                        <v-list-item class="flex-grow-0 flex-fill">
-                            <v-list-item-title>
-                                <router-link
-                                    :to="{ name: 'AllBlogs' }"
-                                    class="text-reset fs-13 fw-700 opacity-80"
-                                >
-                                    {{ $t("all_blogs") }}
-                                </router-link>
-                            </v-list-item-title>
-                        </v-list-item>
-                        <v-list-item class="flex-grow-0 flex-fill">
-                            <v-list-item-title>
-                                <router-link
-                                    :to="{ name: 'AllOffers' }"
-                                    class="text-reset fs-13 fw-700 opacity-80"
-                                >
-                                    {{ $t("offers") }}
-                                </router-link>
-                            </v-list-item-title>
-                        </v-list-item> -->
+                         <!-- <a href="/all-categories" class="text-reset fs-13 fw-700 opacity-80">All</a>-->
+                        <div tabindex="-1" role="listitem" class="submenuitems flex-grow-0 flex-fill v-list-item theme--light">
+                            <div class="v-list-item__title">
+                                <a href="/all-categories" class="text-reset fs-13 fw-700 opacity-80">All Categories</a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                  
+                                    <li><a href="#">Submenu Name 1</a></li>
+                                    <li><a href="#">Submenu Name 1</a></li>
+                                    <li><a href="#">Submenu Name 1</a></li>
+                                    <li class="subsubmenuitems">
+                                        <a  href="#">New Arrival</a>
+                                        <ul class="dropdown-submenu" aria-labelledby="dropdownMenu1">
+                                            <li><a href="#">Action</a></li>
+                                            <li><a href="#">Action 2</a></li>
+                                            <li><a href="#">Action 3</a></li>
+                                        </ul>
+                                    </li>
+                                   
+                                </ul>
+                            </div>
+                        </div>
                         <v-list-item
                             v-for="(link, label, i) in $optional(
                                 'data.header_menu'

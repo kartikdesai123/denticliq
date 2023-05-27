@@ -1,8 +1,8 @@
 <template>
     <div class="mb-5">
         <v-container class="py-0">
-            <h2 class="mb-4">{{ title }}</h2>
-            <div v-if="loading">
+            <h2 class="main_heading">{{ title }}</h2>
+            <div v-if="loading" class="todaydeal">
                 <swiper ref="c1" class="" :options="carouselOption" >
                     <swiper-slide v-for="(i) in 8" :key="i"  class="">
                         <v-skeleton-loader type="image" height="186" ></v-skeleton-loader>
@@ -66,13 +66,3 @@ export default {
     }
 }
 </script>
-<style scoped>
-    h2{
-        font-size: 16px;
-    }
-    @media (min-width: 960px) {
-        h2{
-            font-size: 24px;
-        }
-    }
-</style>

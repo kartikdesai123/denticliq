@@ -1,7 +1,7 @@
 <template>
     <div class="mb-5">
         <v-container class="py-0">
-            <h2 class="mb-4">{{ title }}</h2>
+            <h2 class="main_heading">{{ title }}</h2>
             <v-row class="gutters-10">
                 <v-col cols="12" lg="3" sm="6">
                     <div v-if="loading">

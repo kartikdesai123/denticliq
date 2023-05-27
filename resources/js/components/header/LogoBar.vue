@@ -1,6 +1,5 @@
 <template>
     <div class="logobar">
-        <v-container class="pb-md-0 pt-4">
             <div class="d-flex align-center">
                 <div class="logo">
                     <router-link :to="{ name: 'Home' }" class="d-block lh-0">
@@ -10,7 +9,7 @@
                 <v-spacer />
                 <div :class="['flex-grow-1 search-box', { open: openSearch }]">
                     <v-form
-                        class="border rounded flex-grow-1"
+                        class="flex-grow-1"
                         @submit.stop.prevent="search()"
                     >
                         <v-row align="center" dense>
@@ -31,16 +30,13 @@
                                     solo
                                     flat
                                 ></v-text-field>
+                                
                             </v-col>
-                            <v-col cols="auto me-1" class="d-none d-md-block">
-                                <v-btn
-                                    block
-                                    color="primary"
+                             <v-btn
                                     elevation="0"
                                     @click.stop.prevent="search()"
-                                    >{{ $t("search") }}</v-btn
+                                    > <i class="las la-search fs-18 ts-05" ></i> </v-btn
                                 >
-                            </v-col>
                         </v-row>
                     </v-form>
                     <div class="white shadow-lg position-absolute search_content_box" v-if="showSuggestionContainer">
@@ -192,8 +188,8 @@
                 <div class="d-none d-md-block">
                     <div class="header_icons" v-if="!isAuthenticated">
                     <ul class="list-unstyled">
-                        <li><a href="/user/wishlist"> <i class="las la-heart lh-1"></i> Wishlist</a></li>
-                        <li><a href="/compared-list"> <i class="las la-shopping-bag lh-1"></i> Cart</a></li>
+                        <li><a href="/user/wishlist"> <i class="las la la-heart-o lh-1"></i></a></li>
+                        <li><a href="/compared-list"> <i class="las la-shopping-bag lh-1"></i></a></li>
                         <li><a href="/user/login"> <i class="las la-user lh-1"></i> Login</a></li>
                     </ul>
                     </div>
@@ -214,7 +210,6 @@
                     </div>
                 </div>
             </div>
-        </v-container>
     </div>
 </template>
 
