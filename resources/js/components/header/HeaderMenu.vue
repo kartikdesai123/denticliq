@@ -29,14 +29,14 @@
                     <v-list class="d-flex py-0">
                          <!-- <a href="/all-categories" class="text-reset fs-13 fw-700 opacity-80">All</a>-->
                         <div tabindex="-1" role="listitem" class="submenuitems flex-grow-0 flex-fill v-list-item theme--light">
-                            <div class="v-list-item__title">
+                            <div v-if="!iscat" class="v-list-item__title">
                                 <router-link :to="{ name: 'AllCategories'}" class="text-reset fs-13 fw-700 opacity-80">All Categories</router-link>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                <li :class="{'subsubmenuitems': category.children.data.length > 0}" v-for="(category, index) in categories" :key="index">
+                                <li v-for="(category, index) in categories" :key="index" :class="{'subsubmenuitems': category.children.data.length != 0}">
                                     <router-link :to="{ name: 'Category', params: {categorySlug: category.slug}}">{{ category.name }}</router-link>
-                                    <ul v-if="category.children.data && category.children.data.length > 0"  aria-labelledby="dropdownMenu1" class="dropdown-submenu">
+
+                                    <ul v-if="category.children.data.length != 0"  aria-labelledby="dropdownMenu1" class="dropdown-submenu">
                                     <li v-for="(subcategory, subIndex) in category.children.data" :key="subIndex">
-                                        <!-- <a :href="`category/${subcategory.slug}`">{{ subcategory.name }}</a> -->
                                         <router-link :to="{ name: 'Category', params: {categorySlug: subcategory.slug}}">{{ subcategory.name }}</router-link>
                                     </li>
                                     </ul>
@@ -78,10 +78,10 @@ export default {
         },
     },
     data: () => ({
-        loading: true,
+        iscat: true,
         categories: [{},{},{},{}]
     }),
-    mounted() {
+    beforeMount() {
         this.allCategory();
     },
     methods:{
@@ -89,7 +89,7 @@ export default {
         const res = await this.call_api("get", "all-categories");
         if (res.data.success) {
             this.categories = res.data.data
-            this.loading = false
+            this.iscat = false;
         }
     }
     },

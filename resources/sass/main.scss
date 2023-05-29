@@ -3416,6 +3416,9 @@ label {
     max-height: 200px;
     overflow-y: auto;
 }
+.submenuitems .dropdown-menu li a:hover{
+    font-weight: 800 !important;
+}
 
 .mainslider img{
     width: 100%!important;
