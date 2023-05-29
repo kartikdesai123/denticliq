@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-5">
+    <div class="mb-5" id="section1">
         <v-container class="py-0">
             <h2 class="main_heading">{{ title }}</h2>
             <div v-if="loading">
@@ -42,16 +42,16 @@ export default {
                 // when window width is >= 480px
                 960: {
                     slidesPerView: 4,
-                    spaceBetween: 20
+                    spaceBetween: 10
                 },
                 // when window width is >= 640px
                 1264: {
                     slidesPerView: 5,
-                    spaceBetween: 20
+                    spaceBetween: 10
                 },
                 1904: {
                     slidesPerView: 6,
-                    spaceBetween: 20
+                    spaceBetween: 10
                 },
             }
         },
@@ -66,13 +66,3 @@ export default {
     }
 }
 </script>
-<style scoped>
-    h2{
-        font-size: 16px;
-    }
-    @media (min-width: 960px) {
-        h2{
-            font-size: 24px;
-        }
-    }
-</style>

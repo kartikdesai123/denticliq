@@ -1,9 +1,9 @@
 <template>
-    <div class="pb-6">
+    <div class="pb-6" id="brand_sec">
         <v-container>
-            <h1 class="mb-7 mt-4">{{ $t('all_brands') }}</h1>
-            <v-row v-if="brands.length" class="row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6">
-                <v-col v-for="(brand, i) in brands" :key="i">
+            <h1 class="main_heading">{{ $t('all_brands') }}</h1>
+            <v-row v-if="brands.length" class="">
+                <div class="col-md-1" v-for="(brand, i) in brands" :key="i">
                     <div v-if="loading">
                         <v-skeleton-loader
                             type="image"
@@ -13,7 +13,7 @@
                     </div>
                     <v-card outlined class="text-center" v-else>
                         <router-link :to="{ name: 'Brand', params: {brandId: brand.id }}" class="align-center d-block d-flex justify-center pa-4 text-reset">
-                            <span class="h-80px">
+                            <span>
                                 <img
                                     class="mw-100 mh-100"
                                     :src="brand.logo"
@@ -22,8 +22,9 @@
                                 />
                             </span>
                         </router-link>
+                        <h2>{{ brand.name }}</h2>
                     </v-card>
-                </v-col>
+                </div>
             </v-row>
         </v-container>
     </div>

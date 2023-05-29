@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-5">
+    <div class="mb-5" id="section2">
         <v-container class="py-0">
             <h2 class="main_heading">{{ title }}</h2>
             <div v-if="loading">
@@ -12,7 +12,7 @@
             <div v-else>
                 <swiper ref="c2" :options="carouselOption" class="">
                     <swiper-slide v-for="(product, i) in products" :key="i" class="">
-                        <product-box :product-details="product" :is-loading="loading" box-style="four"/>
+                        <product-box :product-details="product" :is-loading="loading"/>
                     </swiper-slide>
                 </swiper>
             </div>
@@ -48,19 +48,19 @@ export default {
                 // when window width is >= 480px
                 960: {
                     slidesPerView: 2,
-                    spaceBetween: 20,
+                    spaceBetween: 12,
                     slidesPerColumn: 2,
                     slidesPerColumnFill: 'row',
                 },
                 // when window width is >= 640px
                 1264: {
-                    slidesPerView: 3,
+                    slidesPerView: 6,
                     spaceBetween: 20,
                     slidesPerColumn: 2,
                     slidesPerColumnFill: 'row',
                 },
                 1904: {
-                    slidesPerView: 4,
+                    slidesPerView: 6,
                     spaceBetween: 20,
                     slidesPerColumn: 2,
                     slidesPerColumnFill: 'row',
@@ -78,13 +78,3 @@ export default {
     }
 }
 </script>
-<style scoped>
-    h2{
-        font-size: 16px;
-    }
-    @media (min-width: 960px) {
-        h2{
-            font-size: 24px;
-        }
-    }
-</style>

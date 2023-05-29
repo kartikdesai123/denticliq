@@ -25,6 +25,100 @@
                                 <div v-html="productDetails.description"></div>
                             </v-expansion-panel-content>
                         </v-expansion-panel>
+                       
+                        
+                        <v-expansion-panel class="mb-3">
+                            <v-expansion-panel-header expand-icon="las la-arrow-circle-right">
+                                <div class="d-flex align-center">
+                                    <svg id="_004-product-description" data-name="004-product-description"
+                                     xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" >
+                                        <g id="Group_1264" data-name="Group 1264" > <path id="Path_3166"
+                                             data-name="Path 3166" d="M18.75,5H1.25A1.252,1.252,0,0,1,0,3.75V1.25A1.252,1.252,0,0,1,1.25,0h17.5A1.252,1.252,0,0,1,20,1.25v2.5A1.252,1.252,0,0,1,18.75,5ZM1.25.833a.417.417,0,0,0-.417.417v2.5a.417.417,0,0,0,.417.417h17.5a.417.417,0,0,0,.417-.417V1.25A.417.417,0,0,0,18.75.833Z" fill="#f5a100"/> </g> <g id="Group_1265" data-name="Group 1265" transform="translate(15 7.5)" > <path id="Path_3167" data-name="Path 3167" d="M20.5,14A2.5,2.5,0,1,1,23,11.5,2.5,2.5,0,0,1,20.5,14Zm0-4.167A1.667,1.667,0,1,0,22.167,11.5,1.668,1.668,0,0,0,20.5,9.833Z" transform="translate(-18 -9)" fill="#f5a100"/> </g> <g id="Group_1266" data-name="Group 1266" transform="translate(15 15)" > <path id="Path_3168" data-name="Path 3168" d="M20.5,23A2.5,2.5,0,1,1,23,20.5,2.5,2.5,0,0,1,20.5,23Zm0-4.167A1.667,1.667,0,1,0,22.167,20.5,1.668,1.668,0,0,0,20.5,18.833Z" transform="translate(-18 -18)" fill="#f5a100"/> </g> <g id="Group_1267" data-name="Group 1267" transform="translate(0 8.333)" > <path id="Path_3169" data-name="Path 3169" d="M12.917,10.833H.417a.417.417,0,1,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -10)" fill="#f5a100"/> </g> <g id="Group_1268" data-name="Group 1268" transform="translate(0 10.833)" > <path id="Path_3170" data-name="Path 3170" d="M12.917,13.833H.417a.417.417,0,1,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -13)" fill="#f5a100"/> </g> <g id="Group_1269" data-name="Group 1269" transform="translate(0 15.833)" > <path id="Path_3171" data-name="Path 3171" d="M12.917,19.833H.417a.417.417,0,1,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -19)" fill="#f5a100"/> </g> <g id="Group_1270" data-name="Group 1270" transform="translate(0 18.333)" > <path id="Path_3172" data-name="Path 3172" d="M12.917,22.833H.417a.417.417,0,0,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -22)" fill="#f5a100"/> </g>
+                                    </svg>
+                                    <span class="fs-16 ms-5">{{ $t("Key Speci") }}</span>
+                                </div>
+                            </v-expansion-panel-header>
+                            <v-expansion-panel-content>
+                                <div v-html="productDetails.keyspeci"></div>
+                            </v-expansion-panel-content>
+                        </v-expansion-panel>
+                        <v-expansion-panel class="mb-3">
+                            <v-expansion-panel-header expand-icon="las la-arrow-circle-right">
+                                <div class="d-flex align-center">
+                                    <svg id="_004-product-description" data-name="004-product-description"
+                                     xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" >
+                                        <g id="Group_1264" data-name="Group 1264" > <path id="Path_3166"
+                                             data-name="Path 3166" d="M18.75,5H1.25A1.252,1.252,0,0,1,0,3.75V1.25A1.252,1.252,0,0,1,1.25,0h17.5A1.252,1.252,0,0,1,20,1.25v2.5A1.252,1.252,0,0,1,18.75,5ZM1.25.833a.417.417,0,0,0-.417.417v2.5a.417.417,0,0,0,.417.417h17.5a.417.417,0,0,0,.417-.417V1.25A.417.417,0,0,0,18.75.833Z" fill="#f5a100"/> </g> <g id="Group_1265" data-name="Group 1265" transform="translate(15 7.5)" > <path id="Path_3167" data-name="Path 3167" d="M20.5,14A2.5,2.5,0,1,1,23,11.5,2.5,2.5,0,0,1,20.5,14Zm0-4.167A1.667,1.667,0,1,0,22.167,11.5,1.668,1.668,0,0,0,20.5,9.833Z" transform="translate(-18 -9)" fill="#f5a100"/> </g> <g id="Group_1266" data-name="Group 1266" transform="translate(15 15)" > <path id="Path_3168" data-name="Path 3168" d="M20.5,23A2.5,2.5,0,1,1,23,20.5,2.5,2.5,0,0,1,20.5,23Zm0-4.167A1.667,1.667,0,1,0,22.167,20.5,1.668,1.668,0,0,0,20.5,18.833Z" transform="translate(-18 -18)" fill="#f5a100"/> </g> <g id="Group_1267" data-name="Group 1267" transform="translate(0 8.333)" > <path id="Path_3169" data-name="Path 3169" d="M12.917,10.833H.417a.417.417,0,1,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -10)" fill="#f5a100"/> </g> <g id="Group_1268" data-name="Group 1268" transform="translate(0 10.833)" > <path id="Path_3170" data-name="Path 3170" d="M12.917,13.833H.417a.417.417,0,1,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -13)" fill="#f5a100"/> </g> <g id="Group_1269" data-name="Group 1269" transform="translate(0 15.833)" > <path id="Path_3171" data-name="Path 3171" d="M12.917,19.833H.417a.417.417,0,1,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -19)" fill="#f5a100"/> </g> <g id="Group_1270" data-name="Group 1270" transform="translate(0 18.333)" > <path id="Path_3172" data-name="Path 3172" d="M12.917,22.833H.417a.417.417,0,0,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -22)" fill="#f5a100"/> </g>
+                                    </svg>
+                                    <span class="fs-16 ms-5">{{ $t("Features") }}</span>
+                                </div>
+                            </v-expansion-panel-header>
+                            <v-expansion-panel-content>
+                                <div v-html="productDetails.profeatures"></div>
+                            </v-expansion-panel-content>
+                        </v-expansion-panel>
+                        
+                        <v-expansion-panel class="mb-3">
+                            <v-expansion-panel-header expand-icon="las la-arrow-circle-right">
+                                <div class="d-flex align-center">
+                                    <svg id="_004-product-description" data-name="004-product-description"
+                                     xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" >
+                                        <g id="Group_1264" data-name="Group 1264" > <path id="Path_3166"
+                                             data-name="Path 3166" d="M18.75,5H1.25A1.252,1.252,0,0,1,0,3.75V1.25A1.252,1.252,0,0,1,1.25,0h17.5A1.252,1.252,0,0,1,20,1.25v2.5A1.252,1.252,0,0,1,18.75,5ZM1.25.833a.417.417,0,0,0-.417.417v2.5a.417.417,0,0,0,.417.417h17.5a.417.417,0,0,0,.417-.417V1.25A.417.417,0,0,0,18.75.833Z" fill="#f5a100"/> </g> <g id="Group_1265" data-name="Group 1265" transform="translate(15 7.5)" > <path id="Path_3167" data-name="Path 3167" d="M20.5,14A2.5,2.5,0,1,1,23,11.5,2.5,2.5,0,0,1,20.5,14Zm0-4.167A1.667,1.667,0,1,0,22.167,11.5,1.668,1.668,0,0,0,20.5,9.833Z" transform="translate(-18 -9)" fill="#f5a100"/> </g> <g id="Group_1266" data-name="Group 1266" transform="translate(15 15)" > <path id="Path_3168" data-name="Path 3168" d="M20.5,23A2.5,2.5,0,1,1,23,20.5,2.5,2.5,0,0,1,20.5,23Zm0-4.167A1.667,1.667,0,1,0,22.167,20.5,1.668,1.668,0,0,0,20.5,18.833Z" transform="translate(-18 -18)" fill="#f5a100"/> </g> <g id="Group_1267" data-name="Group 1267" transform="translate(0 8.333)" > <path id="Path_3169" data-name="Path 3169" d="M12.917,10.833H.417a.417.417,0,1,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -10)" fill="#f5a100"/> </g> <g id="Group_1268" data-name="Group 1268" transform="translate(0 10.833)" > <path id="Path_3170" data-name="Path 3170" d="M12.917,13.833H.417a.417.417,0,1,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -13)" fill="#f5a100"/> </g> <g id="Group_1269" data-name="Group 1269" transform="translate(0 15.833)" > <path id="Path_3171" data-name="Path 3171" d="M12.917,19.833H.417a.417.417,0,1,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -19)" fill="#f5a100"/> </g> <g id="Group_1270" data-name="Group 1270" transform="translate(0 18.333)" > <path id="Path_3172" data-name="Path 3172" d="M12.917,22.833H.417a.417.417,0,0,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -22)" fill="#f5a100"/> </g>
+                                    </svg>
+                                    <span class="fs-16 ms-5">{{ $t("Packaging") }}</span>
+                                </div>
+                            </v-expansion-panel-header>
+                            <v-expansion-panel-content>
+                                <div v-html="productDetails.packaging"></div>
+                            </v-expansion-panel-content>
+                        </v-expansion-panel>
+                        <v-expansion-panel class="mb-3">
+                            <v-expansion-panel-header expand-icon="las la-arrow-circle-right">
+                                <div class="d-flex align-center">
+                                    <svg id="_004-product-description" data-name="004-product-description"
+                                     xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" >
+                                        <g id="Group_1264" data-name="Group 1264" > <path id="Path_3166"
+                                             data-name="Path 3166" d="M18.75,5H1.25A1.252,1.252,0,0,1,0,3.75V1.25A1.252,1.252,0,0,1,1.25,0h17.5A1.252,1.252,0,0,1,20,1.25v2.5A1.252,1.252,0,0,1,18.75,5ZM1.25.833a.417.417,0,0,0-.417.417v2.5a.417.417,0,0,0,.417.417h17.5a.417.417,0,0,0,.417-.417V1.25A.417.417,0,0,0,18.75.833Z" fill="#f5a100"/> </g> <g id="Group_1265" data-name="Group 1265" transform="translate(15 7.5)" > <path id="Path_3167" data-name="Path 3167" d="M20.5,14A2.5,2.5,0,1,1,23,11.5,2.5,2.5,0,0,1,20.5,14Zm0-4.167A1.667,1.667,0,1,0,22.167,11.5,1.668,1.668,0,0,0,20.5,9.833Z" transform="translate(-18 -9)" fill="#f5a100"/> </g> <g id="Group_1266" data-name="Group 1266" transform="translate(15 15)" > <path id="Path_3168" data-name="Path 3168" d="M20.5,23A2.5,2.5,0,1,1,23,20.5,2.5,2.5,0,0,1,20.5,23Zm0-4.167A1.667,1.667,0,1,0,22.167,20.5,1.668,1.668,0,0,0,20.5,18.833Z" transform="translate(-18 -18)" fill="#f5a100"/> </g> <g id="Group_1267" data-name="Group 1267" transform="translate(0 8.333)" > <path id="Path_3169" data-name="Path 3169" d="M12.917,10.833H.417a.417.417,0,1,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -10)" fill="#f5a100"/> </g> <g id="Group_1268" data-name="Group 1268" transform="translate(0 10.833)" > <path id="Path_3170" data-name="Path 3170" d="M12.917,13.833H.417a.417.417,0,1,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -13)" fill="#f5a100"/> </g> <g id="Group_1269" data-name="Group 1269" transform="translate(0 15.833)" > <path id="Path_3171" data-name="Path 3171" d="M12.917,19.833H.417a.417.417,0,1,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -19)" fill="#f5a100"/> </g> <g id="Group_1270" data-name="Group 1270" transform="translate(0 18.333)" > <path id="Path_3172" data-name="Path 3172" d="M12.917,22.833H.417a.417.417,0,0,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -22)" fill="#f5a100"/> </g>
+                                    </svg>
+                                    <span class="fs-16 ms-5">{{ $t("Direction to Use") }}</span>
+                                </div>
+                            </v-expansion-panel-header>
+                            <v-expansion-panel-content>
+                                <div v-html="productDetails.directiontouse"></div>
+                            </v-expansion-panel-content>
+                        </v-expansion-panel>
+                        <v-expansion-panel class="mb-3">
+                            <v-expansion-panel-header expand-icon="las la-arrow-circle-right">
+                                <div class="d-flex align-center">
+                                    <svg id="_004-product-description" data-name="004-product-description"
+                                     xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" >
+                                        <g id="Group_1264" data-name="Group 1264" > <path id="Path_3166"
+                                             data-name="Path 3166" d="M18.75,5H1.25A1.252,1.252,0,0,1,0,3.75V1.25A1.252,1.252,0,0,1,1.25,0h17.5A1.252,1.252,0,0,1,20,1.25v2.5A1.252,1.252,0,0,1,18.75,5ZM1.25.833a.417.417,0,0,0-.417.417v2.5a.417.417,0,0,0,.417.417h17.5a.417.417,0,0,0,.417-.417V1.25A.417.417,0,0,0,18.75.833Z" fill="#f5a100"/> </g> <g id="Group_1265" data-name="Group 1265" transform="translate(15 7.5)" > <path id="Path_3167" data-name="Path 3167" d="M20.5,14A2.5,2.5,0,1,1,23,11.5,2.5,2.5,0,0,1,20.5,14Zm0-4.167A1.667,1.667,0,1,0,22.167,11.5,1.668,1.668,0,0,0,20.5,9.833Z" transform="translate(-18 -9)" fill="#f5a100"/> </g> <g id="Group_1266" data-name="Group 1266" transform="translate(15 15)" > <path id="Path_3168" data-name="Path 3168" d="M20.5,23A2.5,2.5,0,1,1,23,20.5,2.5,2.5,0,0,1,20.5,23Zm0-4.167A1.667,1.667,0,1,0,22.167,20.5,1.668,1.668,0,0,0,20.5,18.833Z" transform="translate(-18 -18)" fill="#f5a100"/> </g> <g id="Group_1267" data-name="Group 1267" transform="translate(0 8.333)" > <path id="Path_3169" data-name="Path 3169" d="M12.917,10.833H.417a.417.417,0,1,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -10)" fill="#f5a100"/> </g> <g id="Group_1268" data-name="Group 1268" transform="translate(0 10.833)" > <path id="Path_3170" data-name="Path 3170" d="M12.917,13.833H.417a.417.417,0,1,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -13)" fill="#f5a100"/> </g> <g id="Group_1269" data-name="Group 1269" transform="translate(0 15.833)" > <path id="Path_3171" data-name="Path 3171" d="M12.917,19.833H.417a.417.417,0,1,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -19)" fill="#f5a100"/> </g> <g id="Group_1270" data-name="Group 1270" transform="translate(0 18.333)" > <path id="Path_3172" data-name="Path 3172" d="M12.917,22.833H.417a.417.417,0,0,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -22)" fill="#f5a100"/> </g>
+                                    </svg>
+                                    <span class="fs-16 ms-5">{{ $t("FAQs") }}</span>
+                                </div>
+                            </v-expansion-panel-header>
+                            <v-expansion-panel-content>
+                                <div v-html="productDetails.faqs"></div>
+                            </v-expansion-panel-content>
+                        </v-expansion-panel>
+                        <v-expansion-panel class="mb-3">
+                            <v-expansion-panel-header expand-icon="las la-arrow-circle-right">
+                                <div class="d-flex align-center">
+                                    <svg id="_004-product-description" data-name="004-product-description"
+                                     xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" >
+                                        <g id="Group_1264" data-name="Group 1264" > <path id="Path_3166"
+                                             data-name="Path 3166" d="M18.75,5H1.25A1.252,1.252,0,0,1,0,3.75V1.25A1.252,1.252,0,0,1,1.25,0h17.5A1.252,1.252,0,0,1,20,1.25v2.5A1.252,1.252,0,0,1,18.75,5ZM1.25.833a.417.417,0,0,0-.417.417v2.5a.417.417,0,0,0,.417.417h17.5a.417.417,0,0,0,.417-.417V1.25A.417.417,0,0,0,18.75.833Z" fill="#f5a100"/> </g> <g id="Group_1265" data-name="Group 1265" transform="translate(15 7.5)" > <path id="Path_3167" data-name="Path 3167" d="M20.5,14A2.5,2.5,0,1,1,23,11.5,2.5,2.5,0,0,1,20.5,14Zm0-4.167A1.667,1.667,0,1,0,22.167,11.5,1.668,1.668,0,0,0,20.5,9.833Z" transform="translate(-18 -9)" fill="#f5a100"/> </g> <g id="Group_1266" data-name="Group 1266" transform="translate(15 15)" > <path id="Path_3168" data-name="Path 3168" d="M20.5,23A2.5,2.5,0,1,1,23,20.5,2.5,2.5,0,0,1,20.5,23Zm0-4.167A1.667,1.667,0,1,0,22.167,20.5,1.668,1.668,0,0,0,20.5,18.833Z" transform="translate(-18 -18)" fill="#f5a100"/> </g> <g id="Group_1267" data-name="Group 1267" transform="translate(0 8.333)" > <path id="Path_3169" data-name="Path 3169" d="M12.917,10.833H.417a.417.417,0,1,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -10)" fill="#f5a100"/> </g> <g id="Group_1268" data-name="Group 1268" transform="translate(0 10.833)" > <path id="Path_3170" data-name="Path 3170" d="M12.917,13.833H.417a.417.417,0,1,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -13)" fill="#f5a100"/> </g> <g id="Group_1269" data-name="Group 1269" transform="translate(0 15.833)" > <path id="Path_3171" data-name="Path 3171" d="M12.917,19.833H.417a.417.417,0,1,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -19)" fill="#f5a100"/> </g> <g id="Group_1270" data-name="Group 1270" transform="translate(0 18.333)" > <path id="Path_3172" data-name="Path 3172" d="M12.917,22.833H.417a.417.417,0,0,1,0-.833h12.5a.417.417,0,1,1,0,.833Z" transform="translate(0 -22)" fill="#f5a100"/> </g>
+                                    </svg>
+                                    <span class="fs-16 ms-5">{{ $t("Warranty") }}</span>
+                                </div>
+                            </v-expansion-panel-header>
+                            <v-expansion-panel-content>
+                                <div v-html="productDetails.warranty"></div>
+                            </v-expansion-panel-content>
+                        </v-expansion-panel>
+
                         <v-expansion-panel class="mb-3">
                             <v-expansion-panel-header expand-icon="las la-arrow-circle-right">
                                 <div class="d-flex align-center">
@@ -125,6 +219,8 @@
                                 </router-link>
                             </span>
                         </div>
+
+
                     </v-col>
                     <v-col lg="12" md="9" sm="8" cols="12">
                         <div class="mb-4">
@@ -263,5 +359,8 @@ export default {
         width: 224px;
         max-width: 224px;
     }
+}
+.v-expansion-panel-content__wrap{
+    color: black!important;
 }
 </style>

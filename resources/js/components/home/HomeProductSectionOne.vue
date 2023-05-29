@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-5">
+    <div class="mb-5" id="section1">
         <v-container class="py-0">
             <h2 class="main_heading">{{ title }}</h2>
             <div v-if="loading" class="todaydeal">
@@ -46,7 +46,7 @@ export default {
                 },
                 // when window width is >= 640px
                 1264: {
-                    slidesPerView: 5,
+                    slidesPerView: 6,
                     spaceBetween: 20
                 },
                 1904: {

@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-5">
+    <div class="mb-5" id="section1">
         <v-container class="py-0">
             <h2 class="main_heading">{{ title }}</h2>
             <div v-if="loading">
@@ -76,13 +76,3 @@ export default {
     },
 };
 </script>
-<style scoped>
-h2 {
-    font-size: 16px;
-}
-@media (min-width: 960px) {
-    h2 {
-        font-size: 24px;
-    }
-}
-</style>
