@@ -25,7 +25,7 @@
                             </v-col>
                             <v-col cols="8">
                                 <h3 class="mb-3">
-                                    <router-link :to="{ name: 'Category', params: {categorySlug: category.slug}}" class="text-reset">{{ category.name }}</router-link>
+                                    <router-link :to="{ name: 'Category', params: {categorySlug: category.slug}}" class="text-reset" style="color:#f28708 !important">{{ category.name }}</router-link>
                                 </h3>
                                 <div v-if="category.children.data.length">
                                     <!-- <v-hover v-slot="{ hover }" v-for="(children, j) in category.children.data" :key="j">
@@ -37,7 +37,7 @@
 
                                     <ul v-if="category.children.data.length != 0"  aria-labelledby="dropdownMenu1" >
                                         <li v-for="(subcategory, subIndex) in category.children.data" :key="subIndex" :class="{'subsubmenuitems': subcategory.childrensub.data.length != 0}">
-                                            <router-link :to="{ name: 'Category', params: {categorySlug: subcategory.slug}}">{{ subcategory.name }}</router-link>
+                                            <router-link style="color:#000 !important" :to="{ name: 'Category', params: {categorySlug: subcategory.slug}}">{{ subcategory.name }}</router-link>
 
                                             <ul v-if="subcategory.childrensub.data.length != 0"  aria-labelledby="dropdownMenu1" >
                                                 <li v-for="(subsubcategory, subsubIndex) in subcategory.childrensub.data" :key="subsubIndex">
