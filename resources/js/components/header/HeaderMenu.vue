@@ -36,9 +36,16 @@
                                     <router-link :to="{ name: 'Category', params: {categorySlug: category.slug}}">{{ category.name }}</router-link>
 
                                     <ul v-if="category.children.data.length != 0"  aria-labelledby="dropdownMenu1" class="dropdown-submenu">
-                                    <li v-for="(subcategory, subIndex) in category.children.data" :key="subIndex">
-                                        <router-link :to="{ name: 'Category', params: {categorySlug: subcategory.slug}}">{{ subcategory.name }}</router-link>
-                                    </li>
+                                        <li v-for="(subcategory, subIndex) in category.children.data" :key="subIndex" :class="{'subsubmenuitems': subcategory.childrensub.data.length != 0}">
+                                            <router-link :to="{ name: 'Category', params: {categorySlug: subcategory.slug}}">{{ subcategory.name }}</router-link>
+
+                                            <ul v-if="subcategory.childrensub.data.length != 0"  aria-labelledby="dropdownMenu1" class="dropdown-submenu">
+                                                <li v-for="(subsubcategory, subsubIndex) in subcategory.childrensub.data" :key="subsubIndex">
+                                                    <router-link :to="{ name: 'Category', params: {categorySlug: subsubcategory.slug}}">{{ subsubcategory.name }}</router-link>
+                                                </li>
+                                            </ul>
+
+                                        </li>
                                     </ul>
                                 </li>
                                 </ul>

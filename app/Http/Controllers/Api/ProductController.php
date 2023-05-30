@@ -102,7 +102,7 @@ class ProductController extends Controller
         if ($brand_ids != null) {
             $products->whereIn('brand_id', $brand_ids);
         }
-        
+
 
         // search keyword check
         if ($search_keyword != null) {
@@ -234,10 +234,10 @@ class ProductController extends Controller
         $case1 = $search_keyword . '%';
         $case2 = '%' . $search_keyword . '%';
 
-        $products_query->orderByRaw("CASE 
-                WHEN name LIKE '$case1' THEN 1 
-                WHEN name LIKE '$case2' THEN 2 
-                ELSE 3 
+        $products_query->orderByRaw("CASE
+                WHEN name LIKE '$case1' THEN 1
+                WHEN name LIKE '$case2' THEN 2
+                ELSE 3
                 END");
 
         $products = new ProductCollection($products_query->limit(3)->get());
@@ -279,14 +279,14 @@ class ProductController extends Controller
             $products_array['brand'][] = $product->brand->name ?? "none" ;
             $products_array['Shop'][] = $product->shop->name ?? "none" ;
             $products_array['slug'][] = $product->slug;
-            $products_array['id'][] = $product->id;           
-           
+            $products_array['id'][] = $product->id;
+
         }
         return response()->json([
             'success' => true,
             'specifications' => $products_array,
         ]);
-       
+
     }
 
 }

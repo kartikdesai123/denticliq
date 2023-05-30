@@ -25,9 +25,9 @@
                                 <div v-html="productDetails.description"></div>
                             </v-expansion-panel-content>
                         </v-expansion-panel>
-                       
-                        
-                        <v-expansion-panel class="mb-3">
+
+
+                        <v-expansion-panel class="mb-3" v-if="productDetails.keyspeci != null">
                             <v-expansion-panel-header expand-icon="las la-arrow-circle-right">
                                 <div class="d-flex align-center">
                                     <svg id="_004-product-description" data-name="004-product-description"
@@ -42,7 +42,7 @@
                                 <div v-html="productDetails.keyspeci"></div>
                             </v-expansion-panel-content>
                         </v-expansion-panel>
-                        <v-expansion-panel class="mb-3">
+                        <v-expansion-panel class="mb-3" v-if="productDetails.profeatures != null">
                             <v-expansion-panel-header expand-icon="las la-arrow-circle-right">
                                 <div class="d-flex align-center">
                                     <svg id="_004-product-description" data-name="004-product-description"
@@ -57,8 +57,8 @@
                                 <div v-html="productDetails.profeatures"></div>
                             </v-expansion-panel-content>
                         </v-expansion-panel>
-                        
-                        <v-expansion-panel class="mb-3">
+
+                        <v-expansion-panel class="mb-3" v-if="productDetails.packaging != null">
                             <v-expansion-panel-header expand-icon="las la-arrow-circle-right">
                                 <div class="d-flex align-center">
                                     <svg id="_004-product-description" data-name="004-product-description"
@@ -73,7 +73,7 @@
                                 <div v-html="productDetails.packaging"></div>
                             </v-expansion-panel-content>
                         </v-expansion-panel>
-                        <v-expansion-panel class="mb-3">
+                        <v-expansion-panel class="mb-3" v-if="productDetails.directiontouse != null">
                             <v-expansion-panel-header expand-icon="las la-arrow-circle-right">
                                 <div class="d-flex align-center">
                                     <svg id="_004-product-description" data-name="004-product-description"
@@ -88,7 +88,7 @@
                                 <div v-html="productDetails.directiontouse"></div>
                             </v-expansion-panel-content>
                         </v-expansion-panel>
-                        <v-expansion-panel class="mb-3">
+                        <v-expansion-panel class="mb-3" v-if="productDetails.faqs != null">
                             <v-expansion-panel-header expand-icon="las la-arrow-circle-right">
                                 <div class="d-flex align-center">
                                     <svg id="_004-product-description" data-name="004-product-description"
@@ -103,7 +103,7 @@
                                 <div v-html="productDetails.faqs"></div>
                             </v-expansion-panel-content>
                         </v-expansion-panel>
-                        <v-expansion-panel class="mb-3">
+                        <v-expansion-panel class="mb-3" v-if="productDetails.warranty != null">
                             <v-expansion-panel-header expand-icon="las la-arrow-circle-right">
                                 <div class="d-flex align-center">
                                     <svg id="_004-product-description" data-name="004-product-description"
@@ -125,7 +125,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" >
                                         <g id="Group_1286" data-name="Group 1286" transform="translate(-567 -1260.5)" > <g id="Group_1272" data-name="Group 1272" transform="translate(567 1260.5)" > <g id="Group_1271" data-name="Group 1271" transform="translate(0 0)" > <path id="Path_3173" data-name="Path 3173" d="M6.65,2.545a.417.417,0,0,0-.287-.273L4.655,1.805,3.684.325a.433.433,0,0,0-.7,0l-.971,1.48L.307,2.271a.417.417,0,0,0-.216.663L1.2,4.316,1.115,6.085a.417.417,0,0,0,.564.41l1.656-.627,1.656.627a.417.417,0,0,0,.564-.41L5.471,4.316,6.579,2.935A.417.417,0,0,0,6.65,2.545ZM4.722,3.917a.418.418,0,0,0-.091.281L4.692,5.49,3.483,5.032a.416.416,0,0,0-.3,0L1.978,5.49,2.04,4.2a.417.417,0,0,0-.091-.281L1.14,2.909l1.248-.341a.417.417,0,0,0,.239-.174l.709-1.081.709,1.081a.417.417,0,0,0,.239.174l1.247.341Z" transform="translate(0 -0.148)" fill="#fff"/> </g> </g> <g id="Group_1285" data-name="Group 1285" transform="translate(567 1274.127)" > <g id="Group_1271-2" data-name="Group 1271" transform="translate(0 0)" > <path id="Path_3173-2" data-name="Path 3173" d="M6.65,2.545a.417.417,0,0,0-.287-.273L4.655,1.805,3.684.325a.433.433,0,0,0-.7,0l-.971,1.48L.307,2.271a.417.417,0,0,0-.216.663L1.2,4.316,1.115,6.085a.417.417,0,0,0,.564.41l1.656-.627,1.656.627a.417.417,0,0,0,.564-.41L5.471,4.316,6.579,2.935A.417.417,0,0,0,6.65,2.545ZM4.722,3.917a.418.418,0,0,0-.091.281L4.692,5.49,3.483,5.032a.416.416,0,0,0-.3,0L1.978,5.49,2.04,4.2a.417.417,0,0,0-.091-.281L1.14,2.909l1.248-.341a.417.417,0,0,0,.239-.174l.709-1.081.709,1.081a.417.417,0,0,0,.239.174l1.247.341Z" transform="translate(0 -0.148)" fill="#fff"/> </g> </g> <g id="Group_1278" data-name="Group 1278" transform="translate(567 1267.314)" > <g id="Group_1277" data-name="Group 1277" > <path id="Path_3174" data-name="Path 3174" d="M6.65,169.895a.418.418,0,0,0-.287-.273l-1.708-.466-.971-1.48a.433.433,0,0,0-.7,0l-.971,1.48-1.708.466a.417.417,0,0,0-.216.663L1.2,171.666l-.084,1.769a.417.417,0,0,0,.564.41l1.656-.627,1.656.627a.417.417,0,0,0,.564-.41l-.084-1.769,1.108-1.381A.417.417,0,0,0,6.65,169.895Zm-1.928,1.372a.418.418,0,0,0-.091.281l.062,1.292-1.209-.458a.416.416,0,0,0-.3,0l-1.209.458.062-1.291a.417.417,0,0,0-.091-.281l-.809-1.009,1.248-.34a.417.417,0,0,0,.239-.174l.709-1.081.709,1.081a.417.417,0,0,0,.239.174l1.247.34Z" transform="translate(0 -167.498)" fill="#fff"/> </g> </g> <rect id="Rectangle_1289" data-name="Rectangle 1289" width="6.667" height="0.833" rx="0.417" transform="translate(575.333 1262.583)" fill="#fff"/> <rect id="Rectangle_1293" data-name="Rectangle 1293" width="6.667" height="0.833" rx="0.417" transform="translate(575.333 1276.21)" fill="#fff"/> <rect id="Rectangle_1291" data-name="Rectangle 1291" width="6.667" height="0.833" rx="0.417" transform="translate(575.333 1269.25)" fill="#fff"/> <rect id="Rectangle_1290" data-name="Rectangle 1290" width="11.667" height="0.833" rx="0.417" transform="translate(575.333 1265.083)" fill="#fff"/> <rect id="Rectangle_1294" data-name="Rectangle 1294" width="11.667" height="0.833" rx="0.417" transform="translate(575.333 1278.71)" fill="#fff"/> <rect id="Rectangle_1292" data-name="Rectangle 1292" width="11.667" height="0.833" rx="0.417" transform="translate(575.333 1271.75)" fill="#fff"/> </g>
                                     </svg>
-                                    <span class="fs-16 ms-5">{{ $t("rating__reviews") }}</span>
+                                    <span class="fs-16 ms-5">{{ $t("Rating Reviews") }}</span>
                                 </div>
                             </v-expansion-panel-header>
                             <v-expansion-panel-content class="">
@@ -310,7 +310,7 @@ export default {
                 this.getBoughtTogetherProducts(this.productDetails.id);
                 this.getMoreProducts(this.productDetails.id);
                 this.addNewRecentlyViewedProduct(this.productDetails.id);
-                
+
             } else {
                 this.snack({
                     message: res.data.message,
@@ -341,7 +341,7 @@ export default {
                 this.moreLoading = false;
             }
         },
-        
+
     },
     async created() {
         this.getDetails();

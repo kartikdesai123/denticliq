@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductSingleCollection extends JsonResource
-{   
+{
     /**
      * Transform the resource into an array.
      *
@@ -53,6 +53,12 @@ class ProductSingleCollection extends JsonResource
                 'count_1' => (integer) $this->reviews_1_count,
             ],
             'description' => $this->getTranslation('description'),
+            'profeatures' => $this->profeatures,
+            'keyspeci' => $this->keyspeci,
+            'packaging' => $this->packaging,
+            'directiontouse' => $this->directiontouse,
+            'warranty' => $this->warranty,
+            'faqs' => $this->faqs,
             'variations' => filter_product_variations($this->variations,$this),
             'variation_options' => generate_variation_options($this->variation_combinations),
             'shop' => [

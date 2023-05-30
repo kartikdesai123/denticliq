@@ -46,7 +46,6 @@ class CategoryController extends Controller
       $categories = Category::where('parent_id', 0)
           ->with('childrenCategories')
           ->get();
-
       return view('backend.product.categories.create', compact('categories'));
     }
 
@@ -195,7 +194,7 @@ class CategoryController extends Controller
 
         // Category Translations Delete
         $category->category_translations()->delete();
-        
+
         $category->product_categories()->delete();
 
         CategoryUtility::delete_category($id);
