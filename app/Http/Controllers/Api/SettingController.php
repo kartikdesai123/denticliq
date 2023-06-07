@@ -6,11 +6,15 @@ use App\Http\Resources\AllCategoryCollection;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\SettingsCollection;
+use App\Http\Resources\BrandCollection;
 use App\Http\Resources\ShopCollection;
 use App\Models\AppSettings;
 use App\Models\Category;
+use App\Models\Brand;
 use App\Models\Product;
 use App\Models\Shop;
+use Illuminate\Support\Facades\DB;
+
 use Cache;
 
 class SettingController extends Controller
@@ -20,7 +24,7 @@ class SettingController extends Controller
         // return new SettingsCollection(AppSettings::all());
     }
     public function home_setting($section)
-    {   
+    {
         switch ($section) {
             case 'sliders':
                 $data = Cache::remember('sliders', 86400, function () {
@@ -40,7 +44,17 @@ class SettingController extends Controller
                         ];
                 });
                 break;
+            case 'top_brands':
+                $topBrands = [];
+                $products = Product::whereNotNull('brand_id')->groupBy('brand_id')->get();
+                if(!empty($products)){
+                    for($i=0; $i<count($products); $i++){
+                        $topBrands[] = $products[$i]->brand_id;
+                    }
+                }
+                return new BrandCollection(Brand::whereIn('id', $topBrands)->get());
 
+                break;
             case 'popular_categories':
                 $data = Cache::remember('popular_categories', 86400, function () {
                     return get_setting('home_popular_categories')
@@ -262,9 +276,9 @@ class SettingController extends Controller
                             : []
             ]);
         });
-    }  
+    }
     public function footer_setting()
-    {   
+    {
         return Cache::remember('footer_setting', 86400, function () {
             return response()->json([
                 'footer_logo' => api_asset(get_setting('footer_logo')),

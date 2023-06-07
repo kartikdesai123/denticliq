@@ -179,7 +179,33 @@ class ProductController extends Controller
                 break;
         }
 
+
+
         $collection = new ProductCollection($products->paginate(20));
+
+        $grapcatgeoryId = [];
+        $findCatgeoryId = [];
+        $catgeoryId = [];
+        if(!empty($collection) && $brand_ids !== null){
+            for($i=0; $i<count($collection); $i++){
+                $findCatgeoryId[] = Product::find($collection[$i]->id)->product_categories->pluck('category_id')->toArray();
+            }
+
+            if(!empty($findCatgeoryId)){
+                for($i=0; $i<count($findCatgeoryId); $i++){
+                    if(!empty($findCatgeoryId[$i])){
+                        for($j=0; $j<count($findCatgeoryId[$i]); $j++){
+                            $grapcatgeoryId[] = $findCatgeoryId[$i][$j];
+                        }
+                    }
+                }
+            }
+
+            $uniqueValues = array_unique($grapcatgeoryId);
+            $catgeoryId = array_values($uniqueValues);
+        }
+
+
 
         return response()->json([
             'success' => true,
@@ -193,6 +219,8 @@ class ProductController extends Controller
             'childCategories' => $category ? new CategoryCollection($category->childrenCategories) : null,
             'rootCategories' => new CategoryCollection(Category::where('level', 0)->orderBy('order_level', 'desc')->get()),
             'allBrands' => new BrandCollection(Brand::all()),
+            'selectedBrands' => ($brand_ids != null) ? new BrandCollection(Brand::where('id', $brand_ids[0])->get()) : [],
+            'selectedCategory' => new CategoryCollection(Category::whereIn('id', $catgeoryId)->orderBy('order_level', 'desc')->get()),
             'attributes' => new AttributeCollection($attributes)
         ]);
     }

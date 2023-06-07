@@ -89,7 +89,7 @@
                                         class="mt-1"
                                         hide-details
                                         v-for="(brand,i) in allBrands"
-                                        :key="i" 
+                                        :key="i"
                                         :label="brand.name"
                                         @change="brandChange(brand.id)"
                                     ></v-checkbox>
@@ -100,7 +100,7 @@
                                         class="mt-1"
                                         hide-details
                                         v-for="(brand,i) in allBrands"
-                                        :key="i" 
+                                        :key="i"
                                         :label="brand.name"
                                         @change="brandChange(brand.id)"
                                     ></v-checkbox>
@@ -114,7 +114,7 @@
                                         class="mt-1"
                                         hide-details
                                         v-for="(value,j) in attribute.values.data"
-                                        :key="j" 
+                                        :key="j"
                                         :label="value.name"
                                         @change="attributeValueChange(value.id)"
                                     ></v-checkbox>
@@ -125,7 +125,7 @@
                                         class="mt-1"
                                         hide-details
                                         v-for="(value,j) in attribute.values.data"
-                                        :key="j" 
+                                        :key="j"
                                         :label="value.name"
                                         @change="attributeValueChange(value.id)"
                                     ></v-checkbox>
@@ -134,8 +134,89 @@
                         </div>
                     </div>
                 </v-col>
+
                 <v-col>
                     <div class="pt-5 ps-lg-7">
+                        <div v-if="isBrandRoute">
+                            <v-row align="end" class="mb-3">
+                            <v-col cols="12" sm>
+                                <div class="d-flex align-center">
+                                    <div>
+                                        <h1 class="fs-18">Selected Brand</h1>
+                                    </div>
+                                </div>
+                            </v-col>
+                        </v-row>
+                        <div class="mb-7">
+
+                            <v-row v-if="selectedBrand.length > 0">
+                                <div class="col-md-2" v-for="(brand, i) in selectedBrand" :key="i">
+                                    <div v-if="loading">
+                                        <v-skeleton-loader
+                                            type="image"
+                                            class=""
+                                            height="100"
+                                        ></v-skeleton-loader>
+                                    </div>
+                                    <v-card outlined class="text-center" v-else>
+                                        <router-link :to="{ name: 'Brand', params: {brandId: brand.id }}" class="align-center d-block d-flex justify-center pa-4 text-reset">
+                                            <span>
+                                                <img
+                                                    class="mw-100 mh-100"
+                                                    :src="brand.logo"
+                                                    :alt="brand.name"
+                                                    @error="imageFallback($event)"
+                                                />
+                                            </span>
+                                        </router-link>
+                                        <p>{{ brand.name }}</p>
+                                    </v-card>
+                                </div>
+                            </v-row>
+                        </div>
+                        <v-row align="end" class="mb-3">
+                            <v-col cols="12" sm>
+                                <div class="d-flex align-center">
+                                    <div>
+                                        <h1 class="fs-18">Related Category</h1>
+                                    </div>
+                                </div>
+                            </v-col>
+
+                        </v-row>
+
+                        <div class="mb-7">
+                             <v-row v-if="relatedCategory.length > 0">
+                                <div class="col-md-2" v-for="(category, i) in relatedCategory" :key="i">
+                                    <div v-if="loading">
+                                        <v-skeleton-loader
+                                            type="image"
+                                            class=""
+                                            height="100"
+                                        ></v-skeleton-loader>
+                                    </div>
+                                    <v-card outlined class="text-center" v-else>
+                                        <router-link :to="{ name: 'Category', params: {categorySlug: category.slug}}" class="align-center d-block d-flex justify-center pa-4 text-reset">
+                                            <span>
+                                                <img
+                                                    class="mw-100 mh-100"
+                                                    :src="category.banner"
+                                                    :alt="category.name"
+                                                    height="100"
+                                                    @error="imageFallback($event)"
+                                                />
+                                            </span>
+                                        </router-link>
+                                        <p>{{ category.name }}</p>
+                                    </v-card>
+                                </div>
+                            </v-row>
+                        </div>
+
+
+                        </div>
+
+
                         <v-row align="end" class="mb-3">
                             <v-col cols="12" sm>
                                 <div class="d-flex align-center">
@@ -214,6 +295,8 @@
             parentCategory: {},
             currentCategory: {},
             childCategories: [],
+            selectedBrand: [],
+            relatedCategory: [],
             products:[{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]
         }),
         components: {
@@ -268,14 +351,14 @@
                 })
             },
             brandChange(id){
-                
+
                 if(this.queryParam.brandIds.indexOf(id) > -1){
                     let index = this.queryParam.brandIds.indexOf(id)
                     this.queryParam.brandIds.splice(index, 1);
                 }else{
                     this.queryParam.brandIds.push(id)
                 }
-                
+
                 this.$router
                     .push({
                         query: {
@@ -311,7 +394,7 @@
                 let priceRange = {}
                 priceRange.minPrice = this.queryParam.minPrice
                 priceRange.maxPrice = this.queryParam.maxPrice
-                
+
                 this.$router
                     .push({
                         query: {
@@ -327,10 +410,10 @@
                 this.filterDrawerOpen = status
             },
             async getList(obj){
-                
+
                 this.loading = true;
                 let params = { ...this.queryParam, ...obj}
-                
+
                 let url = 'product/search?'
                 url += `&page=${this.queryParam.page}`
                 url += params.categorySlug ? `&category_slug=${params.categorySlug}` : ''
@@ -340,7 +423,7 @@
                 url += params.sortBy ? `&sort_by=${params.sortBy}` : ''
                 url += params.minPrice ? `&min_price=${params.minPrice}` : ''
                 url += params.maxPrice ? `&max_price=${params.maxPrice}` : ''
-                
+
                 const res = await this.call_api("get", url);
 
 
@@ -356,6 +439,8 @@
                     this.childCategories = res.data.childCategories ? res.data.childCategories.data : [];
                     this.totalPages = res.data.totalPage;
                     this.totalProducts = res.data.total;
+                    this.selectedBrand = res.data.selectedBrands.data ? res.data.selectedBrands.data : [];
+                    this.relatedCategory = res.data.selectedCategory.data ? res.data.selectedCategory.data : [];
                     this.queryParam.page = res.data.currentPage;
                 }
             }
@@ -376,7 +461,7 @@
                 let selectedSort = this.sortingOptions.find(sort =>  sort.value === this.queryParam.sortBy)
                 this.sortingDefault = selectedSort
             }
-            
+
             this.getList({
                 page: this.queryParam.page,
                 categorySlug: this.queryParam.categorySlug,

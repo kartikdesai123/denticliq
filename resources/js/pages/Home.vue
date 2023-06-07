@@ -3,6 +3,9 @@
         <!-- slider area -->
         <HomeSliders />
 
+        <!-- top brands -->
+        <HomeTopBrands />
+
         <!-- popular categories -->
         <HomePopularCategories />
 
@@ -38,13 +41,13 @@
 
         <!-- home banner 3 -->
         <HomeBannerSectionThree />
-        
+
         <!-- shop section 4 -->
         <HomeShopSectionFour v-if="is_addon_activated('multi_vendor')" />
 
         <!-- product section 4 -->
         <HomeProductSectionFour />
-        
+
         <!-- shop section 5 -->
         <HomeShopSectionFive v-if="is_addon_activated('multi_vendor')" />
 
@@ -72,6 +75,7 @@
 <script>
 import HomeSliders from "../components/home/HomeSliders";
 import HomePopularCategories from "../components/home/HomePopularCategories";
+import HomeTopBrands from "../components/home/HomeTopBrands";
 
 import HomeProductSectionOne from "../components/home/HomeProductSectionOne";
 import HomeProductSectionTwo from "../components/home/HomeProductSectionTwo";
@@ -100,6 +104,7 @@ import HomeShopBannerSectionThree from '../components/home/HomeShopBannerSection
 export default {
     components: {
         HomeSliders,
+        HomeTopBrands,
         HomePopularCategories,
         HomeProductSectionOne,
         HomeProductSectionTwo,
