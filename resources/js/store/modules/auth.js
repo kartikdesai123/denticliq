@@ -8,6 +8,7 @@ const loadState = () => ({
     showLoginDialog: false,
     showAddToCartDialog: false,
     showConversationDialog: false,
+    showNewProductRequestDialog: false,
     cartDialogProductSlug: null,
     accessToken: localStorage.getItem('shopAccessToken') || null,
     currentUser: {},
@@ -35,6 +36,9 @@ export default {
         },
         showConversationDialog(state) {
             return state.showConversationDialog;
+        },
+        showNewProductRequestDialog(state) {
+            return state.showNewProductRequestDialog;
         },
         cartDialogProductSlug(state) {
             return state.cartDialogProductSlug;
@@ -72,8 +76,11 @@ export default {
             state.showAddToCartDialog = status;
             state.cartDialogProductSlug = slug;
         },
-        showConversationDialog(state, { status }) { 
-                state.showConversationDialog = status; 
+        showConversationDialog(state, { status }) {
+                state.showConversationDialog = status;
+        },
+        showNewProductRequestDialog(state, { status }) {
+                state.showNewProductRequestDialog = status;
         },
         login(state, data) {
             state.accessToken = data.access_token;
@@ -161,8 +168,15 @@ export default {
             commit("logout");
         },
         showConversationDialog({commit}, status ) {
-            if (this.getters["auth/isAuthenticated"]) { 
+            if (this.getters["auth/isAuthenticated"]) {
                 commit("showConversationDialog", status);
+            } else {
+                commit("auth/showLoginDialog", true, { root: true });
+            }
+        },
+        showNewProductRequestDialog({commit}, status ) {
+            if (this.getters["auth/isAuthenticated"]) {
+                commit("showNewProductRequestDialog", status);
             } else {
                 commit("auth/showLoginDialog", true, { root: true });
             }

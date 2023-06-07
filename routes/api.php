@@ -1,5 +1,5 @@
 <?php
- 
+
 use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BlogController;
@@ -134,7 +134,8 @@ Route::group(['middleware' => 'unbanned'], function () {
 
             # conversation
             Route::get('querries', [ConversationController::class, 'index']);
-            Route::post('new-query', [ConversationController::class, 'store']); 
+            Route::post('new-query', [ConversationController::class, 'store']);
+            Route::post('new-product-request', [ConversationController::class, 'storeProdutRequest']);
             Route::get('querries/{id}', [ConversationController::class,'show']);
             Route::post('new-message-query', [ConversationController::class, 'storeMessage']);
 
@@ -144,8 +145,8 @@ Route::group(['middleware' => 'unbanned'], function () {
 
             # club points
             Route::get('earning/history', [ClubPointController::class, 'earningRechargeHistory']);
-            Route::post('convert-point-into-wallet', [ClubPointController::class, 'convert_point_into_wallet']); 
-            
+            Route::post('convert-point-into-wallet', [ClubPointController::class, 'convert_point_into_wallet']);
+
             // Refund Addon
             Route::get('refund-requests', [RefundRequestController::class,'index']);
             Route::get('refund-request/create/{order_id}', [RefundRequestController ::class,'create']);
@@ -161,7 +162,7 @@ Route::group(['middleware' => 'unbanned'], function () {
     Route::get('shop/{slug}/home', [ShopController::class,'shop_home']);
     Route::get('shop/{slug}/coupons', [ShopController::class,'shop_coupons']);
     Route::get('shop/{slug}/products', [ShopController::class,'shop_products']);
-    
+
 });
 
 Route::fallback(function () {

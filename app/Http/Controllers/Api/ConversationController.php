@@ -10,7 +10,7 @@ use App\Mail\ConversationMailManager;
 use App\Models\Conversation;
 use App\Models\Message;
 use App\Models\Product;
-use Auth; 
+use Auth;
 use Mail;
 
 
@@ -63,9 +63,37 @@ class ConversationController extends Controller
         }
 
         return response()->json([
-            'success' => true, 
+            'success' => true,
             'message' => translate('Message has been sent to seller')
-        ]); 
+        ]);
+    }
+
+    # add new product request by customer
+    public function storeProdutRequest(Request $request)
+    {
+        //$user_type = Product::findOrFail($request->product_id)->shop->user->user_type;
+
+        $conversation = new Conversation;
+        $conversation->sender_id = Auth::user()->id;
+        // $conversation->receiver_id = Product::findOrFail($request->product_id)->shop->user->id;
+        $conversation->receiver_id = 1;
+        $conversation->title = $request->title;
+
+        if($conversation->save()) {
+            $message = new Message;
+            $message->conversation_id = $conversation->id;
+            $message->user_id = Auth::user()->id;
+            $message->message = $request->message;
+
+            if ($message->save()) {
+                $this->send_message_notification($conversation, $message, 'admin');
+            }
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => translate('Request has been sent to seller')
+        ]);
     }
 
     # add new message

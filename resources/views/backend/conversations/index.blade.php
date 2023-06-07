@@ -35,7 +35,7 @@
                                         @else
                                             <span class="fw-600">{{ $conversation->sender->name }}</span>
                                         @endif
-                                        
+
                                         <span class="badge badge-primary"></span>
                                         <br>
                                         <span class="opacity-50">
@@ -64,6 +64,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div>
+                                <a href="#" class="btn btn-soft-danger btn-icon btn-circle btn-sm confirm-delete" data-href="{{ route('querries.destroy', $conversation->id) }}" title="Delete">
+                                        <i class="las la-trash"></i>
+                                    </a>
+                                </div>
                             </div>
                         </li>
                     @endif
@@ -71,11 +76,16 @@
             @else
             <div class="text-center">{{ translate('No conversation found') }}</div>
         @endif
-       
+
     </ul>
 
     <div class="aiz-pagination">
         {{ $conversations->links() }}
     </div>
 </div>
+@endsection
+
+
+@section('modal')
+    @include('backend.inc.delete_modal')
 @endsection

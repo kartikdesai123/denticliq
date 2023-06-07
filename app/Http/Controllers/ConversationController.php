@@ -30,7 +30,7 @@ class ConversationController extends Controller
             return back();
         }
     }
-    
+
     public function show($id)
     {
         $conversation = Conversation::findOrFail(decrypt($id));
@@ -64,6 +64,22 @@ class ConversationController extends Controller
         $conversation->save();
         flash(translate('Message has been sent'))->success();
         return back();
+    }
+
+     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $conversation = Conversation::findOrFail($id)->delete();
+        $message = Message::where('conversation_id','=',$id)->delete();
+
+
+        flash(translate('Conversation has been deleted successfully'))->success();
+        return redirect()->route('querries.index');
     }
 
 }

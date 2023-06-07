@@ -252,7 +252,18 @@
                                     <product-box :product-details="product" :is-loading="loading" />
                                 </v-col>
                             </v-row>
-                            <div class="pa-4 text-center fs-20" v-else>{{ $t('no_product_found') }}</div>
+                            <div v-else>
+                                <div class="pt-4 text-center fs-20">No Product Found</div>
+                                <div style="background-color: aliceblue;">
+                                    <div class="pt-4 text-center fs-20">Didn't find what you were looking for?</div>
+                                <div class="text-center fs-14">Let us know by filling in details below.</div>
+                                <!-- todo:: message seller -->
+                                <div class="primary--text pa-1 lh-1 text-center fs-14 fw-700 pa-4" style="cursor:pointer" @click="showNewProductRequestDialog({status:true})">Request a Product</div>
+                                <NewProductRequestDialog />
+                                <!-- message seller -->
+                                </div>
+
+                            </div>
                         </div>
                         <div class="text-center" v-if="totalPages > 1">
                             <v-pagination v-model="queryParam.page" class="my-4" :length="totalPages" prev-icon="la-angle-left" next-icon="la-angle-right" :total-visible="7" elevation="0" @input="pageSwitch"></v-pagination>
@@ -265,7 +276,10 @@
 </template>
 
 <script>
-    import ShowMore from "./../components/inc/ShowMore"
+    import { mapGetters, mapActions, mapMutations } from "vuex";
+    import ShowMore from "./../components/inc/ShowMore";
+    import NewProductRequestDialog from '../components/product/NewProductRequestDialog';
+
     export default {
         metaInfo() {
             return {
@@ -300,7 +314,8 @@
             products:[{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]
         }),
         components: {
-            ShowMore
+            ShowMore,
+            NewProductRequestDialog,
         },
         computed:{
             sortingOptions() {
@@ -320,6 +335,7 @@
             },
         },
         methods: {
+            ...mapActions("auth", ["showNewProductRequestDialog"]),
             pageSwitch(pageNumber){
                 this.$router
                     .push({
