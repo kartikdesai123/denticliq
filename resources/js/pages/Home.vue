@@ -63,10 +63,9 @@
         <!-- product section 6 -->
         <HomeProductSectionSix />
 
-        <div class="py-8 grey lighten-4 mt-8">
+        <div class="py-8 grey lighten-4 mt-8 d-none d-lg-block d-md-block d-sm-block">
             <v-container>
                 <HomeAboutText />
-                <HomeAllCategories />
             </v-container>
         </div>
     </div>

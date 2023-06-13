@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-5" id="section1">
+    <div class="mb-5" id="section1" style="padding: 30px 0;background: linear-gradient(to bottom, rgb(255 255 255 / -2%), rgba(255, 255, 255, .4) 78%), linear-gradient(180deg, #36b8bb, #36b8bb);">
         <v-container class="py-0">
             <h2 class="main_heading">{{ title }}</h2>
             <div v-if="loading" class="todaydeal">
@@ -32,26 +32,26 @@ export default {
             breakpoints: {
                 0: {
                     slidesPerView: 2,
-                    spaceBetween: 12
+                    spaceBetween: 5
                 },
                 // when window width is >= 320px
                 599: {
                     slidesPerView: 4,
-                    spaceBetween: 16
+                    spaceBetween: 5
                 },
                 // when window width is >= 480px
                 960: {
                     slidesPerView: 4,
-                    spaceBetween: 20
+                    spaceBetween: 5
                 },
                 // when window width is >= 640px
                 1264: {
                     slidesPerView: 6,
-                    spaceBetween: 20
+                    spaceBetween: 5
                 },
                 1904: {
                     slidesPerView: 6,
-                    spaceBetween: 20
+                    spaceBetween: 5
                 },
             }
         },

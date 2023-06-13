@@ -30,18 +30,18 @@
                          <!-- <a href="/all-categories" class="text-reset fs-13 fw-700 opacity-80">All</a>-->
                         <div tabindex="-1" role="listitem" class="submenuitems flex-grow-0 flex-fill v-list-item theme--light">
                             <div v-if="!iscat" class="v-list-item__title">
-                                <router-link :to="{ name: 'AllCategories'}" class="text-reset fs-13 fw-700 opacity-80">All Categories</router-link>
+                                <router-link :to="{ name: 'AllCategories'}" class="text-reset fs-13 fw-700 opacity-80">All Categories <i class="las la-angle-down" aria-hidden="true" style="font-size: 12px;"></i></router-link>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                                 <li v-for="(category, index) in categories" :key="index" :class="{'subsubmenuitems': category.children.data.length != 0}">
-                                    <router-link :to="{ name: 'Category', params: {categorySlug: category.slug}}">{{ category.name }}</router-link>
+                                    <router-link :to="{ name: 'Category', params: {categorySlug: category.slug}}">{{ category.name }} <i class="las la-angle-right" aria-hidden="true"></i></router-link>
 
                                     <ul v-if="category.children.data.length != 0"  aria-labelledby="dropdownMenu1" class="dropdown-submenu">
-                                        <li v-for="(subcategory, subIndex) in category.children.data" :key="subIndex" :class="{'subsubmenuitems': subcategory.childrensub.data.length != 0}">
-                                            <router-link :to="{ name: 'Category', params: {categorySlug: subcategory.slug}}">{{ subcategory.name }}</router-link>
+                                        <li v-for="(subcategory, subIndex) in category.children.data" :key="subIndex" :class="{'subsubsubmenuitems': subcategory.childrensub.data.length != 0}">
+                                            <router-link :to="{ name: 'Category', params: {categorySlug: subcategory.slug}}">{{ subcategory.name }} <i class="las la-angle-right" aria-hidden="true"></i></router-link>
 
-                                            <ul v-if="subcategory.childrensub.data.length != 0"  aria-labelledby="dropdownMenu1" class="dropdown-submenu">
+                                            <ul v-if="subcategory.childrensub.data.length != 0"  aria-labelledby="dropdownMenu1" class="dropdown-subsubmenu">
                                                 <li v-for="(subsubcategory, subsubIndex) in subcategory.childrensub.data" :key="subsubIndex">
-                                                    <router-link :to="{ name: 'Category', params: {categorySlug: subsubcategory.slug}}">{{ subsubcategory.name }}</router-link>
+                                                    <router-link :to="{ name: 'Category', params: {categorySlug: subsubcategory.slug}}">{{ subsubcategory.name }} </router-link>
                                                 </li>
                                             </ul>
 

@@ -32,26 +32,26 @@ export default {
             breakpoints: {
                 0: {
                     slidesPerView: 2,
-                    spaceBetween: 12
+                    spaceBetween: 5,
                 },
                 // when window width is >= 320px
                 599: {
                     slidesPerView: 3,
-                    spaceBetween: 16
+                    spaceBetween: 5,
                 },
                 // when window width is >= 480px
                 960: {
                     slidesPerView: 4,
-                    spaceBetween: 10
+                    spaceBetween: 5,
                 },
                 // when window width is >= 640px
                 1264: {
                     slidesPerView: 5,
-                    spaceBetween: 10
+                    spaceBetween: 5,
                 },
                 1904: {
                     slidesPerView: 6,
-                    spaceBetween: 10
+                    spaceBetween: 5,
                 },
             }
         },

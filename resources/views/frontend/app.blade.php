@@ -41,6 +41,9 @@
     <link href="{{ mix('web-assets/css/app.css') }}" rel="stylesheet">
     <!-- Scripts -->
     <script src="{{ mix('web-assets/js/app.js') }}" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"/>
+
+
 
     <style>
         body,
@@ -147,6 +150,9 @@
     @endif
 
     {!! get_setting('footer_script') !!}
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.8/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+</body> 
 
 </html>

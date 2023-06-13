@@ -8,9 +8,6 @@
             </v-main>
 
             <Footer :class="['mt-auto', { 'd-none': routerLoading }]" />
-
-            <BottomChat />
-            <SidebarCart />
             <AddToCartDialog />
             <LoginDialog v-if="!isAuthenticated" />
             <MobileMenu class="d-lg-none" />

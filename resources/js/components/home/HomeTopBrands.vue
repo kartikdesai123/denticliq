@@ -1,9 +1,10 @@
 <template>
-    <div class="mb-5 pb-5" style="background-color: aliceblue;">
+    <div class="mb-5 pb-5 topbrands" id="section1">
         <v-container class="py-0 pe-0 pe-md-3 ps-3">
             <div class="d-flex justify-space-between align-center mb-4 pe-3 pe-md-0">
                 <h2 class="main_heading">{{ $t('Top Brands') }}</h2>
-                <router-link :to="{ name: 'AllBrands' }" class="py-2 primary--text lh-1 d-inline-block">
+                <router-link :to="{ name: 'AllBrands' }" 
+                class="py-2 primary--text newbtnvall lh-1 d-inline-block">
                     {{ $t('view_all') }}
                     <i class="las la-angle-right"></i>
                 </router-link>
@@ -17,10 +18,10 @@
             </div>
             <div v-else>
                 <swiper :options="carouselOption" class="" id="brand_sec">
-                    <swiper-slide v-for="(brand, i) in brands" :key="i" class="popularcat">
+                    <swiper-slide v-for="(brand, i) in brands" :key="i" class="topbrand">
                         <router-link class="" :to="{ name: 'Brand', params: {brandId: brand.id}}">
                             <img :src="brand.logo" :alt="brand.name" @error="imageFallback($event)" class="img-fluid ">
-                            <h3>{{ brand.name }}</h3>
+                            <!--<h3>{{ brand.name }}</h3>-->
                         </router-link>
                     </swiper-slide>
                 </swiper>
@@ -38,31 +39,31 @@ export default {
             slidesPerView: 8,
             spaceBetween: 20,
             autoplay: {
-                delay: 2500,
+                delay: 4500,
                 disableOnInteraction: false
             },
             breakpoints: {
                 0: {
-                    slidesPerView: 4.5,
-                    spaceBetween: 12
+                    slidesPerView: 5.5,
+                    spaceBetween: 20
                 },
                 // when window width is >= 320px
                 599: {
-                    slidesPerView: 5,
-                    spaceBetween: 16
+                    slidesPerView: 5.5,
+                    spaceBetween: 20
                 },
                 // when window width is >= 480px
                 960: {
-                    slidesPerView: 6,
+                    slidesPerView: 9,
                     spaceBetween: 20
                 },
                 // when window width is >= 640px
                 1264: {
-                    slidesPerView: 7,
+                    slidesPerView: 9.3,
                     spaceBetween: 20
                 },
                 1904: {
-                    slidesPerView: 8,
+                    slidesPerView: 10,
                     spaceBetween: 20
                 },
             }

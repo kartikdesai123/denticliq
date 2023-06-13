@@ -1,9 +1,9 @@
 <template>
-    <div class="pb-6">
+    <div class="pb-6" id="all-cat">
         <v-container>
-            <h1 class="mb-7 mt-4">{{ $t('all_categories') }}</h1>
-            <v-row v-if="categories.length">
-                <v-col cols="12" md="6" v-for="(category, i) in categories" :key="i">
+            <h2 class="main_heading">{{ $t('all_categories') }}</h2>
+            <div class="row" v-if="categories.length">
+                <div class="col-md-3" v-for="(category, i) in categories" :key="i">
                     <div v-if="loading">
                         <v-skeleton-loader
                             type="image"
@@ -11,22 +11,9 @@
                             height="235"
                         ></v-skeleton-loader>
                     </div>
-                    <v-card outlined class="pa-6" v-else>
-                        <v-row align="center">
-                            <v-col cols="4">
-                                <router-link :to="{ name: 'Category', params: {categorySlug: category.slug}}" class="text-reset">
-                                    <img
-                                        class="img-fluid"
-                                        :src="category.banner"
-                                        :alt="category.name"
-                                        @error="imageFallback($event)"
-                                    />
-                                </router-link>
-                            </v-col>
-                            <v-col cols="8">
-                                <h3 class="mb-3">
-                                    <router-link :to="{ name: 'Category', params: {categorySlug: category.slug}}" class="text-reset" style="color:#f28708 !important">{{ category.name }}</router-link>
-                                </h3>
+
+                    <div outlined class="pa-6" v-else>
+                                <h3 class="mb-3"><router-link :to="{ name: 'Category', params: {categorySlug: category.slug}}" class="text-reset" style="color:#f28708 !important">{{ category.name }}</router-link></h3>
                                 <div v-if="category.children.data.length">
                                     <!-- <v-hover v-slot="{ hover }" v-for="(children, j) in category.children.data" :key="j">
                                         <router-link
@@ -34,7 +21,6 @@
                                             :to="{ name: 'Category', params: {categorySlug: children.slug}}"
                                         >{{ children.name }}<span v-if="j+1 !== category.children.data.length" class="">,</span></router-link>
                                     </v-hover> -->
-
                                     <ul v-if="category.children.data.length != 0"  aria-labelledby="dropdownMenu1" >
                                         <li v-for="(subcategory, subIndex) in category.children.data" :key="subIndex" :class="{'subsubmenuitems': subcategory.childrensub.data.length != 0}">
                                             <router-link style="color:#000 !important" :to="{ name: 'Category', params: {categorySlug: subcategory.slug}}">{{ subcategory.name }}</router-link>
@@ -48,11 +34,10 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </v-col>
-                        </v-row>
-                    </v-card>
-                </v-col>
-            </v-row>
+                    </div>
+
+                </div>
+            </div>
         </v-container>
     </div>
 </template>

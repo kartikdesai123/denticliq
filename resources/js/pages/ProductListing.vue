@@ -4,8 +4,8 @@
             <banner :loading="false" :banner="$store.getters['app/banners'].listing_page"/>
         </v-container>
         <v-container class="pt-0">
-            <v-row no-gutters align="start">
-                <v-col cols="auto" class="w-lg-270px sticky-top">
+            <div class="row">
+                <div class="col-lg-3 sticky-top">
                     <div :class="['border-end filter-drawer', {'open c-scrollbar overflow-y-auto':filterDrawerOpen}]">
                         <div class="border-bottom pa-5 d-lg-none d-flex align-center ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
@@ -16,8 +16,8 @@
                                 <i class="la la-close fs-20"></i>
                             </button>
                         </div>
-                        <div class="pa-5">
-                            <div class="mb-5">
+                        <div>
+                            <div class="productleftside">
                                 <h4 class="fw-700 fs-14 mb-4 border-bottom pb-3">{{ $t('categories') }}</h4>
                                 <div>
                                     <ul class="list-unstyled ps-0">
@@ -66,22 +66,30 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="mb-4 pt-4 border-top">
+                            <div class="productleftside searchprice">
                                 <h4 class="fw-700 fs-14 mb-3">{{ $t('price') }}</h4>
                                 <div class="row no-gutters align-center">
                                     <div class="col">
-                                        <v-text-field type="number" class="form-control form-control-sm" v-model="queryParam.minPrice" :placeholder="$t('min_price')" outlined hide-details></v-text-field>
+                                        <v-text-field type="number"
+                                        class="form-control form-control-sm" 
+                                        v-model="queryParam.minPrice" :placeholder="$t('min_price')" 
+                                        outlined hide-details></v-text-field>
                                     </div>
-                                    <span class="mx-1 col col-auto opacity-60">to</span>
+                                    <span>to</span>
                                     <div class="col">
-                                        <v-text-field type="number" class="form-control form-control-sm" v-model="queryParam.maxPrice" :placeholder="$t('max_price')" outlined hide-details></v-text-field>
+                                        <v-text-field type="number" 
+                                        class="form-control form-control-sm" 
+                                        v-model="queryParam.maxPrice" :placeholder="$t('max_price')" 
+                                        outlined hide-details></v-text-field>
                                     </div>
-                                    <div class="col col-auto">
-                                        <v-btn x-small fab type="submit" color="primary" class="rounded ms-2" elevation="0" @click.native="filterByPriceRange">{{ $t('go') }}</v-btn >
+                                    <div class="col col-auto m-0 pl-0 pr-0">
+                                        <v-btn x-small fab type="submit" 
+                                        color="primary" class="rounded ms-2" 
+                                        elevation="0" @click.native="filterByPriceRange">{{ $t('go') }}</v-btn >
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-4 pt-4 border-top" v-if="!isBrandRoute">
+                            <div class="productleftside" v-if="!isBrandRoute">
                                 <h4 class="fw-700 fs-14 mb-3">{{ $t('brands') }}</h4>
                                 <div v-if="allBrands.length < 5">
                                     <v-checkbox
@@ -106,7 +114,7 @@
                                     ></v-checkbox>
                                 </ShowMore>
                             </div>
-                            <div class="mb-4 pt-4 border-top" v-for="(attribute, i) in attributes" :key="i">
+                            <div class="productleftside" v-for="(attribute, i) in attributes" :key="i">
                                 <h4 class="fw-700 fs-14 mb-3">{{ attribute.name }}</h4>
                                 <div v-if="attribute.values.data.length < 5">
                                     <v-checkbox
@@ -131,14 +139,15 @@
                                     ></v-checkbox>
                                 </ShowMore>
                             </div>
+
                         </div>
                     </div>
-                </v-col>
+                </div>
 
-                <v-col>
+                <div class="col-lg-9">
                     <div class="pt-5 ps-lg-7">
-                        <div v-if="isBrandRoute">
-                            <v-row align="end" class="mb-3">
+                    <div v-if="isBrandRoute">
+                        <v-row align="end" class="mb-3">
                             <v-col cols="12" sm>
                                 <div class="d-flex align-center">
                                     <div>
@@ -182,27 +191,21 @@
                                     </div>
                                 </div>
                             </v-col>
-
                         </v-row>
-
                         <div class="mb-7">
-                             <v-row v-if="relatedCategory.length > 0">
+                             <v-row class="relcatgory" v-if="relatedCategory.length > 0">
                                 <div class="col-md-2" v-for="(category, i) in relatedCategory" :key="i">
                                     <div v-if="loading">
                                         <v-skeleton-loader
                                             type="image"
-                                            class=""
-                                            height="100"
                                         ></v-skeleton-loader>
                                     </div>
                                     <v-card outlined class="text-center" v-else>
-                                        <router-link :to="{ name: 'Category', params: {categorySlug: category.slug}}" class="align-center d-block d-flex justify-center pa-4 text-reset">
+                                        <router-link :to="{ name: 'Category', params: {categorySlug: category.slug}}" class="align-center d-block d-flex justify-center text-reset">
                                             <span>
                                                 <img
-                                                    class="mw-100 mh-100"
                                                     :src="category.banner"
                                                     :alt="category.name"
-                                                    height="100"
                                                     @error="imageFallback($event)"
                                                 />
                                             </span>
@@ -247,18 +250,21 @@
                             </v-col>
                         </v-row>
                         <div class="mb-7">
-                            <v-row class="row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-5 md-gutters-10" v-if="products.length > 0">
-                                <v-col v-for="(product, i) in products" :key="i">
+                            <v-row class="row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-5 md-gutters-10" 
+                            v-if="products.length > 0">
+                                <div class="col-lg-3 col-md-3 col-6" v-for="(product, i) in products" :key="i">
                                     <product-box :product-details="product" :is-loading="loading" />
-                                </v-col>
+                                </div>
                             </v-row>
                             <div v-else>
-                                <div class="pt-4 text-center fs-20">No Product Found</div>
-                                <div style="background-color: aliceblue;">
-                                    <div class="pt-4 text-center fs-20">Didn't find what you were looking for?</div>
-                                <div class="text-center fs-14">Let us know by filling in details below.</div>
+                                <div style="background-color: aliceblue;" class="notfound">
+                                    <h4>Didn't find what you were looking for?
+                                        <span>Request somthing & we'll look into it.</span>
+                                    </h4>
                                 <!-- todo:: message seller -->
-                                <div class="primary--text pa-1 lh-1 text-center fs-14 fw-700 pa-4" style="cursor:pointer" @click="showNewProductRequestDialog({status:true})">Request a Product</div>
+                                <div class="primary--text pa-1 lh-1 text-center fs-14 fw-700 pa-4">
+                                    <a href="#." class="btn btn-sm btn-success" @click="showNewProductRequestDialog({status:true})">Request a Product</a>
+                                </div>
                                 <NewProductRequestDialog />
                                 <!-- message seller -->
                                 </div>
@@ -269,8 +275,8 @@
                             <v-pagination v-model="queryParam.page" class="my-4" :length="totalPages" prev-icon="la-angle-left" next-icon="la-angle-right" :total-visible="7" elevation="0" @input="pageSwitch"></v-pagination>
                         </div>
                     </div>
-                </v-col>
-            </v-row>
+                </div>
+            </div>
         </v-container>
     </div>
 </template>

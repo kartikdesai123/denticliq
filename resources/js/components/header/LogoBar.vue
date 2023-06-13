@@ -7,17 +7,13 @@
                     </router-link>
                 </div>
                 <v-spacer />
+              
                 <div :class="['flex-grow-1 search-box', { open: openSearch }]">
-                    <v-form
+                    <v-form 
                         class="flex-grow-1"
                         @submit.stop.prevent="search()"
                     >
                         <v-row align="center" dense>
-                            <v-col cols="auto ms-1" class="d-md-none">
-                                <v-btn icon @click.stop="toggleSearch(false)">
-                                    <i class="las la-arrow-left fs-18 ts-05" ></i>
-                                </v-btn>
-                            </v-col>
                             <v-col>
                                 <v-text-field
                                     :placeholder="$t('search_for_products_brands_and_more')"
@@ -174,22 +170,16 @@
                         
                     </div>
                 </div>
-                
-                <v-btn
-                    class="d-md-none border-gray-300"
-                    fab
-                    outlined
-                    small
-                    @click.stop="toggleSearch(true)"
-                >
-                    <i class="las la-search fs-18 ts-05"></i>
-                </v-btn>
+               <div class="menubar">
+                    <i class="las la-bars" aria-hidden="true"></i>
+               </div>
+
                 <v-spacer class="d-none d-md-block" />
                 <div class="d-none d-md-block">
                     <div class="header_icons" v-if="!isAuthenticated">
-                    <ul class="list-unstyled">
+                    <ul class="list-unstyled carticons">
                         <li><a href="/user/wishlist"> <i class="las la la-heart-o lh-1"></i></a></li>
-                        <li><a href="/compared-list"> <i class="las la-shopping-bag lh-1"></i></a></li>
+                        <li><a> <SidebarCart /></a></li>
                         <li><a href="/user/login"> <i class="las la-user lh-1"></i> Login</a></li>
                     </ul>
                     </div>
@@ -214,6 +204,7 @@
 </template>
 
 <script>
+import SidebarCart from "../cart/SidebarCart";
 import { mapGetters, mapActions } from "vuex";
 export default {
     props: {
@@ -236,6 +227,9 @@ export default {
         products: [],
         shops: []
     }),
+    components: {
+        SidebarCart,
+    },
     computed: {
         ...mapGetters("app", ["appLogo", "appName"]),
         ...mapGetters("auth", ["isAuthenticated"]),
@@ -312,35 +306,27 @@ export default {
 };
 </script>
 <style scoped>
-.logobar {
-    min-height: 68px;
-    position: relative;
-    z-index: 1;
-}
 .search_content_box{
     width: 100%;
 }
 
 @media (max-width: 768px) {
     .search_content_box{
-        top: 60px;
+        top: 40px;
     }
 }
 @media (max-width: 959px) {
     .search-box {
-        position: absolute;
-        width: calc(100% - 24px);
-        padding: 9px 0;
-        height: 100%;
-        left: 12px;
-        right: 12px;
-        top: -100%;
-        background: #fff;
-        display: flex;
-        align-items: center;
-        z-index: 3;
-        transition: top 0.3s;
-        -webkit-transition: top 0.3s;
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    top: 65px;
+    background: #fff0;
+    display: flex;
+    align-items: center;
+    z-index: 3;
+    transition: top 0.3s;
+    -webkit-transition: top 0.3s;
     }
     .search-box.open {
         top: 0px;

@@ -1,14 +1,8 @@
 <template>
-    <div>
-        <button
-            class="side-cart-btn text-center fw-500 fs-12 d-none d-lg-block"
-            @click.stop="updateCartDrawer(true)"
-        >
-            <span class="d-block">
-                <i class="las la-shopping-cart" />
-                <span>{{ getCartCount }} {{ $t("items") }}</span>
-            </span>
-            <span class="d-block white primary--text rounded mt-1 px-1 py-2 lh-1" >{{ format_price(getCartPrice - getTotalCouponDiscount) }}</span>
+    <div class="headcart">
+        <button @click.stop="updateCartDrawer(true)">
+                                <i class="las la-shopping-bag lh-1"></i>
+                                <span class="itemcount">{{ getCartCount }}</span>
         </button>
         <v-navigation-drawer
             class="cart-drawer"

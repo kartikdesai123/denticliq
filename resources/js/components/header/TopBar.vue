@@ -1,27 +1,11 @@
 <template>
     <div class="topbar">
-        <div
-            v-if="topBannerVisible && !loading && data.top_banner.img"
-            class="position-relative"
-        >
-            <dynamic-link
-                :to="data.top_banner.link"
-                append-class="text-reset d-block lh-0"
-            >
-                <img
-                    :src="data.top_banner.img"
-                    class="img-fit h-50px w-100"
-                />
+        <div v-if="topBannerVisible && !loading && data.top_banner.img" class="position-relative">
+            <dynamic-link :to="data.top_banner.link" append-class="text-reset d-block lh-0" >
+                 <img :src="data.top_banner.img" class="img-fit h-50px w-100" />
             </dynamic-link>
             <v-btn
-                elevation="0"
-                fab
-                outlined
-                x-small
-                class="absolute-top-right rounded border-2 btn-xxs mt-2 me-2"
-                color="white"
-                @click.native="closeTopBanner"
-            >
+                elevation="0" fab outlined x-small class="absolute-top-right rounded border-2 btn-xxs mt-2 me-2" color="white" @click.native="closeTopBanner">
                 <i class="las la-times ts-10" />
             </v-btn>
         </div>

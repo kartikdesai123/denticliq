@@ -24,7 +24,7 @@
                     <div v-else>
                         <swiper ref="c2" :options="carouselOption" class="">
                             <swiper-slide v-for="(product, i) in products" :key="i" >
-                                <product-box :product-details="product" :is-loading="loading" box-style="three"/>
+                                <product-box :product-details="product" :is-loading="loading" box-style="one"/>
                             </swiper-slide>
                         </swiper>
                     </div>
@@ -42,43 +42,32 @@ export default {
         banner: {},
         products: [],
         carouselOption: {
-            slidesPerColumn: 2,
-            slidesPerColumnFill: "row",
-            slidesPerView: 3,
+            slidesPerView: 6,
             spaceBetween: 20,
             breakpoints: {
                 0: {
-                    slidesPerView: 1,
-                    spaceBetween: 12,
-                    slidesPerColumn: 2,
-                    slidesPerColumnFill: "row",
+                    slidesPerView: 2,
+                    spaceBetween: 5,
                 },
                 // when window width is >= 320px
                 599: {
-                    slidesPerView: 1,
-                    spaceBetween: 12,
-                    slidesPerColumn: 3,
-                    slidesPerColumnFill: "row",
+                    slidesPerView: 2,
+                    spaceBetween: 5,
                 },
                 // when window width is >= 480px
                 960: {
-                    slidesPerView: 1,
-                    spaceBetween: 8,
-                    slidesPerColumn: 3,
-                    slidesPerColumnFill: "row",
+                    slidesPerView: 4,
+                    spaceBetween: 5,
                 },
                 // when window width is >= 640px
                 1264: {
-                    slidesPerView: 2,
-                    spaceBetween: 8,
-                    slidesPerColumn: 2,
-                    slidesPerColumnFill: "row",
+                    slidesPerView: 4,
+                    spaceBetween: 5,
                 },
                 1904: {
-                    slidesPerView: 3,
+                    slidesPerView: 4,
                     spaceBetween: 8,
-                    slidesPerColumn: 2,
-                    slidesPerColumnFill: "row",
+                    //slidesPerColumnFill: "row",
                 },
             },
         },

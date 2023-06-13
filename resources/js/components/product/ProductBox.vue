@@ -8,14 +8,12 @@
                     <div class="position-relative ">
                         <router-link
                             :to="{ name: 'ProductDetails', params: {slug: productDetails.slug}}"
-                            class="text-reset d-block lh-0 text-center"
-                        >
+                            class="text-reset d-block lh-0 text-center">
                             <img
                                 :src="productDetails.thumbnail_image"
                                 :alt="productDetails.name"
                                 @error="imageFallback($event)"
-                                :class="[]"
-                            >
+                                :class="[]">
                         </router-link>
                     </div>
                     <div class='wighlist-icon'>
@@ -26,8 +24,9 @@
                                     <button class="primary--text pa-1 lh-1" @click="addNewWishlist(productDetails.id)" type="button"><i class="la la-heart-o ts-02 fs-18"></i></button>
                                 </template>
                             </div>
-                <v-col :cols="boxStyle == 'one' ? '12' : null" class="minw-0 flex-shrink-0">
-                    <div v-if="generalSettings.club_point == 1 && boxStyle != 'two' &&  boxStyle != 'four'" :class="[ boxStyle == 'two' || boxStyle == 'four' ? 'd-flex flex-row align-center max-w-80px club-badge-design' : 'd-flex flex-row align-center max-w-80px club-badge-design' ]">
+                <div class="pro_info">
+                    <div v-if="generalSettings.club_point == 1 && boxStyle != 'two' &&  
+                    boxStyle != 'four'" :class="[ boxStyle == 'two' || boxStyle == 'four' ? 'd-flex flex-row align-center max-w-80px club-badge-design' : 'd-flex flex-row align-center max-w-80px club-badge-design' ]">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="11.001" viewBox="0 0 18 12.001">
                                 <g id="Group_23890" data-name="Group 23890" transform="translate(-631 -822)">
                                     <path id="Subtraction_84" data-name="Subtraction 84" d="M7583,12a5.989,5.989,0,0,1-1.8-.274,7.1,7.1,0,0,0,0-11.45A5.927,5.927,0,0,1,7583,0a6,6,0,1,1,0,12Zm-1.885-.3A3.016,3.016,0,1,0,7580,11.2a6.1,6.1,0,0,0,1.113.5Z" transform="translate(-6940 822)" fill="#fff"/>
@@ -39,8 +38,8 @@
                                 </g>
                             </svg>
                             <div class="fs-13 ms-1">{{ productDetails.earn_point }}</div>
-                        </div>
-                    <div :class="['px-3 position-relative d-flex flex-column', boxStyle == 'two' ? 'py-1' : 'py-2']">
+                    </div>
+                    <div :class="['', boxStyle == 'two' ? 'py-1' : 'py-2']">
                        
                         <h5 :class="[boxStyle == 'two' ? 'text-truncate fs-12' : '' ]">
                             <router-link
@@ -58,8 +57,7 @@
                                 <span class="fw-700">{{ format_price(productDetails.base_discounted_price) }}</span>
                             </template>
                         </div>
-                        <div class="d-flex align-center" v-if="boxStyle != 'two'">
-                            <div :class="[ boxStyle == 'three' || boxStyle == 'four' ? 'me-3' : 'flex-grow-1 me-1' ]">
+                        <div v-if="boxStyle != 'two'">
                                 <template v-if="productDetails.stock">
                                     <button class="buynowbtn-theme" @click="showAddToCartDialog({status:true,slug:productDetails.slug})">
                                         <i class="la la-shopping-cart fs-20 ts-05 me-1"></i>
@@ -69,10 +67,9 @@
                                 <template v-else>
                                     <span class="fw-700 fs-13 opacity-60">{{ $t('out_of_stock') }}</span>
                                 </template>
-                            </div>
                         </div>
                     </div>
-                </v-col>
+                </div>
             </div>
         </div>
     </div>

@@ -33,35 +33,35 @@ export default {
             spaceBetween: 20,
             breakpoints: {
                 0: {
-                    slidesPerView: 1,
-                    spaceBetween: 12,
+                    slidesPerView: 2,
+                    spaceBetween: 5,
                     slidesPerColumn: 2,
                     slidesPerColumnFill: 'row',
                 },
                 // when window width is >= 320px
                 599: {
                     slidesPerView: 2,
-                    spaceBetween: 12,
+                    spaceBetween: 5,
                     slidesPerColumn: 2,
                     slidesPerColumnFill: 'row',
                 },
                 // when window width is >= 480px
                 960: {
                     slidesPerView: 2,
-                    spaceBetween: 12,
+                    spaceBetween: 5,
                     slidesPerColumn: 2,
                     slidesPerColumnFill: 'row',
                 },
                 // when window width is >= 640px
                 1264: {
                     slidesPerView: 6,
-                    spaceBetween: 20,
+                    spaceBetween: 5,
                     slidesPerColumn: 2,
                     slidesPerColumnFill: 'row',
                 },
                 1904: {
                     slidesPerView: 6,
-                    spaceBetween: 20,
+                    spaceBetween: 5,
                     slidesPerColumn: 2,
                     slidesPerColumnFill: 'row',
                 },

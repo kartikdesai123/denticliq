@@ -1,6 +1,7 @@
 <template>
-    <div class="mb-5">
-            <v-row class="gutters-7 md-gutters-10 lh-0" v-if="loading">
+    
+    <div class="homesliders">
+            <div class="gutters-7 md-gutters-10 lh-0" v-if="loading">
                 <v-col cols="12" lg="12" md="12" class="">
                     <v-skeleton-loader
                         type="image"
@@ -8,8 +9,8 @@
                         class="loader"
                     ></v-skeleton-loader>
                 </v-col>
-            </v-row>
-            <v-row class="mainslider" v-else>
+            </div>
+            <div class="mainslider" v-else>
                 <v-col cols="12" lg="12" class="">
                     <swiper :options="carouselOption" class="">
                         <swiper-slide v-for="(slider, i) in sliders.one" :key="i" class="">
@@ -17,7 +18,7 @@
                         </swiper-slide>
                     </swiper>
                 </v-col>
-            </v-row>
+            </div>
     </div>
 </template>
 

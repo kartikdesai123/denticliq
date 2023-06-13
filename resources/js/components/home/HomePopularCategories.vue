@@ -1,6 +1,6 @@
 <template>
     <div class="mb-5">
-        <v-container class="py-0 pe-0 pe-md-3 ps-3">
+        <v-container class="py-0 pe-0 pe-md-3 ps-3 d-none d-md-block d-sm-block d-lg-block">
             <div class="d-flex justify-space-between align-center mb-4 pe-3 pe-md-0">
                 <h2 class="main_heading">{{ $t('Trending Category') }}</h2>
                 <router-link :to="{ name: 'AllCategories' }" class="py-2 primary--text lh-1 d-inline-block">
@@ -26,6 +26,34 @@
                 </swiper>
             </div>
         </v-container>
+        <v-container class="py-0 pe-0 pe-md-3 ps-3 d-block d-md-none d-sm-none d-lg-none">
+            <div class="d-flex justify-space-between align-center mb-4 pe-3 pe-md-0">
+                <h2 class="main_heading">{{ $t('Trending Category') }}</h2>
+                <router-link :to="{ name: 'AllCategories' }" class="py-2 primary--text lh-1 d-inline-block">
+                    {{ $t('view_all') }}
+                    <i class="las la-angle-right"></i>
+                </router-link>
+            </div>
+          
+                <div v-if="loading">
+                    <div class="row">
+                        <div class="col-lg-1 col-md-6 col-6 popularcat" v-for="(i) in 8" :key="i" >
+                            <v-skeleton-loader type="image" height="186" ></v-skeleton-loader>
+                        </div>
+                    </div>
+                </div>
+                <div v-else>
+                    <div class="row">
+                        <div class="col-lg-1 col-md-6 col-6 popularcat" v-for="(category, i) in categories" :key="i">
+                            <router-link class="" :to="{ name: 'Category', params: {categorySlug: category.slug}}">
+                                <img :src="category.banner" :alt="category.name" @error="imageFallback($event)" class="img-fluid ">
+                                <h3>{{ category.name }}</h3>
+                            </router-link>
+                        </div>
+                    </div>
+                </div>
+          
+        </v-container>
     </div>
 </template>
 
@@ -43,27 +71,27 @@ export default {
             },
             breakpoints: {
                 0: {
-                    slidesPerView: 4.5,
-                    spaceBetween: 12
+                    slidesPerView: 2.5,
+                    spaceBetween: 5
                 },
                 // when window width is >= 320px
                 599: {
-                    slidesPerView: 5,
-                    spaceBetween: 16
+                    slidesPerView: 2.5,
+                    spaceBetween: 5
                 },
                 // when window width is >= 480px
                 960: {
                     slidesPerView: 6,
-                    spaceBetween: 20
+                    spaceBetween: 5
                 },
                 // when window width is >= 640px
                 1264: {
                     slidesPerView: 7,
-                    spaceBetween: 20
+                    spaceBetween: 5
                 },
                 1904: {
                     slidesPerView: 8,
-                    spaceBetween: 20
+                    spaceBetween: 5
                 },
             }
         },
