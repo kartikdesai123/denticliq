@@ -12,7 +12,7 @@
             </a>
         </div>
 
-        
+
         <div class="aiz-side-nav-wrap">
             <ul class="aiz-side-nav-list" data-toggle="aiz-side-menu">
                 <li class="aiz-side-nav-item">
@@ -59,7 +59,7 @@
                 @endcan
 
                 <!-- Product -->
-                @canany(['show_products','show_seller_products','show_categories','show_brands','show_attributes','show_reviews'])
+                @canany(['show_products','show_seller_products','show_categories','show_brands','show_attributes','show_reviews','product_bulk_import','product_bulk_export'])
                     <li class="aiz-side-nav-item">
                         <a href="#" class="aiz-side-nav-link">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
@@ -127,6 +127,20 @@
                                 <li class="aiz-side-nav-item">
                                     <a href="{{ route('reviews.index') }}" class="aiz-side-nav-link">
                                         <span class="aiz-side-nav-text">{{ translate('Reviews') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('product_bulk_import')
+                                <li class="aiz-side-nav-item">
+                                    <a href="{{ route('product_bulk_upload.index') }}" class="aiz-side-nav-link" >
+                                        <span class="aiz-side-nav-text">{{ translate('Bulk Import') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('product_bulk_export')
+                                <li class="aiz-side-nav-item">
+                                    <a href="{{route('product_bulk_export.index')}}" class="aiz-side-nav-link">
+                                        <span class="aiz-side-nav-text">{{translate('Bulk Export')}}</span>
                                     </a>
                                 </li>
                             @endcan
@@ -418,7 +432,7 @@
                         </ul>
                     </li>
                 @endcan
-                
+
                 <!-- product query -->
                 @if (addon_is_activated('multi_vendor') && get_setting('conversation_system') == 1 && auth()->user()->can('product_query'))
                     @php
@@ -445,7 +459,7 @@
                     </li>
                 @endif
                 <!-- product query -->
-                
+
 
                 <!-- Uploaded Files -->
                 @can('show_uploaded_files')
