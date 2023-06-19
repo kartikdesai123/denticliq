@@ -167,7 +167,7 @@ class SettingController extends Controller
             $business_settings->value = 0;
             $business_settings->save();
         }
-        
+
         cache_clear();
 
         flash(translate("Settings updated successfully"))->success();
@@ -190,7 +190,7 @@ class SettingController extends Controller
             $business_settings->value = 0;
             $business_settings->save();
         }
-        
+
         cache_clear();
 
         flash(translate("Settings updated successfully"))->success();
@@ -406,7 +406,7 @@ class SettingController extends Controller
         $business_settings->value = $request[$request->type];
         $business_settings->save();
 
-        
+
         cache_clear();
         return back();
     }

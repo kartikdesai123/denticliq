@@ -245,6 +245,11 @@ class SettingController extends Controller
                             ? banner_array_generate(get_setting('home_shop_banner_3_images'),get_setting('home_shop_banner_3_links'))
                             : [];
                 break;
+            case 'top_banner_text':
+                $data = get_setting('top_banner_text')
+                            ? get_setting('top_banner_text')
+                            : [];
+                break;
 
             default:
                 $data = null;
