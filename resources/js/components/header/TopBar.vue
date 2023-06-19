@@ -10,7 +10,7 @@
             </v-btn>
         </div>
         <v-container class="fs-13 py-0 px-0 px-md-3">
-            <v-row align="center" class="my-0 d-none d-md-flex">
+            <v-row align="center" class="my-0 d-md-flex">
                 <v-col cols="12" class="py-2">
                    <div class="mainticker">
                         <p>SUMMER INCOMING... UP TO 70% OFF ALMOST EVERYTHING!*</p>

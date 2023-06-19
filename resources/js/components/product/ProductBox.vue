@@ -60,7 +60,7 @@
                         <div v-if="boxStyle != 'two'">
                                 <template v-if="productDetails.stock">
                                     <button class="buynowbtn-theme" @click="showAddToCartDialog({status:true,slug:productDetails.slug})">
-                                        <i class="la la-shopping-cart fs-20 ts-05 me-1"></i>
+                                        <i class="las la-shopping-bag fs-20 me-1"></i>
                                         <span>Add to Cart</span>
                                     </button>
                                 </template>

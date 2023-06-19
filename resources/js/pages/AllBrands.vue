@@ -3,7 +3,7 @@
         <v-container>
             <h1 class="main_heading">{{ $t('all_brands') }}</h1>
             <v-row v-if="brands.length" class="">
-                <div class="col-lg-1 col-md-6 col-6" v-for="(brand, i) in brands" :key="i">
+                <div class="col-lg-1 col-md-6 col-4" v-for="(brand, i) in brands" :key="i">
                     <div v-if="loading">
                         <v-skeleton-loader
                             type="image"

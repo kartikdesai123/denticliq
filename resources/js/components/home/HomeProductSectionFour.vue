@@ -1,5 +1,6 @@
 <template>
-    <div class="mb-5" id="section2">
+    <div class="mb-5" id="section2" style="padding: 30px 0px;
+    background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4) 78%), linear-gradient(rgb(54, 184, 187), rgb(54, 184, 187));">
         <v-container class="py-0">
             <h2 class="main_heading">{{ title }}</h2>
             <div v-if="loading">
