@@ -320,7 +320,7 @@ export default {
     position: absolute;
     left: 15px;
     right: 15px;
-    top: 65px;
+    top: 90%;
     background: #fff0;
     display: flex;
     align-items: center;

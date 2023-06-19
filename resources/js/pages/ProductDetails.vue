@@ -2,11 +2,13 @@
     <v-container class="pt-7">
         <div align="start">
             <v-col lg="12" cols="12">
+               
+
                 <add-to-cart :is-loading="detailsLoading" :product-details="productDetails" />
                 <div cols="12" class="mb-6 prodecdetl">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">description</a>
+                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"> description</a>
                         </li>
                         <li class="nav-item" v-if="productDetails.keyspeci != null"> 
                             <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Key Specifications</a>
@@ -256,7 +258,7 @@ export default {
                 this.moreLoading = false;
             }
         },
-
+        
     },
     async created() {
         this.getDetails();

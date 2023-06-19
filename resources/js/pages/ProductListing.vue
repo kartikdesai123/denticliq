@@ -159,7 +159,7 @@
                         <div class="mb-7">
 
                             <v-row v-if="selectedBrand.length > 0">
-                                <div class="col-md-2" v-for="(brand, i) in selectedBrand" :key="i">
+                                <div class="col-md-2 col-4" v-for="(brand, i) in selectedBrand" :key="i">
                                     <div v-if="loading">
                                         <v-skeleton-loader
                                             type="image"
@@ -194,7 +194,7 @@
                         </v-row>
                         <div class="mb-7">
                              <v-row class="relcatgory" v-if="relatedCategory.length > 0">
-                                <div class="col-md-2" v-for="(category, i) in relatedCategory" :key="i">
+                                <div class="col-md-2 col-4" v-for="(category, i) in relatedCategory" :key="i">
                                     <div v-if="loading">
                                         <v-skeleton-loader
                                             type="image"

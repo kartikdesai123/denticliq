@@ -44,12 +44,12 @@ export default {
             },
             breakpoints: {
                 0: {
-                    slidesPerView: 5.5,
+                    slidesPerView: 4.5,
                     spaceBetween: 20
                 },
                 // when window width is >= 320px
                 599: {
-                    slidesPerView: 5.5,
+                    slidesPerView: 4.5,
                     spaceBetween: 20
                 },
                 // when window width is >= 480px

@@ -32,7 +32,7 @@
                     <div v-if="generalSettings.conversation_system == 1 && is_addon_activated('multi_vendor')" class="ms-auto">
                         <button style="background: #f1f1f1; padding: 9px 14px;border-radius: 3px;" class="primary--text lh-1 d-flex align-center"  @click="showConversationDialog({status:true})">
                             <i class="la la-comment ts-02 fs-14 me-1" ></i>
-                            <span class="fw-700">{{ $t("ask_about_this_product") }}</span>
+                            <span class="fw-700">{{ $t("Product Inquiry") }}</span>
                         </button>  
                     </div>
                     <ConversationDialog :product="productDetails" />
@@ -63,7 +63,7 @@
                             </router-link>
                         </span>
                     </v-col>
-                    <v-col cols="9" lg="8">
+                    <v-col cols="5" lg="8">
                         <span class="d-flex flex-column align-baseline lh-1-3" >
                             <span class="fs-12 opacity-60">{{ $t("brand") }}</span>
                             <span class="fw-700">{{ productDetails.brand.name }}</span>
@@ -73,7 +73,7 @@
                             >{{ $t("view_other_products")}}</router-link>
                         </span>
                     </v-col>
-                    <v-col cols="9" lg="2">
+                    <v-col cols="4" lg="2">
                                 <template v-if="stock">
                                     <div class="outstk">
                                         <i class="las la-check green rounded-circle size-15px fs-8 white--text d-inline-flex align-center justify-center"></i>
@@ -217,12 +217,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <ul>
-                                <li><i class="las la-angle-double-right" aria-hidden="true"></i> <span>1 </span>sold in last  <span>19 </span>hours</li>
-                                <li><i class="las la-angle-double-right" aria-hidden="true"></i> <span>13 </span>People are looking for this product</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <ul>
+                                <li><i class="las la-angle-double-right" aria-hidden="true"></i> <span class="textblink"> {{randomNumber}} </span>sold in last  <span>19 </span>hours</li>
                                 <li><i class="las la-angle-double-right" aria-hidden="true"></i> 
                                     {{ $t("estimated_delivery_time") }}
                                 <span v-if=" Math.ceil( productDetails.express_delivery_time / 24 ) == Math.ceil( productDetails.standard_delivery_time / 24 )" class="fs-12 opacity-50" >
@@ -236,6 +231,12 @@
                                     {{ $t("days") }}
                                 </span>
                             </li>
+                             </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul>
+                                <li><i class="las la-angle-double-right" aria-hidden="true"></i> <span class="textblink2"> {{randomViewer}} </span>People are looking for this product</li>
+                           
                             </ul>
                         </div>
                     </div>
@@ -310,7 +311,15 @@ export default {
         selectedVariation: {},
         minCartLimit: 1,
         maxCartLimit: Infinity,
+        randomNumber:'',
     }),
+    created(){
+        this.randomNumber = Math.floor(Math.random() * 50);
+        this.randomViewer = Math.floor(Math.random() * 100);
+       //this.randomNumber = Math.random() * (max - min) + min;
+       // this.randomNumber = Math.random() * (max - min) + min;
+       // this.randomNumber = Math.random()*10; //multiply to generate random number between 0, 100
+        }, 
     watch: {
         productDetails: {
             immediate: true,
@@ -450,5 +459,6 @@ export default {
             }
         },
     }
+   
 }
 </script>

@@ -37,14 +37,14 @@
           
                 <div v-if="loading">
                     <div class="row">
-                        <div class="col-lg-1 col-md-6 col-6 popularcat" v-for="(i) in 8" :key="i" >
+                        <div class="col-lg-1 col-md-6 col-4 popularcat" v-for="(i) in 8" :key="i" >
                             <v-skeleton-loader type="image" height="186" ></v-skeleton-loader>
                         </div>
                     </div>
                 </div>
                 <div v-else>
                     <div class="row">
-                        <div class="col-lg-1 col-md-6 col-6 popularcat" v-for="(category, i) in categories" :key="i">
+                        <div class="col-lg-1 col-md-6 col-4 popularcat" v-for="(category, i) in categories" :key="i">
                             <router-link class="" :to="{ name: 'Category', params: {categorySlug: category.slug}}">
                                 <img :src="category.banner" :alt="category.name" @error="imageFallback($event)" class="img-fluid ">
                                 <h3>{{ category.name }}</h3>
