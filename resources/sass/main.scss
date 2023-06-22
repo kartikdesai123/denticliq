@@ -3321,7 +3321,7 @@ label {
 //--------------------------------------------------by shohan
 .header-sticky{
     background: #fff;
-    z-index: 9999!important;
+    z-index: 99!important;
 }
 // product description video/image responsive issue
 .v-expansion-panel-content iframe {
@@ -3586,11 +3586,11 @@ a:hover{
   }
   #section1{
     background: aliceblue;
-    padding: 15px 0;
+    padding: 40px 0;
   }
   #section2{
     background: white;
-    padding: 15px 0;
+    padding: 40px 0;
   }
   .topbrands .swiper-container{
     overflow: hidden!important;
@@ -3616,7 +3616,7 @@ a:hover{
  .main_heading{
     font-size: 20px;
     font-weight: 600;
-    margin-bottom: 15px;
+    margin-bottom: 23px;
     font-family: system-ui;
  }
  .popularcat{
@@ -3633,12 +3633,13 @@ object-fit: cover;
 border-radius: 10px;
 }
 .popularcat h3{
-color: black;
-font-size: 17px;
-font-weight: 500;
-letter-spacing: inherit;
-text-transform: capitalize;
-line-height: normal;
+    color: black;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: inherit;
+    text-transform: capitalize;
+    line-height: normal;
+    margin-top: 8px;
 }
 .productbox:hover .buynowbtn-theme{
     background: #3e3d3d;
@@ -3665,15 +3666,17 @@ line-height: normal;
 .buynowbtn-theme{
     background: rgb(54 184 187);
     /* border: 1.5px solid rgba(37, 36, 36, 0.7803921569); */
-    color: white;
+    color: white!important;
+    display:block;
+    text-transform: capitalize!important;
     border-radius: 3px;
     padding: 5px 0px;
     /* display: flex; */
     /* align-items: center; */
     /* vertical-align: middle; */
     margin: 10px auto 10px;
-    font-weight: 400;
-    font-size: 13px;
+    font-weight: 400!important;
+    font-size: 12px!important;
     width: 100%;
     text-align: center;
     transition:.3s;
@@ -3778,7 +3781,7 @@ line-height: normal;
     height: 360px!important;
 }
 .container {
-    max-width: 1200px!important;
+    max-width: 1350px!important;
 }
 .ftrdsn h4{
     font-size: 16px;

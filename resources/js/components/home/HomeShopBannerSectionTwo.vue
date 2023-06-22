@@ -15,6 +15,10 @@ export default {
         banners: [],
         carouselOption: {
             slidesPerView: 1,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false
+            },
         },
     }),
     async created(){

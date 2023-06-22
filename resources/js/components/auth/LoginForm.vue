@@ -1,14 +1,6 @@
 <template>
     <div
-        class="
-            rounded-lg
-            pa-5
-            border border-gray-200
-            overflow-hidden
-            white
-            shadow-light
-        "
-    >
+        class="rounded-lg pa-5 border border-gray-200 overflow-hidden white shadow-light">
         <v-row no-gutters align="center">
             <v-col cols="12" lg="6" order="2" order-lg="1" class="">
                 <banner
