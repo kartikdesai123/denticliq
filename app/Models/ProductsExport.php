@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\Brand;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithMapping;
@@ -12,7 +14,9 @@ class ProductsExport implements FromCollection, WithMapping, WithHeadings
 {
     public function collection()
     {
-        return Product::leftJoin('product_variations', 'product_variations.product_id', '=', 'products.id')->leftJoin('product_categories', 'product_categories.product_id', '=', 'products.id')->get();
+        return Product::leftJoin('product_variations', 'product_variations.product_id', '=', 'products.id')
+                    ->leftJoin('product_categories', 'product_categories.product_id', '=', 'products.id')
+                    ->get();
         // return Product::with('product_categories')->get();
     }
 
@@ -22,10 +26,19 @@ class ProductsExport implements FromCollection, WithMapping, WithHeadings
             'name',
             'slug',
             'description',
+            'keyspeci',
+            'profeatures',
+            'packaging',
+            'directiontouse',
+            'faq',
             'shop_id',
+            'shop_name',
             'category_id',
+            'category_name',
             'brand_id',
+            'brand_name',
             'price',
+            'tax',
             'lowest_price',
             'highest_price',
             'stock',
@@ -42,7 +55,19 @@ class ProductsExport implements FromCollection, WithMapping, WithHeadings
      */
     public function map($product): array
     {
-        // dd($product);
+
+        $getCategoryName = Category::where('id',$product->category_id)->get();
+        $catName = (!empty($getCategoryName[0])) ? $getCategoryName[0]->name : '';
+
+        $brandName = '';
+
+        if($product->shop_id !=''){
+            $getbrandName = Brand::where('id',$product->brand_id)->get();
+            $brandName = (!empty($getbrandName[0])) ? $getbrandName[0]->name : '';
+        }
+
+
+
         $qty = 0;
         foreach ($product->variations as $key => $variation) {
             $qty += $variation->qty;
@@ -51,10 +76,19 @@ class ProductsExport implements FromCollection, WithMapping, WithHeadings
             $product->name,
             $product->slug,
             $product->description,
+            $product->keyspeci,
+            $product->profeatures,
+            $product->packaging,
+            $product->directiontouse,
+            $product->faq,
             $product->shop_id,
+            $product->shop->name,
             $product->category_id,
+            $catName,
             $product->brand_id,
+            $brandName,
             $product->price,
+            $product->tax,
             $product->lowest_price,
             $product->highest_price,
             $product->stock,

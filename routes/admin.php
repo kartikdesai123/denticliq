@@ -38,6 +38,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ClubPointController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\Payment\AuthorizenetPaymentController;
+use App\Http\Controllers\ProductBulkUploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,6 +122,22 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         Route::post('/get_products_by_subcategory', [ProductController::class, 'get_products_by_subcategory'])->name('product.get_products_by_subcategory');
     });
 
+    Route::controller(ProductBulkUploadController::class)->group(function () {
+        //Product Export
+        Route::get('/product-bulk-export', 'export')->name('product_bulk_export.index');
+
+        //Product Bulk Upload
+        Route::get('/product-bulk-upload/index', 'index')->name('product_bulk_upload.index');
+        Route::post('/bulk-product-upload', 'bulk_upload')->name('bulk_product_upload');
+        Route::get('/product-csv-download/{type}', 'import_product')->name('product_csv.download');
+        Route::get('/vendor-product-csv-download/{id}', 'import_vendor_product')->name('import_vendor_product.download');
+        Route::group(['prefix' => 'bulk-upload/download'], function() {
+            Route::get('/category', 'pdf_download_category')->name('pdf.download_category');
+            Route::get('/brand', 'pdf_download_brand')->name('pdf.download_brand');
+            Route::get('/seller', 'pdf_download_seller')->name('pdf.download_seller');
+        });
+    });
+
 
     Route::resource('customers', CustomerController::class);
     Route::get('customers_ban/{customer}', [CustomerController::class, 'ban'])->name('customers.ban');
@@ -189,6 +206,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         Route::view('/header', 'backend.website_settings.header')->name('website.header');
         Route::view('/footer', 'backend.website_settings.footer')->name('website.footer');
         Route::view('/banners', 'backend.website_settings.banners')->name('website.banners');
+        Route::view('/top-banner', 'backend.website_settings.top-banner')->name('website.top-banner');
         Route::view('/pages', 'backend.website_settings.pages.index')->name('website.pages');
         Route::view('/appearance', 'backend.website_settings.appearance')->name('website.appearance');
         Route::resource('custom-pages', PageController::class);

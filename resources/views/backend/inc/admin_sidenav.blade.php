@@ -610,6 +610,11 @@
                                 </a>
                             </li>
                             <li class="aiz-side-nav-item">
+                                <a href="{{ route('website.top-banner') }}" class="aiz-side-nav-link">
+                                    <span class="aiz-side-nav-text">{{ translate('Top Banners') }}</span>
+                                </a>
+                            </li>
+                            <li class="aiz-side-nav-item">
                                 <a href="{{ route('website.banners') }}" class="aiz-side-nav-link">
                                     <span class="aiz-side-nav-text">{{ translate('Banners') }}</span>
                                 </a>

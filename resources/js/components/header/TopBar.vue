@@ -12,10 +12,17 @@
         <v-container class="fs-13 py-0 px-0 px-md-3">
             <v-row align="center" class="my-0 d-md-flex">
                 <v-col cols="12" class="py-2">
-                   <div class="mainticker">
+                   <!-- <div class="mainticker">
                         <p>SUMMER INCOMING... UP TO 70% OFF ALMOST EVERYTHING!*</p>
-                   </div>
+                   </div> -->
+                   <div class="marquee-container">
+                    <div class="mainticker marquee-content">
+                    <!-- Your content goes here -->
+                    <p>{{ topbartext }}</p>
+                    </div>
+                </div>
                 </v-col>
+
             </v-row>
         </v-container>
         <v-divider class="" />
@@ -38,6 +45,7 @@ export default {
             image: Vue.helpers.asset("/uploads/img/topbar.jpg"),
             link: "",
         },
+        topbartext:"",
         currencies: [
             {
                 name: "U.S. Dollar",
@@ -77,6 +85,13 @@ export default {
             this.topBannerVisible = false;
             this.setSession("shopTopBanner", "hidden");
         },
+        async getTopBannerData() {
+            const res = await this.call_api("get", "setting/home/top_banner_text");
+            if (res.data.success) {
+                this.topbartext = res.data.data
+                this.loading = false
+            }
+        },
     },
     created() {
         if (this.checkSession("shopTopBanner") != "hidden") {
@@ -84,9 +99,10 @@ export default {
         }
         this.fetchWislistProducts();
         this.fetchProductQuerries();
+        this.getTopBannerData();
         setInterval(() => {
             this.fetchProductQuerries();
-        }, 8000);            
+        }, 8000);
     },
 };
 </script>
@@ -95,5 +111,25 @@ export default {
     position: relative;
     z-index: 2;
     background-color: #fff;
+}
+</style>
+<style>
+.marquee-container {
+  width: 110%;
+  overflow: hidden;
+}
+
+.marquee-content {
+  animation: marquee 20s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
 }
 </style>
