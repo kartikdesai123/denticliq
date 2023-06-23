@@ -59,11 +59,10 @@
                         </div>
                         <div v-if="boxStyle != 'two'">
                                 <template v-if="productDetails.stock">
-                                    <button class="buynowbtn-theme" @click="showAddToCartDialog({status:true,slug:productDetails.slug})">
-                                        <i class="las la-shopping-bag fs-20 me-1"></i>
-                                        <span>Add to Cart</span>
-                                    </button>
-                                </template>
+                                    <router-link class="buynowbtn-theme"
+                                            :to="{ name: 'ProductDetails', params: {slug: productDetails.slug}}">
+                                            <i class="las la-shopping-bag fs-20 me-1"></i> Add to Cart </router-link>
+                                </template> 
                                 <template v-else>
                                     <span class="fw-700 fs-13 opacity-60">{{ $t('out_of_stock') }}</span>
                                 </template>
@@ -118,14 +117,66 @@ export default {
             "updateQuantity",
         ]),
         ...mapMutations('auth', ['showAddToCartDialog']),
-        addCart(){
-            if(!this.$props.productDetails.is_variant){
-                this.addToCart({
-                    variation_id: this.$props.productDetails.variations[0].id,
-                    qty: this.$props.productDetails.min_qty
-                })
+        addCart() {
+            if (this.productDetails.is_variant == 1) {
+                // for variant product
+
+                let chooseOptions = this.chooseOptions.filter((el) => el != "");
+                if ( this.productDetails.variation_options.length > chooseOptions.length ) {
+                    // if all options is not selected
+
+                    this.snack({
+                        message: this.$i18n.t("please_select_all_options"),
+                        color: "red",
+                    });
+                    return;
+                }
             }
+
+            if (!this.stock) {
+                // selected variation stock check
+
+                this.snack({
+                    message: this.$i18n.t("this_product_is_out_of_stock"),
+                    color: "red",
+                });
+                return;
+            }
+
+            let minMaxCheck = this.checkMinMaxLimit(this.selectedVariation.id);
+            if (!minMaxCheck.success) {
+                // selected variation min max limit check
+
+                let message =
+                    minMaxCheck.type == "min_limit"
+                        ? `${this.$i18n.t("you_need_to_purchase_minimum_quantity")} ${this.minCartLimit}.`
+                        : `${this.$i18n.t("you_can_purchase_maximum_quantity")} ${this.maxCartLimit}.`;
+
+                this.snack({
+                    message: message,
+                    color: "red",
+                });
+                return;
+            }
+
+            this.addToCart({
+                variation_id: this.selectedVariation.id,
+                qty: this.cartQuantity,
+            });
+            this.snack({
+                message: this.$i18n.t("product_added_to_cart"),
+                color: "green",
+            });
         },
+
+       // addCart(){
+       //     if(!this.$props.productDetails.is_variant){
+       //         this.addToCart({
+       //             variation_id: this.$props.productDetails.variations[0].id,
+        //            qty: this.$props.productDetails.min_qty
+        //        })
+       //     }
+       // },
         updateCart(type,cart_id){
             this.updateQuantity({
                     type:type,

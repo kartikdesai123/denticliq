@@ -16,6 +16,10 @@ export default {
         carouselOption: {
             slidesPerView: 2,
             spaceBetween: 20,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false
+            },
             breakpoints: {
                 0: {
                     slidesPerView: 1,

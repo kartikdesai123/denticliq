@@ -2,9 +2,9 @@
     <div>
         <v-container>
             <v-row>
-                <v-col xl="10" class="mx-auto my-5 my-lg-16 ">
+                <div class="col-lg-10 mx-auto loginregform">
                     <login-form />
-                </v-col>
+                </div>
             </v-row>
         </v-container>
     </div>
