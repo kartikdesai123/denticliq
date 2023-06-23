@@ -33,7 +33,7 @@
                     $permission_groups = \App\Models\Permission::all()->groupBy('parent');
                 @endphp
                 @foreach ($permission_groups as $key => $permission_group)
-                
+
                     @php
                         $check = true;
                         if (
