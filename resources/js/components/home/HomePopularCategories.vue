@@ -26,7 +26,7 @@
                 </swiper>
             </div>
         </v-container>
-        <v-container class="py-0 pe-0 pe-md-3 ps-3 d-block d-md-none d-sm-none d-lg-none">
+        <v-container class="d-block d-md-none d-sm-none d-lg-none">
             <div class="d-flex justify-space-between align-center mb-4 pe-3 pe-md-0">
                 <h2 class="main_heading">{{ $t('Trending Category') }}</h2>
                 <router-link :to="{ name: 'AllCategories' }" class="py-2 primary--text lh-1 d-inline-block">
