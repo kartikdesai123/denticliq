@@ -1808,9 +1808,6 @@ hr,
 .product-box-one {
     min-height: auto!important;
 }
-.pro_info {
-    height: 160px!important;
-}
 .discount-badge-new {
     bottom: 170px!important;
 }
@@ -3482,12 +3479,18 @@ padding: 7px 9px;
     background-color: #1c888b!important;
 }
 .v-application a {
-    text-transform: uppercase;
-    font-weight: 400!important;
     letter-spacing: 0.04em;
 }
 .theme--light.v-list, .menumain  {
     background: #f8f8f8;
+}
+.menumain .v-list-item__title a{
+    font-weight: 400!important;
+    text-transform: uppercase;
+}
+.submenuitems .v-list-item__title a{
+    font-weight: 400!important;
+    text-transform: uppercase;
 }
 .submenuitems .dropdown-menu{
     visibility: hidden;
@@ -4019,4 +4022,75 @@ margin-top:15px;
 
 .container {
     max-width: 1310px !important;
+}
+.log_right{
+    background: #dbe9f5;
+    padding: 20px;
+}
+.log_right h1{
+    color: black;
+    font-size: 24px;
+    margin-bottom: 44px;
+}
+.log_right input{
+    font-size: 14px;
+    border-radius: 0px;
+}
+.log_right fieldset{
+    height: 44px;
+    background: white;
+}
+.log_right .v-text-field__slot{
+    height: 40px;
+}
+.log_right .v-input__slot{
+    min-height: auto!important;
+}
+.log_right .sub-btn{
+    width: 100%;
+    margin: 4px 0 8px;
+}
+.log_right .form-group{
+    margin-bottom: 15px;
+    padding: 0;
+}
+.v-text-field.v-text-field--enclosed .v-text-field__details {
+    margin-bottom: 0!important;
+    padding: 0;
+}
+.auth-box{
+    background: aliceblue;
+}
+.auth-box .banner img{
+height: 380px;
+object-fit: contain;
+}
+.auth-box .notranslate{
+    font-size: 18px;
+    right: 7px;
+    top: -4px;
+}
+.forgt-link{
+    font-weight: 600!important;
+    color: #11079d;
+    text-transform: capitalize;
+}
+.log-footer{
+    text-align: center;
+    border-top: 1px solid #80808073;
+    padding-top: 10px;
+    margin-top: 15px;
+}
+.log-footer h5{
+    font-weight: 500;
+    font-size: 12px;
+} 
+.log-footer .hv-acc{
+    font-size: 13px;
+}
+.log-link{
+    font-size: 13px;
+    text-transform: capitalize!important;
+    font-weight: 500!important;
+    color: #070bad!important;
 }

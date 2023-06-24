@@ -1,36 +1,24 @@
 <template>
     <div
-        class="rounded-lg pa-5 border border-gray-200 overflow-hidden white shadow-light">
-        <v-row no-gutters align="center">
-            <v-col cols="12" lg="6" order="2" order-lg="1" class="">
+        class="rounded-lg border border-gray-200 overflow-hidden white shadow-light">
+        <v-row no-gutters>
+            <v-col cols="12" lg="6" order="2" order-lg="1" class="p-0 banner">
                 <banner
                     :loading="false"
                     :banner="$store.getters['app/banners'].login_page"
                     class="mt-5 mt-lg-0"
                 />
             </v-col>
-            <v-col cols="12" order="1" order-lg="2" lg="6">
-                <div class="px-lg-7">
-                    <h1 class="text-uppercase lh-1 mb-6">
-                        <span class="opacity-50 fs-22 fw-400">{{
-                            $t("login_with")
-                        }}</span>
-                        <span class="d-block display-1 fw-900 primary--text">{{
-                            $store.getters["app/appName"]
-                        }}</span>
-                        <span class="opacity-50 fs-22 fw-400">{{
-                            $t("account")
-                        }}</span>
-                    </h1>
+            <v-col cols="12" order="1" order-lg="2" lg="6" class="p-0">
+                <div class="log_right">
+                    <h1>{{$t("login_with")}} <span>{{$store.getters["app/appName"]}}</span></h1>
                     <v-form
                         ref="loginForm"
                         lazy-validation
                         @submit.prevent="login()"
                     >
                         <div v-if="authSettings.customer_login_with == 'email' || (!showPhoneField && authSettings.customer_login_with == 'email_phone')" class="mb-4">
-                            <div class="mb-1 fs-13 fw-500">
-                                {{ $t("email") }}
-                            </div>
+                           
                             <v-text-field
                                 v-model="form.email"
                                 :placeholder="$t('email_address')"
@@ -45,9 +33,7 @@
                             </div>
                         </div>
                         <div v-if="authSettings.customer_login_with == 'phone' || (showPhoneField && authSettings.customer_login_with == 'email_phone')" class="mb-4">
-                            <div class="mb-1 fs-13 fw-500">
-                                {{ $t("phone_number") }}
-                            </div>
+                          
                             <vue-tel-input
                                 v-model="form.phone"
                                 v-bind="mobileInputProps"
@@ -65,8 +51,8 @@
                             </div>
                             <div v-if="!$v.form.phone.$error && form.showInvalidPhone" class=" v-text-field__details mt-2 pl-3">
                                 <div class=" v-messages theme--light error--text " role="alert" >
-                                    <div class=" v-messages__wrapper " >
-                                        <div class=" v-messages__message " >
+                                    <div class=" v-messages__wrapper">
+                                        <div class="v-messages__message">
                                             {{ $t("phone_number_must_be_valid") }}
                                         </div>
                                     </div>
@@ -77,9 +63,7 @@
                             </div>
                         </div>
                         <div>
-                            <div class="mb-1 fs-13 fw-500">
-                                {{ $t("password") }}
-                            </div>
+                         
                             <v-text-field
                                 v-model="form.password"
                                 placeholder="* * * * * * * *"
@@ -97,17 +81,14 @@
                                 @click:append="passwordShow = !passwordShow"
                             ></v-text-field>
                             <div class="text-end font-italic fs-12 opacity-70">
-                                <router-link
+                                <router-link 
                                     :to="{ name: 'ForgotPassword' }"
-                                    class="primary--text"
+                                    class="log-link"
                                 >{{ $t("forgot_password") }}?</router-link
                                 >
                             </div>
                         </div>
-                        <v-btn
-                            x-large
-                            class="px-16 mb-4"
-                            elevation="0"
+                        <v-btn elevation="0" class="sub-btn"
                             type="submit"
                             color="primary"
                             :loading="loading"
@@ -115,29 +96,20 @@
                             @click="login"
                         >{{ $t("login") }}</v-btn>
                     </v-form>
-                    <div
+                    <div class="log-footer"
                         v-if="
                             generalSettings.social_login.facebook == 1 ||
                                 generalSettings.social_login.twitter == 1 ||
                                 generalSettings.social_login.google == 1
                         "
                     >
-                        <div class="d-flex align-center mb-3">
-                            <span class="me-2 fs-13 fw-500 opacity-60"
-                            >{{ $t("or") }}, {{ $t("login_with") }}</span
-                            >
-                            <v-divider></v-divider>
+                        <h5>{{ $t("or") }}, {{ $t("login_with") }}</h5>
+                        <SocialLogin class="mb-3" />
+                        <div class="hv-acc"> {{ $t("dont_have_an_account") }},
+                            <router-link :to="{ name: 'Registration' }" class="log-link text-decoration-underline">{{ $t("signup") }}</router-link>
                         </div>
-                        <SocialLogin class="mb-5" />
                     </div>
-                    <div>
-                        {{ $t("dont_have_an_account") }},
-                        <router-link
-                            :to="{ name: 'Registration' }"
-                            class="primary--text text-decoration-underline"
-                        >{{ $t("signup") }}</router-link
-                        >
-                    </div>
+                 
                 </div>
             </v-col>
         </v-row>

@@ -9,22 +9,12 @@
                 <i class="las la-times ts-10" />
             </v-btn>
         </div>
-        <v-container class="fs-13 py-0 px-0 px-md-3">
-            <v-row align="center" class="my-0 d-md-flex">
-                <v-col cols="12" class="py-2">
-                   <!-- <div class="mainticker">
-                        <p>SUMMER INCOMING... UP TO 70% OFF ALMOST EVERYTHING!*</p>
-                   </div> -->
-                   <div class="marquee-container">
-                    <div class="mainticker marquee-content">
-                    <!-- Your content goes here -->
-                    <p>{{ topbartext }}</p>
-                    </div>
-                </div>
-                </v-col>
+        <div class="marquee-container">
+            <div class="mainticker">
+                 <marquee scrollamount="5" direction="left"><p>{{ topbartext }}</p></marquee>
+            </div>
+        </div>
 
-            </v-row>
-        </v-container>
         <v-divider class="" />
     </div>
 </template>
@@ -111,25 +101,5 @@ export default {
     position: relative;
     z-index: 2;
     background-color: #fff;
-}
-</style>
-<style>
-.marquee-container {
-  width: 110%;
-  overflow: hidden;
-}
-
-.marquee-content {
-  animation: marquee 20s linear infinite;
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(100%);
-  }
-
-  100% {
-    transform: translateX(-100%);
-  }
 }
 </style>

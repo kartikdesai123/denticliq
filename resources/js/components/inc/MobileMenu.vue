@@ -85,7 +85,7 @@
                         }}</span>
                     </router-link>
                 </v-col>
-                <v-col>
+               <!--<v-col>
                     <div
                         @click.stop="openChatWindow"
                         class="c-pointer d-inline-flex align-center flex-column"
@@ -108,7 +108,7 @@
                             $t("messages")
                         }}</span>
                     </div>
-                </v-col>
+                </v-col>--> 
                 <v-col>
                     <div
                         @click.stop="openCartDrawer"

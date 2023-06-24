@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="auth-box">
         <v-container>
             <v-row>
                 <div class="col-lg-10 mx-auto loginregform">

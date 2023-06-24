@@ -1,28 +1,23 @@
 <template>
-    <div>
+      <div class="auth-box">
         <v-container>
             <v-row>
-                <v-col xl="10" class="mx-auto">
-                    <div class="my-5 my-lg-16 rounded-lg pa-5 border overflow-hidden shadow-light">
-                        <v-row no-gutters align="start">
-                            <v-col cols="12" lg="6" order="2" order-lg="1" class="lh-0" >
+                <v-col xl="10" class="mx-auto loginregform">
+                    <div class="rounded-lg border border-gray-200 overflow-hidden white shadow-light">
+                        <v-row no-gutters>
+                            <v-col cols="12" lg="6" order="2" order-lg="1" class="banner p-0" >
                                 <banner :loading="false" :banner=" $store.getters['app/banners'] .registration_page " class="mt-5 mt-lg-0"/>
                             </v-col>
-                            <v-col cols="12" order="1" order-lg="2" lg="6">
-                                <div class="px-lg-7">
-                                    <h1 class="text-uppercase lh-1 mb-5">
-                                        <span class="opacity-50 fs-22 fw-400">{{ $t("welcome_to") }}</span>
-                                        <span class="d-block display-1 fw-900" >{{ $store.getters["app/appName"] }}</span>
-                                    </h1>
+                            <v-col cols="12" order="1" order-lg="2" lg="6" class="p-0">
+                                <div class="log_right">
+                                    <h1>{{ $t("Welcome To") }}<span>{{ $store.getters["app/appName"] }}</span></h1>
                                     <v-form
                                         ref="loginForm"
                                         lazy-validation
                                         v-on:submit.prevent="register()"
                                     >
-                                        <div class="mb-4">
-                                            <div class="mb-1 fs-13 fw-500">
-                                                {{ $t("full_name") }}
-                                            </div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-6">
                                             <v-text-field
                                                 :placeholder="$t('full_name')"
                                                 type="text"
@@ -34,10 +29,8 @@
                                                 outlined
                                             ></v-text-field>
                                         </div>
-                                        <div class="mb-4" v-if="authSettings.customer_login_with == 'phone' || authSettings.customer_login_with == 'email_phone'">
-                                            <div class="mb-1 fs-13 fw-500">
-                                                {{ $t("phone_number") }}
-                                            </div>
+                                        <div class="form-group col-lg-6" v-if="authSettings.customer_login_with == 'phone' || authSettings.customer_login_with == 'email_phone'">
+                                           
                                             <vue-tel-input
                                                 v-model="form.phone"
                                                 v-bind="mobileInputProps"
@@ -63,10 +56,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="mb-4" v-if="authSettings.customer_login_with == 'email' || authSettings.customer_login_with == 'email_phone'">
-                                            <div class="fs-13 fw-500">
-                                                {{ $t("email_address") }}
-                                            </div>
+                                        <div class="form-group col-lg-6" v-if="authSettings.customer_login_with == 'email' || authSettings.customer_login_with == 'email_phone'">
+                                           
                                             <v-text-field
                                                 :placeholder="$t('email_address')"
                                                 type="email"
@@ -78,10 +69,8 @@
                                                 outlined
                                             ></v-text-field>
                                         </div>
-                                        <div class="mb-4">
-                                            <div class="mb-1 fs-13 fw-500">
-                                                {{ $t("password") }}
-                                            </div>
+                                        <div class="form-group col-lg-6">
+                                          
                                             <v-text-field
                                                 placeholder="* * * * * * * *"
                                                 v-model="form.password"
@@ -93,11 +82,9 @@
                                                 required
                                                 outlined
                                             ></v-text-field>
-                                        </div>
-                                        <div class="mb-4">
-                                            <div class="mb-1 fs-13 fw-500">
-                                                {{ $t("confirm_password") }}
-                                            </div>
+                                        </div> 
+                                        <div class="form-group col-lg-6">
+                                           
                                             <v-text-field
                                                 placeholder="* * * * * * * *"
                                                 v-model="form.confirmPassword"
@@ -110,16 +97,18 @@
                                                 outlined
                                             ></v-text-field>
                                         </div>
-                                        <div class="mb-4">
+                                        <div class="form-group col-lg-12">
                                             {{$t("by_signing_up_you_agree_to_our")}}
                                             <router-link
                                                 :to="{ name: 'CustomPage', params: { pageSlug: 'terms-and-conditions', }, }"
-                                                class=" primary--text text-decoration-underline "
+                                                class="log-link text-decoration-underline "
                                             >{{ $t("terms_and_conditions")}}</router-link>
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
                                         <v-btn
-                                            x-large
-                                            class="px-12 mb-4"
+                                            class="sub-btn"
                                             elevation="0"
                                             type="submit"
                                             color="primary"
@@ -128,19 +117,16 @@
                                             :disabled="loading"
                                             >{{ $t("create_account") }}</v-btn
                                         >
-                                    </v-form>
-                                    <div
-                                        v-if="generalSettings.social_login.facebook == 1 || generalSettings.social_login.twitter == 1 || generalSettings.social_login.google == 1"
-                                    >
-                                        <div class="d-flex align-center mb-3">
-                                            <span class="me-2 fs-13 fw-500 opacity-60 " >{{ $t("or") }}, {{ $t("join_with") }}</span>
-                                            <v-divider></v-divider>
-                                        </div>
-                                        <SocialLogin class="mb-5"/>
                                     </div>
-                                    <div>
-                                        {{ $t("already_have_an_account") }},
-                                        <router-link :to="{ name: 'Login' }" class="primary--texttext-decoration-underline">{{ $t("login") }}</router-link>
+                                    </div>
+                                    </v-form>
+                                    <div class="log-footer"
+                                        v-if="generalSettings.social_login.facebook == 1 || generalSettings.social_login.twitter == 1 || generalSettings.social_login.google == 1">
+                                         <h5>{{ $t("or") }}, {{ $t("join_with") }}</h5>
+                                        <SocialLogin class="mb-3"/>
+                                        <div class="hv-acc">{{ $t("already_have_an_account") }},
+                                            <router-link :to="{ name: 'Login' }" class="log-link text-decoration-underline">{{ $t("login") }}</router-link>
+                                        </div>
                                     </div>
                                 </div>
                             </v-col>
