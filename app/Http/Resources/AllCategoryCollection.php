@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use App\Models\Category;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use App\Utility\CategoryUtility;
+use App\Models\ProductCategory;
 
 class AllCategoryCollection extends ResourceCollection
 {
@@ -12,7 +13,9 @@ class AllCategoryCollection extends ResourceCollection
     {
         return [
             'data' => $this->collection->map(function($data) {
-                $childrens = Category::where('level','=','1')->whereIn('id', CategoryUtility::children_ids($data->id))->get();
+                $allCategory = ProductCategory::pluck('category_id')->toArray();
+                $final = array_values(array_unique($allCategory));
+                $childrens = Category::whereIn('id',$final)->where('level','=','1')->whereIn('id', CategoryUtility::children_ids($data->id))->get();
                 return [
                     'name' => $data->getTranslation('name'),
                     'banner' => api_asset($data->banner),

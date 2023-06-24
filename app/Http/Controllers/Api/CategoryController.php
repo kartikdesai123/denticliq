@@ -6,13 +6,16 @@ use App\Http\Resources\AllCategoryCollection;
 use App\Http\Resources\CategoryCollection;
 use App\Models\Setting;
 use App\Models\Category;
+use App\Models\ProductCategory;
 
 class CategoryController extends Controller
 {
 
     public function index()
     {
-        return new AllCategoryCollection(Category::where('level',0)->orderBy('order_level', 'desc')->get());
+        $allCategory = ProductCategory::pluck('category_id')->toArray();
+        $final = array_values(array_unique($allCategory));
+        return new AllCategoryCollection(Category::whereIn('id',$final)->where('level',0)->orderBy('order_level', 'desc')->get());
     }
 
     public function featured()
