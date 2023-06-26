@@ -27,18 +27,18 @@
                     >
                     </v-rating>
                     <span class="ms-3 opacity-50"> ({{ productDetails.review_summary.total_count }} {{ $t("ratings") }}) </span>
-                    
+
                     <!-- todo:: message seller -->
                     <div v-if="generalSettings.conversation_system == 1 && is_addon_activated('multi_vendor')" class="ms-auto">
                         <button style="background: #f1f1f1; padding: 9px 14px;border-radius: 3px;" class="primary--text lh-1 d-flex align-center"  @click="showConversationDialog({status:true})">
                             <i class="la la-comment ts-02 fs-14 me-1" ></i>
                             <span class="fw-700">{{ $t("Product Inquiry") }}</span>
-                        </button>  
+                        </button>
                     </div>
                     <ConversationDialog :product="productDetails" />
                     <!-- message seller -->
 
-                    <div :class="['ms-2', { 'ms-auto': generalSettings.conversation_system != 1 }, { 'ms-auto': !is_addon_activated('multi_vendor') }]" > 
+                    <div :class="['ms-2', { 'ms-auto': generalSettings.conversation_system != 1 }, { 'ms-auto': !is_addon_activated('multi_vendor') }]" >
                         <template v-if="isThisWishlisted(productDetails.id)" >
                             <button class="primary--text pa-1 lh-1 d-flex align-center" @click="removeFromWishlist(productDetails.id)" >
                                 <i class="la la-heart ts-02 fs-14 me-1" ></i>
@@ -218,7 +218,7 @@
                         <div class="col-md-6">
                             <ul>
                                 <li><i class="las la-angle-double-right" aria-hidden="true"></i> <span class="textblink"> {{randomNumber}} </span>sold in last  <span>19 </span>hours</li>
-                                <li><i class="las la-angle-double-right" aria-hidden="true"></i> 
+                                <li><i class="las la-angle-double-right" aria-hidden="true"></i>
                                     {{ $t("estimated_delivery_time") }}
                                 <span v-if=" Math.ceil( productDetails.express_delivery_time / 24 ) == Math.ceil( productDetails.standard_delivery_time / 24 )" class="fs-12 opacity-50" >
                                     {{ Math.ceil( productDetails.express_delivery_time / 24 )}}
@@ -236,7 +236,7 @@
                         <div class="col-md-6">
                             <ul>
                                 <li><i class="las la-angle-double-right" aria-hidden="true"></i> <span class="textblink2"> {{randomViewer}} </span>People are looking for this product</li>
-                           
+
                             </ul>
                         </div>
                     </div>
@@ -258,7 +258,7 @@
                             :max="maxCartLimit"
                             :step="1"></vue-numeric-input>
                         </div>
-                        
+
                     </div>
                     <div class="col-lg-4 col-md-4 col-5">
                         <v-btn
@@ -277,7 +277,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="#" class="btn bynwbtn btn-success"><i class="las la-inr" aria-hidden="true"></i> Buy Now</a>
+                        <a class="btn bynwbtn btn-success" v-if="Number.isInteger(cartQuantity)" @click="buyNow"><i class="las la-inr" aria-hidden="true"></i> Buy Now</a>
                     </div>
                 </div>
                 <!--<v-row>
@@ -300,7 +300,7 @@ import ProductGallery from "../product/ProductGallery";
 import ConversationDialog from "../product/ConversationDialog";
 import SocialShare from "../product/SocialShare";
 export default {
-    props: { 
+    props: {
         isLoading: { type: Boolean, required: true, default: true },
         productDetails: { type: Object, required: true, default: {} }
     },
@@ -319,7 +319,7 @@ export default {
        //this.randomNumber = Math.random() * (max - min) + min;
        // this.randomNumber = Math.random() * (max - min) + min;
        // this.randomNumber = Math.random()*10; //multiply to generate random number between 0, 100
-        }, 
+        },
     watch: {
         productDetails: {
             immediate: true,
@@ -344,6 +344,14 @@ export default {
         ...mapGetters("app", ["generalSettings"]),
         ...mapGetters("wishlist", ["isThisWishlisted"]),
         ...mapGetters("cart", ["isThisInCart", "findCartItemByVariationId"]),
+        ...mapGetters("cart", [
+            "getCartCount",
+            "getCartPrice",
+            "getShopMinOrder",
+            "getCartProducts",
+            "getTotalCouponDiscount",
+        ]),
+        ...mapGetters("auth", ["isAuthenticated", "cartDrawerOpen"]),
         discount() {
             return this.discount_percent(
                 this.productDetails.base_price,
@@ -356,7 +364,32 @@ export default {
         ...mapActions("cart", ["addToCart", "updateQuantity"]),
         ...mapActions("auth", ["showConversationDialog"]),
         ...mapMutations("auth", ["updateChatWindow"]),
-
+        ...mapActions("cart", [
+            "fetchCartProducts",
+            "updateQuantity",
+            "toggleCartItem",
+            "removeFromCart",
+        ]),
+        ...mapMutations("auth", ["showLoginDialog", "updateCartDrawer"]),
+        buyNow() {
+            this.addCart();
+            this.checkout();
+        },
+        checkout() {
+            if (this.cartQuantity > 0) {
+                this.$router.push({ name: "Checkout" }).catch((e) => {
+                    if(this.$route.name == "Checkout"){
+                        this.updateCartDrawer(false)
+                    }
+                });
+            } else {
+                this.snack({
+                    message: this.$i18n.t("please_select_a_cart_product"),
+                    color: "red",
+                });
+                return;
+            }
+        },
         addCart() {
             if (this.productDetails.is_variant == 1) {
                 // for variant product
@@ -459,6 +492,6 @@ export default {
             }
         },
     }
-   
+
 }
 </script>

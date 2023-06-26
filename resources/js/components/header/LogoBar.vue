@@ -7,9 +7,9 @@
                     </router-link>
                 </div>
                 <v-spacer />
-              
+
                 <div :class="['flex-grow-1 search-box', { open: openSearch }]">
-                    <v-form 
+                    <v-form
                         class="flex-grow-1"
                         @submit.stop.prevent="search()"
                     >
@@ -26,7 +26,7 @@
                                     solo
                                     flat
                                 ></v-text-field>
-                                
+
                             </v-col>
                              <v-btn
                                     elevation="0"
@@ -46,7 +46,7 @@
                         </div>
 
                         <div v-else>
-                            <div 
+                            <div
                                 v-if="suggestionNotFound"
                                 class="text-center ma-8 fs-16"
                             >
@@ -58,7 +58,7 @@
                                     <div class="px-2 py-1 text-uppercase fs-10 text-right grey lighten-3">{{ $t('popular_suggestions') }}</div>
                                     <ul class="list-unstyled px-5 py-2 fs-13">
                                         <li
-                                            v-for="(keyword, i) in keywords" 
+                                            v-for="(keyword, i) in keywords"
                                             :key="i"
                                             class="py-1 text-capitalize"
                                             @click="popularSuggesation(keyword)"
@@ -67,13 +67,13 @@
                                         </li>
                                     </ul>
                                 </div>
-                                
+
                                 <!-- Product Suggesations -->
                                 <div class="" v-if="products.length">
                                     <div class="px-2 py-1 text-uppercase fs-10 text-right grey lighten-3">{{ $t('products') }}</div>
                                     <ul class="list-unstyled px-5 py-2 fs-13">
-                                        <li 
-                                            v-for="(product, i) in products" 
+                                        <li
+                                            v-for="(product, i) in products"
                                             :key="i"
                                             class="py-1 d-flex align-center"
                                         >
@@ -82,11 +82,11 @@
                                                 :alt="product.name"
                                                 @error="imageFallback($event)"
                                                 class="img-fit size-50px"
-                                                
+
                                             >
                                             <div class="ml-2">
                                                 <h5 class="opacity-60 mb-1 fs-13" @click="hideSearchContainer">
-                                                    <router-link 
+                                                    <router-link
                                                         :to="{ name: 'ProductDetails', params: {slug: product.slug}}"
                                                         class="text-reset">
                                                         {{ product.name }}
@@ -110,8 +110,8 @@
                                 <div class="" v-if="categories.length">
                                     <div class="px-2 py-1 text-uppercase fs-10 text-right grey lighten-3">{{ $t('category_suggestions') }}</div>
                                     <ul class="list-unstyled px-5 fs-13">
-                                        <li 
-                                            v-for="(category, i) in categories" 
+                                        <li
+                                            v-for="(category, i) in categories"
                                             :key="i"
                                             class="py-1"
                                             @click="hideSearchContainer"
@@ -120,13 +120,13 @@
                                         </li>
                                     </ul>
                                 </div>
-                                
+
                                 <!-- Brand Suggesations -->
                                 <div class="" v-if="brands.length">
                                     <div class="px-2 py-1 text-uppercase fs-10 text-right grey lighten-3">{{ $t('brands') }}</div>
                                     <ul class="list-unstyled px-5 fs-13">
-                                        <li 
-                                            v-for="(brand, i) in brands" 
+                                        <li
+                                            v-for="(brand, i) in brands"
                                             :key="i"
                                             class="py-1"
                                             @click="hideSearchContainer"
@@ -140,8 +140,8 @@
                                 <div class="" v-if="shops.length">
                                     <div class="px-2 py-1 text-uppercase fs-10 text-right grey lighten-3">{{ $t('Shops') }}</div>
                                     <ul class="list-unstyled px-5 py-2 fs-13">
-                                        <li 
-                                            v-for="(shop, i) in shops" 
+                                        <li
+                                            v-for="(shop, i) in shops"
                                             :key="i"
                                             class="py-1 d-flex align-center"
                                         >
@@ -150,11 +150,11 @@
                                                 :alt="shop.name"
                                                 @error="imageFallback($event)"
                                                 class="img-fit size-30px"
-                                                
+
                                             >
                                             <div class="ml-3">
                                                 <h5 class="opacity-60 mb-1 fs-13" @click="hideSearchContainer">
-                                                    <router-link 
+                                                    <router-link
                                                     :to="{ name: 'ShopDetails', params: {slug: shop.slug}}"
                                                         class="text-reset">
                                                         {{ shop.name }}
@@ -167,7 +167,7 @@
 
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
                <div @click.stop="toggleMobileSideMenu(true)" class="menubar">
@@ -184,6 +184,7 @@
                     </ul>
                     </div>
                     <div class="d-flex align-center" v-else>
+                        <a> <SidebarCart /></a>
                         <i class="las la-user fs-30 lh-1 me-3 opacity-70"></i>
                         <router-link
                             :to="{ name: 'DashBoard' }"
@@ -545,7 +546,7 @@
                         </v-list-item-title>
                         <LanguageSwitchDialog ref="langSwitch" />
                     </v-list-item>
-                  
+
                     <v-list-item
                         class="flex-grow-0 flex-fill"
                         @click.stop="logout"
@@ -574,7 +575,7 @@
                 </v-list>
             </div>
             </v-navigation-drawer>
-    
+
     </div>
 </template>
 
@@ -651,7 +652,7 @@ export default {
         hideSearchContainer(){
             this.showSuggestionContainer = false;
         },
- 
+
         toggleMobileSideMenu(status) {
             this.updateMobileSideMenu(status);
         },

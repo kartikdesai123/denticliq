@@ -14,7 +14,7 @@ class AllCategoryCollection extends ResourceCollection
         return [
             'data' => $this->collection->map(function($data) {
                 $allCategory = ProductCategory::pluck('category_id')->toArray();
-                $final = array_values(array_unique($allCategory));
+                $final = array_values(array_unique($allCategory)); 
                 $childrens = Category::whereIn('id',$final)->where('level','=','1')->whereIn('id', CategoryUtility::children_ids($data->id))->get();
                 return [
                     'name' => $data->getTranslation('name'),
