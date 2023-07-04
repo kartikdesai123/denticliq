@@ -71,20 +71,20 @@
                                 <div class="row no-gutters align-center">
                                     <div class="col">
                                         <v-text-field type="number"
-                                        class="form-control form-control-sm" 
-                                        v-model="queryParam.minPrice" :placeholder="$t('min_price')" 
+                                        class="form-control form-control-sm"
+                                        v-model="queryParam.minPrice" :placeholder="$t('min_price')"
                                         outlined hide-details></v-text-field>
                                     </div>
                                     <span>to</span>
                                     <div class="col">
-                                        <v-text-field type="number" 
-                                        class="form-control form-control-sm" 
-                                        v-model="queryParam.maxPrice" :placeholder="$t('max_price')" 
+                                        <v-text-field type="number"
+                                        class="form-control form-control-sm"
+                                        v-model="queryParam.maxPrice" :placeholder="$t('max_price')"
                                         outlined hide-details></v-text-field>
                                     </div>
                                     <div class="col col-auto m-0 pl-0 pr-0">
-                                        <v-btn x-small fab type="submit" 
-                                        color="primary" class="rounded ms-2" 
+                                        <v-btn x-small fab type="submit"
+                                        color="primary" class="rounded ms-2"
                                         elevation="0" @click.native="filterByPriceRange">{{ $t('go') }}</v-btn >
                                     </div>
                                 </div>
@@ -250,7 +250,7 @@
                             </v-col>
                         </v-row>
                         <div class="mb-7">
-                            <v-row class="row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-5 md-gutters-10" 
+                            <v-row class="row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-5 md-gutters-10"
                             v-if="products.length > 0">
                                 <div class="col-lg-3 col-md-3 col-6" v-for="(product, i) in products" :key="i">
                                     <product-box :product-details="product" :is-loading="loading" />
@@ -447,7 +447,7 @@
                 url += params.maxPrice ? `&max_price=${params.maxPrice}` : ''
 
                 const res = await this.call_api("get", url);
-
+                // console.log(res);
 
                 if (res.data.success) {
                     this.loading = false;

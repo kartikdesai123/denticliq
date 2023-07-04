@@ -18,6 +18,7 @@ use App\Models\OrderDetail;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 use App\Utility\CategoryUtility;
+use App\Models\ProductCategory;
 
 class ProductController extends Controller
 {
@@ -205,7 +206,9 @@ class ProductController extends Controller
             $catgeoryId = array_values($uniqueValues);
         }
 
-
+        $allCategory = ProductCategory::pluck('category_id')->toArray();
+        $final = array_values(array_unique($allCategory));
+        //dd($category->childrenCategories);
 
         return response()->json([
             'success' => true,
@@ -216,8 +219,8 @@ class ProductController extends Controller
             'total' => $collection->total(),
             'parentCategory' => $category && $category->parent_id != 0 ? new CategorySingleCollection(Category::find($category->parent_id)) : null,
             'currentCategory' => $category? new CategorySingleCollection($category) : null,
-            'childCategories' => $category ? new CategoryCollection($category->childrenCategories) : null,
-            'rootCategories' => new CategoryCollection(Category::where('level', 0)->orderBy('order_level', 'desc')->get()),
+            'childCategories' => $category ? new CategoryCollection(Category::whereIn('id',$final)->where('level', 1)->get()) : null,
+            'rootCategories' => new CategoryCollection(Category::whereIn('id',$final)->where('level', 0)->orderBy('order_level', 'desc')->get()),
             'allBrands' => new BrandCollection(Brand::all()),
             'selectedBrands' => ($brand_ids != null) ? new BrandCollection(Brand::where('id', $brand_ids[0])->get()) : [],
             'selectedCategory' => new CategoryCollection(Category::whereIn('id', $catgeoryId)->orderBy('order_level', 'desc')->get()),
