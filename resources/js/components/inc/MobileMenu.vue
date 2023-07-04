@@ -109,32 +109,12 @@
                         }}</span>
                     </div>
                 </v-col>--> 
-                <v-col>
+                <v-col class="sidebarcart">
+                    <SidebarCart />
                     <div
                         @click.stop="openCartDrawer"
-                        class="c-pointer d-inline-flex align-center flex-column"
-                    >
-                        <span class="position-relative d-flex">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="12.978"
-                                height="15"
-                                viewBox="0 0 12.978 15"
-                            >
-                                <path
-                                    id="Path_18931"
-                                    data-name="Path 18931"
-                                    d="M16.476,11.739a2.248,2.248,0,0,0-1.37-2.083l1.348-5.244a.772.772,0,0,0-.13-.652.709.709,0,0,0-.57-.262H5.879l-.238-.944A.726.726,0,0,0,4.942,2H3.5V3.5h.887l1.788,6.937a.725.725,0,0,0,.721.554h7.418a.75.75,0,0,1,0,1.5H4.942a.75.75,0,0,0,0,1.5h.851a2.3,2.3,0,0,0,.742,2.57,2.1,2.1,0,0,0,2.582,0,2.3,2.3,0,0,0,.742-2.57h1.7a2.309,2.309,0,0,0,.554,2.406,2.1,2.1,0,0,0,2.346.419,2.292,2.292,0,0,0,1.007-3.177A2.269,2.269,0,0,0,16.476,11.739ZM13.657,9.491H7.465L6.268,5h8.55ZM7.825,15.484a.75.75,0,1,1,.721-.749A.735.735,0,0,1,7.825,15.484Zm5.767,0a.75.75,0,1,1,.721-.749A.735.735,0,0,1,13.592,15.484Z"
-                                    transform="translate(-3.5 -2)"
-                                    fill="#999"
-                                />
-                            </svg>
-                            <span
-                                class="absolute-top-right red size-15px fs-8 d-flex align-center justify-center rounded-circle white--text"
-                                >{{ getCartCount }}</span
-                            >
-                        </span>
-                        <span class="d-block fs-10 mt-1 fw-600">{{
+                        class="c-pointer" style="margin-top: -5px;color: grey;">
+                        <span class="d-block fs-10 fw-600">{{
                             $t("cart")
                         }}</span>
                     </div>
@@ -552,6 +532,7 @@
 </template>
 
 <script>
+import SidebarCart from "../cart/SidebarCart";
 import { mapGetters, mapMutations, mapActions } from "vuex";
 import UserMenu from "../user/UserMenu";
 import LanguageSwitchDialog from "./LanguageSwitchDialog";
@@ -559,6 +540,7 @@ export default {
     components: {
         LanguageSwitchDialog,
         UserMenu,
+        SidebarCart,
     },
     computed: {
         ...mapGetters("auth", [

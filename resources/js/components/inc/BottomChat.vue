@@ -3,8 +3,7 @@
         <button
             :class="['bottom-chat-button text-center fw-500 fs-12 px-6 py-4 primary', chatWindowOpen ? 'd-none' : 'd-none d-lg-block']"
             type="button"
-            @click.stop="openChatWindow"
-        >
+            @click.stop="openChatWindow">
             <span class="d-flex align-center white--text">
                 <img :src="static_asset('/assets/img/chat.svg')" height="30" />
                 <span class="fs-14 fw-700 ms-2">{{ $t("talk_with_us") }}</span>

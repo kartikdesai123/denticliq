@@ -3576,7 +3576,6 @@ a:hover{
 }
 .mainslider img{
     width: 100% !important;
-    height: 230px;
     -o-object-fit: cover;
     object-fit: cover;
     border-radius: 5px;
@@ -4020,9 +4019,6 @@ margin-top:15px;
     color: black!important;
 }
 
-.container {
-    max-width: 1310px !important;
-}
 .log_right{
     background: #dbe9f5;
     padding: 20px;
@@ -4093,4 +4089,25 @@ object-fit: contain;
     text-transform: capitalize!important;
     font-weight: 500!important;
     color: #070bad!important;
+}
+.sidebarcart i{
+    font-size: 24px;
+    color: grey;
+    margin-top: 0;
+}
+.sidebarcart button span{
+    font-size: 9px;
+    position: absolute;
+    background: #ff2d2d;
+    color: white;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    display: inline-block;   
+}
+.sidebarcart span{
+    font-size: 13px;   
+}
+.menumain .v-list-item__title a:hover{
+    color: #229ea1!important;
 }
