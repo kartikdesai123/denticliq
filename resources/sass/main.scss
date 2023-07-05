@@ -4091,12 +4091,12 @@ object-fit: contain;
     font-weight: 500!important;
     color: #070bad!important;
 }
-.sidebarcart i{
+.sidebarcart .headcart i{
     font-size: 24px;
     color: grey;
     margin-top: 0;
 }
-.sidebarcart button span{
+.sidebarcart button span.itemcount{
     font-size: 9px;
     position: absolute;
     background: #ff2d2d;
